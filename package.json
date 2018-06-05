@@ -6,10 +6,11 @@
   "module": "lib-esm/index.js",
   "types": "lib-dts/index.d.ts",
   "scripts": {
+    "build:ne": "nearleyc src/parser/grammar.ne -o src/parser/grammar.ts",
     "build:esm": "tsc -p ./tsconfig/tsconfig.esm.json",
     "build:cjs": "tsc -p ./tsconfig/tsconfig.cjs.json",
     "build:dts": "tsc -p ./tsconfig/tsconfig.dts.json",
-    "build": "npm run build:esm && npm run build:cjs && npm run build:dts",
+    "build": "npm run build:ne && npm run build:esm && npm run build:cjs && npm run build:dts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -24,6 +25,8 @@
     "typescript": "^2.9.1"
   },
   "dependencies": {
+    "@types/nearley": "^2.11.0",
+    "nearley": "^2.13.0",
     "tslib": "^1.9.2"
   }
 }
