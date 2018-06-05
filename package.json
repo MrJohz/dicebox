@@ -2,8 +2,14 @@
   "name": "dicebox",
   "version": "0.1.0",
   "description": "Dice rolling library that mimics roll20 as much as possible",
-  "main": "dist/index.js",
+  "main": "lib-cjs/index.js",
+  "module": "lib-esm/index.js",
+  "types": "lib-dts/index.d.ts",
   "scripts": {
+    "build:esm": "tsc -p ./tsconfig/tsconfig.esm.json",
+    "build:cjs": "tsc -p ./tsconfig/tsconfig.cjs.json",
+    "build:dts": "tsc -p ./tsconfig/tsconfig.dts.json",
+    "build": "npm run build:esm && npm run build:cjs && npm run build:dts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -13,5 +19,11 @@
     "roll20"
   ],
   "author": "MrJohz <jonathan.frere@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^2.9.1"
+  },
+  "dependencies": {
+    "tslib": "^1.9.2"
+  }
 }
