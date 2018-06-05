@@ -1,0 +1,17 @@
+{
+  "name": "dicebox",
+  "version": "0.1.0",
+  "description": "Dice rolling library that mimics roll20 as much as possible",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "dice",
+    "random",
+    "rpg",
+    "roll20"
+  ],
+  "author": "MrJohz <jonathan.frere@gmail.com>",
+  "license": "MIT"
+}
