@@ -1,44 +1,71 @@
-import { createLanguage, alt, string, regexp, seq, optWhitespace } from 'parsimmon';
+import { createLanguage, alt, string, regexp, seq, oneOf } from 'parsimmon';
 
-import { Dice, dice } from './types';
+import { EDice, dice, number } from './types';
 
-function diceOf(n: number | 'F') {
+function diceSidesOf(n: string) {
     if (n === 'F') {
         return [-1, 0, 1];
     }
 
     const arr = [];
-    for (let i = 1; i <= n; i++) {
+    const all = parseInt(n, 10);
+    for (let i = 1; i <= all; i++) {
         arr.push(i);
     }
 
     return arr;
 }
 
+function intOf(n: string): number {
+    return parseInt(n, 10);
+}
+
+function floatOf(n: string): number {
+    return parseFloat(n);
+}
+
+const DigitsNotZero = regexp(/[1-9]+/).desc('non-zero integer');
+const AnyDigits = alt(string('0'), DigitsNotZero).desc('integer');
+const FateDice = string('F').desc(`fate dice 'F'`);
+const DiceSpec = string('d').desc(`dice specifier 'd'`);
+
+const AnyFloat = seq(
+    AnyDigits.fallback('0'),
+    string('.'),
+    AnyDigits,
+    seq(
+        oneOf('eE'),
+        AnyDigits,
+    ).map(all => all.join('')).fallback(''),
+).map(all => all.join(''));
+
+const AnyInt = seq(
+    AnyDigits,
+    seq(
+        oneOf('eE'),
+        AnyDigits,
+    ).map(all => all.join('')).fallback(''),
+).map(all => all.join(''));
+
+const AnyNum = alt(AnyFloat, AnyInt);
+
 const language = createLanguage({
-    Expr: r =>
-        seq(
-            r.Factor,
-            optWhitespace,
-            alt(string('+'), string('-')),
-            optWhitespace,
-            r.Factor,
-        ).or(r.Factor)
-            .map(val => console.log(val) || val),
-    Factor: r => r.Dice,
-    Dice: r =>
-        seq(
-            alt(r.AnyNum).fallback('1').map(i => parseInt(i, 10)),
-            string('d'),
-            alt(
-                r.NumNot0.map(i => parseInt(i, 10)),
-                string('F'),
-            ).map(diceOf),
-        ).map(([noDice, _, diceSides]) => dice({ noDice, diceSides })),
-    AnyNum: r => alt(string('0'), r.NumNot0).desc('number'),
-    NumNot0: () => regexp(/[1-9]+/).desc('non-zero number'),
+    Expr: r => r.Factor,
+
+    Factor: r => alt(r.Dice, r.Number),
+
+    Dice: () => seq(
+        AnyDigits.fallback('1').map(intOf),
+        DiceSpec,
+        alt(
+            DigitsNotZero,
+            FateDice,
+        ).map(diceSidesOf),
+    ).map(([noDice, _, diceSides]) => dice({ noDice, diceSides })),
+
+    Number: () => AnyNum.map(floatOf).map(value => number({ value })),
 });
 
-export function parse(s: string): Dice {
+export function parse(s: string): EDice {
     return language.Expr.tryParse(s);
 }
