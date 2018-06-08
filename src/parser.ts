@@ -1,6 +1,6 @@
-import { createLanguage, alt, string, regexp, seq, oneOf } from 'parsimmon';
+import { createLanguage, alt, string, regexp, seq, oneOf, optWhitespace } from 'parsimmon';
 
-import { EDice, dice, number } from './types';
+import { EDice, dice, number, binExpression } from './types';
 
 function diceSidesOf(n: string) {
     if (n === 'F') {
@@ -29,30 +29,58 @@ const AnyDigits = alt(string('0'), DigitsNotZero).desc('integer');
 const FateDice = string('F').desc(`fate dice 'F'`);
 const DiceSpec = string('d').desc(`dice specifier 'd'`);
 
+const operatorLow = oneOf('+-').desc('+ or -');
+const operatorMed = oneOf('*/').desc('* or /');
+const operatorHigh = string('**').desc('**');
+
 const AnyFloat = seq(
     AnyDigits.fallback('0'),
     string('.'),
     AnyDigits,
     seq(
-        oneOf('eE'),
+        oneOf('eE').desc('e/E'),
         AnyDigits,
-    ).map(all => all.join('')).fallback(''),
-).map(all => all.join(''));
+    ).desc('exponent').map(all => all.join('')).fallback(''),
+).map(all => all.join('')).desc('float');
 
 const AnyInt = seq(
     AnyDigits,
     seq(
-        oneOf('eE'),
+        oneOf('eE').desc('e/E'),
         AnyDigits,
-    ).map(all => all.join('')).fallback(''),
-).map(all => all.join(''));
+    ).desc('exponent').map(all => all.join('')).fallback(''),
+).map(all => all.join('')).desc('integer w/ exponent');
 
-const AnyNum = alt(AnyFloat, AnyInt);
+const AnyNum = alt(AnyFloat, AnyInt).desc('number');
 
 const language = createLanguage({
-    Expr: r => r.Factor,
+    Expr: r => r.ExprLow,
 
-    Factor: r => alt(r.Dice, r.Number),
+    ExprLow: r => seq(r.ExprMed, seq(operatorLow.trim(optWhitespace), r.ExprMed).many())
+        .map(([head, tail]) => [head, ...tail])
+        .map(factors => factors.reduce((prev, curr) => !prev ? curr : binExpression({
+            op: curr[0],
+            lhs: prev,
+            rhs: curr[1],
+        }))),
+
+    ExprMed: r => seq(r.ExprHigh, seq(operatorMed.trim(optWhitespace), r.ExprHigh).many())
+        .map(([head, tail]) => [head, ...tail])
+        .map(factors => factors.reduce((prev, curr) => !prev ? curr : binExpression({
+            op: curr[0],
+            lhs: prev,
+            rhs: curr[1],
+        }))),
+
+    ExprHigh: r => seq(r.DiceOrNum, seq(operatorHigh.trim(optWhitespace), r.DiceOrNum).many())
+        .map(([head, tail]) => [head, ...tail])
+        .map(factors => factors.reduce((prev, curr) => !prev ? curr : binExpression({
+            op: curr[0],
+            lhs: prev,
+            rhs: curr[1],
+        }))),
+
+    DiceOrNum: r => alt(r.Dice, r.Number),
 
     Dice: () => seq(
         AnyDigits.fallback('1').map(intOf),
