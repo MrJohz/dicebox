@@ -1,6 +1,6 @@
 import { createLanguage, alt, string, regexp, seq, oneOf, optWhitespace } from 'parsimmon';
 
-import { EDice, dice, number, binExpression } from './types';
+import { EDice, dice, number, binExpression, funcExpression } from './types';
 
 function diceSidesOf(n: string) {
     if (n === 'F') {
@@ -32,6 +32,15 @@ const DiceSpec = string('d').desc(`dice specifier 'd'`);
 const operatorLow = oneOf('+-').desc('+ or -');
 const operatorMed = oneOf('*/').desc('* or /');
 const operatorHigh = string('**').desc('**');
+
+const openBracket = string('(').desc('open paren');
+const closeBracket = string(')').desc('close paren');
+const functionName = alt(
+    string('floor'),
+    string('round'),
+    string('ciel'),
+    string('abs'),
+);
 
 const AnyFloat = seq(
     AnyDigits.fallback('0'),
@@ -72,7 +81,7 @@ const language = createLanguage({
             rhs: curr[1],
         }))),
 
-    ExprHigh: r => seq(r.DiceOrNum, seq(operatorHigh.trim(optWhitespace), r.DiceOrNum).many())
+    ExprHigh: r => seq(r.LiteralOrExpr, seq(operatorHigh.trim(optWhitespace), r.LiteralOrExpr).many())
         .map(([head, tail]) => [head, ...tail])
         .map(factors => factors.reduce((prev, curr) => !prev ? curr : binExpression({
             op: curr[0],
@@ -80,7 +89,17 @@ const language = createLanguage({
             rhs: curr[1],
         }))),
 
-    DiceOrNum: r => alt(r.Dice, r.Number),
+    LiteralOrExpr: r => alt(r.ExprBracketed, r.Literal),
+
+    ExprBracketed: r => seq(
+        functionName.fallback(''),
+        openBracket.skip(optWhitespace),
+        r.Expr,
+        closeBracket.trim(optWhitespace))
+    // if functionName is present, this is a function call, else it is a bracketed expression
+        .map(([func, _, arg]) => func ? funcExpression({ func, arg }) : arg),
+
+    Literal: r => alt(r.Dice, r.Number),
 
     Dice: () => seq(
         AnyDigits.fallback('1').map(intOf),

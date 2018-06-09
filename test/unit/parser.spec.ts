@@ -1,6 +1,6 @@
 import expect from 'must';
 import { parse } from '../../src/parser';
-import { dice, number, binExpression } from '../../src/types';
+import { dice, number, binExpression, funcExpression } from '../../src/types';
 
 describe('parse', () => {
 
@@ -116,13 +116,17 @@ describe('parse', () => {
             }));
         });
 
-        it.skip(`should have the correct precedence of all binary operators`, () => {
+        it(`should have the correct precedence of all binary operators`, () => {
             expect(parse('4 + 3 ** 2 * 5')).to.eql(binExpression({
                 op: '+',
                 lhs: number(4),
                 rhs: binExpression({
                     op: '*',
-                    lhs: number(3),
+                    lhs: binExpression({
+                        op: '**',
+                        lhs: number(3),
+                        rhs: number(2),
+                    }),
                     rhs: number(5),
                 }),
             }));
@@ -134,10 +138,87 @@ describe('parse', () => {
                     lhs: number(4),
                     rhs: number(3),
                 }),
+                rhs: binExpression({
+                    op: '**',
+                    lhs: number(5),
+                    rhs: number(2),
+                }),
+            }));
+        });
+
+        it(`should allow arbitrary whitespace around all binary operators`, () => {
+            expect(parse('4+ 5     +     7')).to.eql(binExpression({
+                op: '+',
+                lhs: binExpression({
+                    op: '+',
+                    lhs: number(4),
+                    rhs: number(5),
+                }),
+                rhs: number(7),
+            }));
+        });
+
+    });
+
+    describe('brackets', () => {
+
+        it('should pass the child expression directly when passed (N)', () => {
+            expect(parse('(3)')).to.eql(number(3));
+        });
+
+        it('should handle arbitrary (balanced) parentheses', () => {
+            expect(parse('((((3))))')).to.eql(number(3));
+        });
+
+        it('should fail if parentheses are unbalanced', () => {
+            expect(() => parse('(((3)')).to.throw();
+            expect(() => parse('(3)))')).to.throw();
+        });
+
+        it('should affect the normal precedence order', () => {
+            expect(parse('(3 + 4) * 5')).to.eql(binExpression({
+                op: '*',
+                lhs: binExpression({
+                    op: '+',
+                    lhs: number(3),
+                    rhs: number(4),
+                }),
                 rhs: number(5),
             }));
-        })
 
+            expect(parse('3 + (4 * 5)')).to.eql(binExpression({
+                op: '+',
+                lhs: number(3),
+                rhs: binExpression({
+                    op: '*',
+                    lhs: number(4),
+                    rhs: number(5),
+                }),
+            }));
+        });
+
+        it('should allow arbitrary space around and between the parentheses', () => {
+            expect(parse('(3 ) +   (   4 )  ')).to.eql(binExpression({
+                op: '+',
+                lhs: number(3),
+                rhs: number(4),
+            }));
+        });
+
+    });
+
+    describe('functions', () => {
+        it('should return a function node when passed func(N)', () => {
+            expect(parse('floor(3.6)')).to.eql(funcExpression({ func: 'floor', arg: number(3.6) }));
+        });
+
+        it('should allow whitespace between brackets', () => {
+            expect(parse('ciel(   4.8   )')).to.eql(funcExpression({ func: 'ciel', arg: number(4.8) }));
+        });
+
+        it('should not allow space between function name and brackets', () => {
+            expect(() => parse('round (3)')).to.throw();
+        });
     });
 
 });

@@ -22,7 +22,7 @@ export type ENumber = WithKind<NumberAttrs, 'number'>
 
 export function number(num: NumberAttrs | number): ENumber {
     if (typeof num === 'number') {
-        return number({ value: num});
+        return number({ value: num });
     }
 
     return {
@@ -42,6 +42,20 @@ export type BinExpression = WithKind<BinExpressionAttrs, 'binExpression'>
 export function binExpression(expr: BinExpressionAttrs): BinExpression {
     return {
         kind: 'binExpression',
+        ...expr,
+    };
+}
+
+interface FuncExpressionAttrs {
+    func: string,
+    arg: Expression,
+}
+
+export type FuncExpression = WithKind<FuncExpressionAttrs, 'funcExpression'>
+
+export function funcExpression(expr: FuncExpressionAttrs): FuncExpression {
+    return {
+        kind: 'funcExpression',
         ...expr,
     };
 }
