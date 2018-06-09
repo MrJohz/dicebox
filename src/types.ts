@@ -1,8 +1,8 @@
 type WithKind<T, Kind extends string> = T & { kind: Kind };
 
 interface DiceAttrs {
-    diceSides: number[];
-    noDice: number;
+    diceSides: number[] | Expression;
+    noDice: number | Expression;
 }
 
 export type EDice = WithKind<DiceAttrs, 'dice'>

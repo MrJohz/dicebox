@@ -1,4 +1,4 @@
-import { createLanguage, alt, string, regexp, seq, oneOf, optWhitespace } from 'parsimmon';
+import { createLanguage, alt, string, regexp, seq, oneOf, optWhitespace, of } from 'parsimmon';
 
 import { EDice, dice, number, binExpression, funcExpression } from './types';
 
@@ -63,7 +63,7 @@ const AnyInt = seq(
 const AnyNum = alt(AnyFloat, AnyInt).desc('number');
 
 const language = createLanguage({
-    Expr: r => r.ExprLow,
+    Expr: r => r.ExprLow.trim(optWhitespace),
 
     ExprLow: r => seq(r.ExprMed, seq(operatorLow.trim(optWhitespace), r.ExprMed).many())
         .map(([head, tail]) => [head, ...tail])
@@ -89,25 +89,28 @@ const language = createLanguage({
             rhs: curr[1],
         }))),
 
-    LiteralOrExpr: r => alt(r.ExprBracketed, r.Literal),
+    LiteralOrExpr: r => alt(r.ExprFunction, r.Literal, r.ExprBracketed),
 
-    ExprBracketed: r => seq(
-        functionName.fallback(''),
-        openBracket.skip(optWhitespace),
-        r.Expr,
-        closeBracket.trim(optWhitespace))
-    // if functionName is present, this is a function call, else it is a bracketed expression
-        .map(([func, _, arg]) => func ? funcExpression({ func, arg }) : arg),
+    ExprFunction: r => seq(functionName, openBracket.skip(optWhitespace), r.Expr, closeBracket.trim(optWhitespace))
+        .map(([func, _, arg]) => funcExpression({ func, arg })),
+
+    ExprBracketed: r => seq(openBracket.skip(optWhitespace), r.Expr, optWhitespace.then(closeBracket))
+        .map(([_, expr]) => expr),
 
     Literal: r => alt(r.Dice, r.Number),
 
-    Dice: () => seq(
-        AnyDigits.fallback('1').map(intOf),
+    Dice: r => seq(
+        alt(
+            r.ExprBracketed,
+            AnyDigits.map(intOf),
+            of(1),
+        ),
         DiceSpec,
         alt(
-            DigitsNotZero,
-            FateDice,
-        ).map(diceSidesOf),
+            r.ExprBracketed,
+            DigitsNotZero.map(diceSidesOf),
+            FateDice.map(diceSidesOf),
+        ),
     ).map(([noDice, _, diceSides]) => dice({ noDice, diceSides })),
 
     Number: () => AnyNum.map(floatOf).map(value => number({ value })),

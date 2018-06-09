@@ -233,4 +233,33 @@ describe('parse', () => {
         });
     });
 
+    describe('computed dice', () => {
+        it('should return a dice that has a computed dice number when passed (expr)dN', () => {
+            expect(parse('(2 + 3)d8')).to.eql(dice({
+                noDice: binExpression({
+                    op: '+',
+                    lhs: number(2),
+                    rhs: number(3),
+                }),
+                diceSides: [1, 2, 3, 4, 5, 6, 7, 8],
+            }));
+        });
+
+        it('should return a dice that has computer dice sides when passed Nd(expr)', () => {
+            expect(parse('8d(2+3)')).to.eql(dice({
+                noDice: 8,
+                diceSides: binExpression({
+                    op: '+',
+                    lhs: number(2),
+                    rhs: number(3),
+                }),
+            }));
+        });
+
+        it('should not allow whitespace between the expression computation and the dice specifier', () => {
+            expect(() => parse('(8) d8')).to.throw();
+            expect(() => parse('8d (8)')).to.throw();
+        });
+    });
+
 });
