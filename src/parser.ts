@@ -29,7 +29,7 @@ const AnyDigits = alt(string('0'), DigitsNotZero).desc('integer');
 const FateDice = string('F').desc(`fate dice 'F'`);
 const DiceSpec = string('d').desc(`dice specifier 'd'`);
 
-const operatorLow = oneOf('+-').desc('+ or -');
+const operatorLow = oneOf('+-%').desc('+ or - or %');
 const operatorMed = oneOf('*/').desc('* or /');
 const operatorHigh = string('**').desc('**');
 

@@ -158,6 +158,18 @@ describe('parse', () => {
             }));
         });
 
+        it(`should support the modulus operator`, () => {
+            expect(parse('4 % 5 + 7')).to.eql(binExpression({
+                op: '+',
+                lhs: binExpression({
+                    op: '%',
+                    lhs: number(4),
+                    rhs: number(5),
+                }),
+                rhs: number(7),
+            }));
+        });
+
     });
 
     describe('brackets', () => {
