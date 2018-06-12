@@ -65,6 +65,9 @@ const AnyNum = alt(AnyFloat, AnyInt).desc('number');
 const language = createLanguage({
     Expr: r => r.ExprLow.trim(optWhitespace),
 
+    ExprBracketed: r => seq(openBracket.skip(optWhitespace), r.Expr, optWhitespace.then(closeBracket))
+        .map(([_, expr]) => expr),
+
     ExprLow: r => seq(r.ExprMed, seq(operatorLow.trim(optWhitespace), r.ExprMed).many())
         .map(([head, tail]) => [head, ...tail])
         .map(factors => factors.reduce((prev, curr) => !prev ? curr : binExpression({
@@ -91,11 +94,8 @@ const language = createLanguage({
 
     LiteralOrExpr: r => alt(r.ExprFunction, r.Literal, r.ExprBracketed),
 
-    ExprFunction: r => seq(functionName, openBracket.skip(optWhitespace), r.Expr, closeBracket.trim(optWhitespace))
-        .map(([func, _, arg]) => funcExpression({ func, arg })),
-
-    ExprBracketed: r => seq(openBracket.skip(optWhitespace), r.Expr, optWhitespace.then(closeBracket))
-        .map(([_, expr]) => expr),
+    ExprFunction: r => seq(functionName, r.ExprBracketed)
+        .map(([func, arg]) => funcExpression({ func, arg })),
 
     Literal: r => alt(r.Dice, r.Number),
 
