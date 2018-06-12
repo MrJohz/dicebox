@@ -22,6 +22,8 @@ If Roll20 can't parse an expression, it will parse as much as it can, and then g
 
 Note that the parser must have parsed a full, valid expression before it allows arbitrary input.  For example, `(4d8` will fail because of the unbalanced parentheses, while `4d8)` will succeed because a full expression (`4d8`) was parsed before the first unbalanced paren was encountered.
 
+Note also that this isn't always true.  The dice roll `8d6!=3!=4` fails because there are two exploding dice modifiers present in the roll.  However, `8` on its own is a valid expression, so one would expect the parser to backtrack to that point.  This happens for certain other invalid rolls (`8d6r6ro5` will return `8`, because it is invalid to put a roll-once modifier after a roll modifier).
+
 Currently, the dicebox parser fails if there is any extraneous input that cannot be parsed into a single expression.  This seems most reasonable for my uses, and means that the parser will be more explicit about any errors that it sees, meaning that if the user did make a mistake and wants to correct it, they will be able to see what they did.  However, in terms of compatibility, not allowing this additional input means that there exist expressions that work in Roll20 that don't work in dicebox.  It would make sense to add a compatibility mode that allows arbitrary trailing inputs (or a strict mode that disallows it).
 
 ### Two types of expressions
@@ -37,5 +39,13 @@ For this reason (and also for the additional complexity in attempting to parse t
 As far as I can tell, Roll20 numbers can be split roughly into two groups - integers, and numbers.  Dice expressions can only accept integers (unless one uses computed dice or inline rolls), whereas everything else deals in numbers, which may or may not have a fractional part, and may or may not have a fractional part.
 
 I have kept the same distinction.
+
+### Rerolls
+
+There are two 'reroll' dice modifiers - `rCP` (reroll always) and `roCP` (reroll once).  `rCP` is a bit unusual compared to other dice modifiers in that it can be applied multiple times to the same dice expression.  `roCP` acts more like a traditional dice modifier, in that it can only be applied once.  However, `roCP` cannot be applied *after* `rCP`.  There are further oddities in exactly how the parser will fail if `roCP` and `rCP` are combined (sometimes it will not parse anything, other times it will fallback to a recognised expression) but it always fails.
+
+There is an obvious difficulty in allowing the reroll once modifier to be applied multiple times.  Say the dice expression `4d8ro6ro4` is evaluated.  One die rolls a 4, so we reroll.  The new result is a 6.  Should we reroll that die?  On the one hand, we've already rerolled once, so we should accept the 6.  On the other hand, `ro6` and `ro4` are two different modifiers, so we should approach each of them separately, meaning we should also reroll the 6 (but only once).  Roll20 answers this question by simply refusing to allow multiple `roCP` modifiers.
+
+In addition to matching the Roll20 syntax, I also want to ensure that my parser isn't over-complicated with weird syntaxes that will make parsing (and error messages) more difficult.  As a result, I believe it makes most sense to treat `roCP` like a normal dice modifier, without any additional conditions over where it is allowed to go.  This means that my parser is slightly more lenient than the Roll20 parser, but also means that I don't need to make a decision about what happens when multiple `roCP` modifiers collide.
 
 [spec]: <https://wiki.roll20.net/Dice_Reference#Roll20_Dice_Specification>

@@ -1,6 +1,6 @@
-import { createLanguage, alt, string, regexp, seq, oneOf, optWhitespace, of } from 'parsimmon';
+import { createLanguage, alt, string, regexp, seq, oneOf, optWhitespace, of, succeed, lazy, Parser } from 'parsimmon';
 
-import { EDice, dice, number, binExpression, funcExpression } from './types';
+import { EDice, dice, number, binExpression, funcExpression, DICE_MAX, DICE_MIN } from './types';
 
 function diceSidesOf(n: string) {
     if (n === 'F') {
@@ -33,6 +33,8 @@ const operatorLow = oneOf('+-%').desc('+ or - or %');
 const operatorMed = oneOf('*/').desc('* or /');
 const operatorHigh = string('**').desc('**');
 
+const comparisonOperator = oneOf('<>=').desc('< or > or =');
+
 const openBracket = string('(').desc('open paren');
 const closeBracket = string(')').desc('close paren');
 const functionName = alt(
@@ -61,6 +63,83 @@ const AnyInt = seq(
 ).map(all => all.join('')).desc('integer w/ exponent');
 
 const AnyNum = alt(AnyFloat, AnyInt).desc('number');
+
+const ComparePoint = seq(comparisonOperator.fallback('='), AnyDigits.map(intOf))
+    .map(([op, number]) => ({ op, number }));
+
+function diceModifiers(currentModifers: string[]) {
+    return alt(...[
+        {
+            name: 'success', combinator: seq(
+                ComparePoint,
+                seq(string('f').desc(`failure modifier 'f'`),
+                    ComparePoint).fallback(null),
+            ).map(([success, failure]) => failure === null
+                ? { success }
+                : { success, failure: failure[1] }),
+        }, {
+            name: 'compounding', combinator: seq(
+                string('!!').desc(`compounding modifier '!!'`),
+                ComparePoint.fallback({ op: '=', number: DICE_MAX }),
+            ).map(([_, compounding]) => ({ compounding })),
+        }, {
+            name: 'penetrating', combinator: seq(
+                string('!p').desc(`penetrating modifier '!p'`),
+                ComparePoint.fallback({ op: '=', number: DICE_MAX }),
+            ).map(([_, penetrating]) => ({ penetrating })),
+        }, {
+            name: 'exploding', combinator: seq(
+                string('!').desc(`exploding modifier '!'`),
+                ComparePoint.fallback({ op: '=', number: DICE_MAX }),
+            ).map(([_, exploding]) => ({ exploding })),
+        }, {
+            name: 'keep', combinator: seq(
+                string('k').desc(`keep modifier 'k'`),
+                oneOf('hl').desc('h or l').fallback('h'),
+                AnyDigits.map(intOf),
+            ).map(([_, direction, number]) => ({ keep: { direction, number } })),
+        }, {
+            name: 'drop', combinator: seq(
+                string('d').desc(`drop modifier 'd'`),
+                oneOf('hl').desc('h or l').fallback('l'),
+                AnyDigits.map(intOf),
+            ).map(([_, direction, number]) => ({ drop: { direction, number } })),
+        }, {
+            name: 'rerollOnce', combinator: seq(
+                string('ro').desc(`reroll once modifier 'ro'`),
+                ComparePoint.fallback({ op: '=', number: DICE_MAX }),
+            ).map(([_, rerollOnce]) => ({ rerollOnce })),
+        }, {
+            name: 'sort', combinator: seq(
+                string('s').desc(`sort modifier 's'`),
+                oneOf('ad').desc('a or d').fallback('a'),
+            ).map(([_, direction]) => ({ sort: { direction } })),
+        }, {
+            name: null, /* always allow rerolls */ combinator: seq(
+                string('r').desc(`reroll modifier 'r'`),
+                ComparePoint.fallback({ op: '=', number: DICE_MIN }),
+            ).map(([_, reroll]) => ({ reroll })),
+
+        },
+    ]
+        .filter(({ name }) => name === null || currentModifers.indexOf(name) === -1)
+        .map(({ combinator }) => combinator));
+}
+
+const MultipleDiceModifiers: Parser<any[]> = lazy(() =>
+    succeed({})
+        .chain(modifiers =>
+            // fancy way of ensuring that modifiers cannot be duplicated
+            // and that it will be a parse error if they are duplicated
+            // (allows us to recover location information more easily)
+            seq(
+                diceModifiers(Object.keys(modifiers)),
+                MultipleDiceModifiers,
+            )
+                .map(([first, second])=> [first, ...second])
+                .fallback([modifiers])));
+
+// const MultipleDiceModifiers = diceModifiers([]).many();
 
 const language = createLanguage({
     Expr: r => r.ExprLow.trim(optWhitespace),
@@ -92,9 +171,9 @@ const language = createLanguage({
             rhs: curr[1],
         }))),
 
-    LiteralOrExpr: r => alt(r.ExprFunction, r.Literal, r.ExprBracketed),
+    LiteralOrExpr: r => alt(r.Function, r.Literal, r.ExprBracketed),
 
-    ExprFunction: r => seq(functionName, r.ExprBracketed)
+    Function: r => seq(functionName, r.ExprBracketed)
         .map(([func, arg]) => funcExpression({ func, arg })),
 
     Literal: r => alt(r.Dice, r.Number),
@@ -111,7 +190,24 @@ const language = createLanguage({
             DigitsNotZero.map(diceSidesOf),
             FateDice.map(diceSidesOf),
         ),
-    ).map(([noDice, _, diceSides]) => dice({ noDice, diceSides })),
+        MultipleDiceModifiers
+            .map(modifiers => {
+                let modifierAggregate: any = {};
+                for (const modifier of modifiers) {
+                    if ('reroll' in modifier) {
+                        if ('reroll' in modifierAggregate) {
+                            modifierAggregate.reroll.push(modifier.reroll);
+                        } else {
+                            modifierAggregate.reroll = [modifier.reroll];
+                        }
+                    } else {
+                        modifierAggregate = { ...modifierAggregate, ...modifier };
+                    }
+                }
+                return modifierAggregate;
+            }),
+    )
+        .map(([noDice, _, diceSides, modifiers]) => dice({ noDice, diceSides, ...modifiers })),
 
     Number: () => AnyNum.map(floatOf).map(value => number({ value })),
 });

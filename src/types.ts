@@ -1,8 +1,23 @@
 type WithKind<T, Kind extends string> = T & { kind: Kind };
 
+export const DICE_MAX = 'DICE MAX';
+export const DICE_MIN = 'DICE_MIN';
+
+type ModifierOperators = '=' | '<' | '>';
+
 interface DiceAttrs {
     diceSides: number[] | Expression;
     noDice: number | Expression;
+    success?: { op: ModifierOperators, number: number | typeof DICE_MAX };
+    failure?: { op: ModifierOperators, number: number | typeof DICE_MAX };
+    exploding?: { op: ModifierOperators, number: number | typeof DICE_MAX };
+    compounding?: { op: ModifierOperators, number: number | typeof DICE_MAX };
+    penetrating?: { op: ModifierOperators, number: number | typeof DICE_MAX };
+    keep?: { number: number, direction: 'h' | 'l' };
+    drop?: { number: number, direction: 'h' | 'l' };
+    rerollOnce?: { op: ModifierOperators, number: number | typeof DICE_MAX };
+    reroll?: ({ op: ModifierOperators, number: number | typeof DICE_MAX })[];
+    sort?: ({ direction: 'a' | 'd' });
 }
 
 export type EDice = WithKind<DiceAttrs, 'dice'>
