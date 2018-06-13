@@ -1,4 +1,4 @@
-import { createLanguage, alt, string, regexp, seq, oneOf, optWhitespace, of, succeed, lazy, Parser } from 'parsimmon';
+import { createLanguage, alt, string, regexp, seq, oneOf, optWhitespace, of } from 'parsimmon';
 
 import { EDice, dice, number, binExpression, funcExpression, DICE_MAX, DICE_MIN } from './types';
 
@@ -126,20 +126,7 @@ function diceModifiers(currentModifers: string[]) {
         .map(({ combinator }) => combinator));
 }
 
-const MultipleDiceModifiers: Parser<any[]> = lazy(() =>
-    succeed({})
-        .chain(modifiers =>
-            // fancy way of ensuring that modifiers cannot be duplicated
-            // and that it will be a parse error if they are duplicated
-            // (allows us to recover location information more easily)
-            seq(
-                diceModifiers(Object.keys(modifiers)),
-                MultipleDiceModifiers,
-            )
-                .map(([first, second])=> [first, ...second])
-                .fallback([modifiers])));
-
-// const MultipleDiceModifiers = diceModifiers([]).many();
+const MultipleDiceModifiers = diceModifiers([]).many();
 
 const language = createLanguage({
     Expr: r => r.ExprLow.trim(optWhitespace),
