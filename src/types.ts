@@ -5,9 +5,12 @@ export const DICE_MIN = 'DICE_MIN';
 
 type ModifierOperators = '=' | '<' | '>';
 
-interface DiceAttrs {
+interface DiceAttrs extends DiceModifiers {
     diceSides: number[] | Expression;
     noDice: number | Expression;
+}
+
+export interface DiceModifiers {
     success?: { op: ModifierOperators, number: number | typeof DICE_MAX };
     failure?: { op: ModifierOperators, number: number | typeof DICE_MAX };
     exploding?: { op: ModifierOperators, number: number | typeof DICE_MAX };
