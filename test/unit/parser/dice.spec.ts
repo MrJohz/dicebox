@@ -1,9 +1,9 @@
 import expect from 'must';
 
 import { parse } from '../../../src/parser';
-import { dice, number, binExpression, DICE_MAX } from '../../../src/types';
+import { dice, number, binExpression, DICE_MAX, diceGroup } from '../../../src/types';
 
-describe('parser', () => {
+describe('parser/dice', () => {
 
     describe('basic dice', () => {
 
@@ -218,6 +218,75 @@ describe('parser', () => {
         it('should throw if the same modifier is specified twice', () => {
             expect(() => parse('3d1!2!3')).to.throw();
         });
+    });
+
+    describe('dice groups', () => {
+
+        it('should fail if an empty dice group is passed', () => {
+            expect(() => parse('{}')).to.throw();
+        });
+
+        it('should parse a dice group containing a single item into a diceGroup node', () => {
+            expect(parse('{ 3 }')).to.eql(diceGroup({
+                elements: [number(3)],
+            }));
+        });
+
+        it('should parse a dice group containing multiple items', () => {
+            expect(parse('{ 3, 4 }')).to.eql(diceGroup({
+                elements: [number(3), number(4)],
+            }));
+        });
+
+        it('should accept whitespace around any element', () => {
+            expect(parse('   {    3,4,}')).to.eql(diceGroup({
+                elements: [number(3), number(4)],
+            }));
+            expect(parse('{   3    ,4,}')).to.eql(diceGroup({
+                elements: [number(3), number(4)],
+            }));
+            expect(parse('{3  ,   4,}')).to.eql(diceGroup({
+                elements: [number(3), number(4)],
+            }));
+            expect(parse('{3,   4  ,}')).to.eql(diceGroup({
+                elements: [number(3), number(4)],
+            }));
+            expect(parse('{3,4   , }')).to.eql(diceGroup({
+                elements: [number(3), number(4)],
+            }));
+            expect(parse('{3,4, }   ')).to.eql(diceGroup({
+                elements: [number(3), number(4)],
+            }));
+        });
+
+        it('should accept a trailing comma', () => {
+            expect(parse('{3, 4, 5,}')).to.eql(diceGroup({
+                elements: [number(3), number(4), number(5)],
+            }));
+        });
+
+        it('should accept any valid expression', () => {
+            expect(parse('{3, 4d1, 5 + 6d1, (7 / 3) + 2}'))
+                .to.eql(diceGroup({
+                elements: [
+                    parse('3'),
+                    parse('4d1'),
+                    parse('5 + 6d1'),
+                    parse('(7 / 3) + 2'),
+                ],
+            }));
+        });
+
+        it('should accept sub-dice groups', () => {
+            expect(parse('{ { 2d1, 4 }, 8, 9 }')).to.eql(diceGroup({
+                elements: [
+                    diceGroup({ elements: [parse('2d1'), number(4)] }),
+                    number(8),
+                    number(9),
+                ],
+            }));
+        });
+
     });
 
 });

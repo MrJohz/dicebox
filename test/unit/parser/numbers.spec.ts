@@ -3,7 +3,7 @@ import expect from 'must';
 import { parse } from '../../../src/parser';
 import { number } from '../../../src/types';
 
-describe('parser', () => {
+describe('parser/numbers', () => {
 
     describe('numbers', () => {
 

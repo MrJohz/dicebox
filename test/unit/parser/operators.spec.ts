@@ -3,7 +3,7 @@ import expect from 'must';
 import { parse } from '../../../src/parser';
 import { binExpression, number, funcExpression } from '../../../src/types';
 
-describe('parser', () => {
+describe('parser/operators', () => {
 
     describe('binary operators', () => {
 

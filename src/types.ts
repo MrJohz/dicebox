@@ -78,7 +78,21 @@ export function funcExpression(expr: FuncExpressionAttrs): FuncExpression {
     };
 }
 
+interface DiceGroupAttrs {
+    elements: Expression[];
+}
+
+export type DiceGroup = WithKind<DiceGroupAttrs, 'diceGroup'>
+
+export function diceGroup(expr: DiceGroupAttrs): DiceGroup {
+    return {
+        kind: 'diceGroup',
+        ...expr,
+    };
+}
+
 export type Expression =
     | EDice
     | ENumber
     | BinExpression
+    | DiceGroup

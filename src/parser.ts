@@ -1,6 +1,16 @@
 import { createLanguage, alt, string, regexp, seq, oneOf, optWhitespace, of, Parser } from 'parsimmon';
 
-import { EDice, dice, number, binExpression, funcExpression, DICE_MAX, DICE_MIN, DiceModifiers } from './types';
+import {
+    EDice,
+    dice,
+    number,
+    binExpression,
+    funcExpression,
+    DICE_MAX,
+    DICE_MIN,
+    DiceModifiers,
+    diceGroup,
+} from './types';
 
 function diceSidesOf(n: string) {
     if (n === 'F') {
@@ -37,6 +47,12 @@ const comparisonOperator = oneOf('<>=').desc('< or > or =');
 
 const openBracket = string('(').desc('open paren');
 const closeBracket = string(')').desc('close paren');
+
+const openBrace = string('{').desc('open brace');
+const closeBrace = string('}').desc('close brace');
+
+const comma = string(',').desc('comma');
+
 const functionName = alt(
     string('floor'),
     string('round'),
@@ -130,7 +146,7 @@ function diceModifiers(currentModifers: DiceModifiers[]) {
 function chainFunc(modifiers: DiceModifiers[]): Parser<DiceModifiers[]> {
     return diceModifiers(modifiers)
         .chain(chainFunc)
-        .fallback(modifiers)
+        .fallback(modifiers);
 }
 
 const MultipleDiceModifiers = of([])
@@ -171,7 +187,15 @@ const language = createLanguage({
     Function: r => seq(functionName, r.ExprBracketed)
         .map(([func, arg]) => funcExpression({ func, arg })),
 
-    Literal: r => alt(r.Dice, r.Number),
+    Literal: r => alt(r.Dice, r.Number, r.DiceGroup),
+
+    DiceGroup: r => seq(
+        openBrace,
+        r.Expr,
+        seq(comma.trim(optWhitespace), r.Expr).many(),
+        comma.trim(optWhitespace).fallback(','),
+        closeBrace,
+    ).map(([_, expr, exprs]) => diceGroup({ elements: [expr, ...exprs.map(([_, expr]) => expr)] })),
 
     Dice: r => seq(
         alt(
