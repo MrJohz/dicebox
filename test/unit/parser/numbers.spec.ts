@@ -2,8 +2,12 @@ import expect from 'must';
 
 import { parse } from '../../../src/parser';
 import { number } from '../../../src/types';
+import { acceptLoc, ignoreLoc } from '../../ignore-loc.util';
 
 describe('parser/numbers', () => {
+
+    beforeEach(() => { ignoreLoc(expect); });
+    afterEach(() => { acceptLoc(expect); });
 
     describe('numbers', () => {
 

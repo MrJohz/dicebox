@@ -189,7 +189,7 @@ const language = createLanguage({
     ExprLow: r => seq(r.ExprMed, seq(operatorLow.trim(optWhitespace), r.ExprMed).many())
         .map(([head, tail]) => [head, ...tail])
         .mark()
-        .map(({value, ...loc}) => value.reduce((prev, curr) => !prev ? curr : binExpression({
+        .map(({ value, ...loc }) => value.reduce((prev, curr) => !prev ? curr : binExpression({
             loc,
             op: curr[0],
             lhs: prev,
@@ -199,7 +199,7 @@ const language = createLanguage({
     ExprMed: r => seq(r.ExprHigh, seq(operatorMed.trim(optWhitespace), r.ExprHigh).many())
         .map(([head, tail]) => [head, ...tail])
         .mark()
-        .map(({value, ...loc}) => value.reduce((prev, curr) => !prev ? curr : binExpression({
+        .map(({ value, ...loc }) => value.reduce((prev, curr) => !prev ? curr : binExpression({
             loc,
             op: curr[0],
             lhs: prev,
@@ -209,7 +209,7 @@ const language = createLanguage({
     ExprHigh: r => seq(r.LiteralOrExpr, seq(operatorHigh.trim(optWhitespace), r.LiteralOrExpr).many())
         .map(([head, tail]) => [head, ...tail])
         .mark()
-        .map(({value, ...loc}) => value.reduce((prev, curr) => !prev ? curr : binExpression({
+        .map(({ value, ...loc }) => value.reduce((prev, curr) => !prev ? curr : binExpression({
             loc,
             op: curr[0],
             lhs: prev,
@@ -219,7 +219,8 @@ const language = createLanguage({
     LiteralOrExpr: r => alt(r.Function, r.Literal, r.ExprBracketed),
 
     Function: r => seq(functionName, r.ExprBracketed)
-        .map(([func, arg]) => funcExpression({ func, arg })),
+        .mark()
+        .map(({ value: [func, arg], ...loc }) => funcExpression({ func, arg, loc })),
 
     Literal: r => alt(r.Dice, r.Number, r.DiceGroup),
 
@@ -230,8 +231,10 @@ const language = createLanguage({
         comma.trim(optWhitespace).fallback(','),
         closeBrace,
         r.DiceGroupModifiers,
-    ).map(([_1, expr, exprs, _2, _3, mods]) =>
-        diceGroup({ elements: [expr, ...exprs.map(([_, expr]) => expr)], ...mods })),
+    )
+        .mark()
+        .map(({ value: [_1, expr, exprs, _2, _3, mods], ...loc }) =>
+            diceGroup({ elements: [expr, ...exprs.map(([_, expr]) => expr)], ...mods, loc })),
 
     DiceGroupModifiers: () => MultipleDiceGroupModifiers
         .map(modifiers => assign({}, ...modifiers)),
@@ -250,7 +253,8 @@ const language = createLanguage({
         ),
         r.DiceModifiers,
     )
-        .map(([noDice, _, diceSides, modifiers]) => dice({ noDice, diceSides, ...modifiers })),
+        .mark()
+        .map(({ value: [noDice, _, diceSides, modifiers], ...loc }) => dice({ noDice, diceSides, ...modifiers, loc })),
 
     DiceModifiers: () => MultipleDiceModifiers
         .map(modifiers => {
@@ -258,7 +262,9 @@ const language = createLanguage({
             return assign({}, ...modifiers.filter(mod => !('reroll' in mod)), reroll.length ? { reroll } : null);
         }),
 
-    Number: () => AnyNum.map(floatOf).map(value => number({ value })),
+    Number: () => AnyNum.map(floatOf)
+        .mark()
+        .map(({ value, ...loc }) => number({ value, loc })),
 });
 
 export function parse(s: string): EDice {

@@ -80,4 +80,72 @@ describe('checker', () => {
         });
     });
 
+    describe('check dice groups', () => {
+
+        it('should have accept all sum kinds as a sum kind', () => {
+            expect(check(parse('{4d6, 4d6, 4d2}'))).to.eql({
+                success: true, kind: Kind.sum,
+            });
+        });
+
+        it('should have accept all number kinds as a number kind', () => {
+            expect(check(parse('{4, 5, 3}'))).to.eql({
+                success: true, kind: Kind.number,
+            });
+        });
+
+        it('should have accept all success kinds as a success kind', () => {
+            expect(check(parse('{4d6>1, 4d6>1, 4d2>1}'))).to.eql({
+                success: true, kind: Kind.success,
+            });
+        });
+
+        it('should combine errors from all child errors', () => {
+            expect(check(parse('{ 3d6 + 3d8>2, 3d7 + 2d1>3 }'))).to.eql({
+                success: false, errors: [
+                    {
+                        type: 'BINOP_INCOMPATIBLE_KINDS',
+                        message: `cannot add kinds 'sum' and 'success'`,
+                        loc: loc(2, 13),
+                    },
+                    {
+                        type: 'BINOP_INCOMPATIBLE_KINDS',
+                        message: `cannot add kinds 'sum' and 'success'`,
+                        loc: loc(15, 26),
+                    },
+                ],
+            });
+        });
+
+        it('should return an error if any element is different', () => {
+            expect(check(parse('{ 3d6, 4d8>2 }'))).to.eql({
+                success: false, errors: [
+                    {
+                        type: 'GROUP_INCOMPATIBLE_KINDS',
+                        message: `cannot mix kinds 'sum' and 'success'`,
+                        loc: loc(7, 12),
+                    },
+                ],
+            });
+        });
+
+        it('should return an error for each different element', () => {
+            expect(check(parse('{ 3d6, 4d8>1, 4d5, 4 }'))).to.eql({
+                success: false, errors: [
+                    {
+                        type: 'GROUP_INCOMPATIBLE_KINDS',
+                        message: `cannot mix kinds 'sum' and 'success'`,
+                        loc: loc(7, 12),
+                    },
+                    {
+                        type: 'GROUP_INCOMPATIBLE_KINDS',
+                        message: `cannot mix kinds 'sum' and 'number'`,
+                        loc: loc(19, 20),
+                    },
+                ]
+            })
+        })
+
+    });
+
 });

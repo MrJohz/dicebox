@@ -2,8 +2,14 @@ import { Index } from 'parsimmon';
 
 export type Location = { start: Index, end: Index }
 
+function defaultLocation(): Location {
+    return {
+        start: { column: 0, offset: 0, line: 0 },
+        end: { column: 0, offset: 0, line: 0 },
+    };
+}
+
 type WithKind<T, Kind extends string> = T & { kind: Kind }
-type WithLoc<T> = T & { loc: Location }
 
 export const DICE_MAX = 'DICE MAX';
 export const DICE_MIN = 'DICE_MIN';
@@ -28,12 +34,13 @@ export interface DiceModifiers {
     sort?: ({ direction: 'a' | 'd' });
 }
 
-export type EDice = WithKind<DiceAttrs, 'dice'>
+export type EDice = WithKind<DiceAttrs, 'dice'> & { loc: Location }
 
-export function dice(dice: DiceAttrs): EDice {
+export function dice(dice: DiceAttrs & { loc?: Location }): EDice {
     return {
         kind: 'dice',
         ...dice,
+        loc: dice.loc || defaultLocation(),
     };
 }
 
@@ -41,9 +48,9 @@ interface NumberAttrs {
     value: number;
 }
 
-export type ENumber = WithKind<NumberAttrs, 'number'>
+export type ENumber = WithKind<NumberAttrs, 'number'> & { loc: Location }
 
-export function number(num: NumberAttrs | number): ENumber {
+export function number(num: NumberAttrs & { loc?: Location } | number): ENumber {
     if (typeof num === 'number') {
         return number({ value: num });
     }
@@ -51,6 +58,7 @@ export function number(num: NumberAttrs | number): ENumber {
     return {
         kind: 'number',
         ...num,
+        loc: num.loc || defaultLocation(),
     };
 }
 
@@ -60,14 +68,14 @@ interface BinExpressionAttrs {
     rhs: Expression,
 }
 
-export type BinExpression = WithLoc<WithKind<BinExpressionAttrs, 'binExpression'>>
+export type BinExpression = WithKind<BinExpressionAttrs, 'binExpression'> & { loc: Location }
 
 export function binExpression(expr: BinExpressionAttrs & { loc?: Location }): BinExpression {
 
     return {
         kind: 'binExpression',
         ...expr,
-        loc: expr.loc || { start: { offset: 0, line: 0, column: 0 }, end: { offset: 0, line: 0, column: 0 } },
+        loc: expr.loc || defaultLocation(),
     };
 }
 
@@ -76,12 +84,13 @@ interface FuncExpressionAttrs {
     arg: Expression,
 }
 
-export type FuncExpression = WithKind<FuncExpressionAttrs, 'funcExpression'>
+export type FuncExpression = WithKind<FuncExpressionAttrs, 'funcExpression'> & { loc: Location }
 
-export function funcExpression(expr: FuncExpressionAttrs): FuncExpression {
+export function funcExpression(expr: FuncExpressionAttrs & { loc?: Location }): FuncExpression {
     return {
         kind: 'funcExpression',
         ...expr,
+        loc: expr.loc || defaultLocation(),
     };
 }
 
@@ -96,12 +105,13 @@ interface DiceGroupAttrs extends DiceGroupModifiers {
     elements: Expression[];
 }
 
-export type DiceGroup = WithKind<DiceGroupAttrs, 'diceGroup'>
+export type DiceGroup = WithKind<DiceGroupAttrs, 'diceGroup'> & { loc: Location };
 
-export function diceGroup(expr: DiceGroupAttrs): DiceGroup {
+export function diceGroup(expr: DiceGroupAttrs & { loc?: Location }): DiceGroup {
     return {
         kind: 'diceGroup',
         ...expr,
+        loc: expr.loc || defaultLocation(),
     };
 }
 

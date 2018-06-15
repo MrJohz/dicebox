@@ -8,10 +8,14 @@ export enum Kind {
 
 export type CheckError =
     | { type: 'BINOP_INCOMPATIBLE_KINDS', message: string, loc: Location }
+    | { type: 'GROUP_INCOMPATIBLE_KINDS', message: string, loc: Location }
+
+type SuccessResult = { success: true, kind: Kind };
+type ErrorResult = { success: false, errors: CheckError[] };
 
 export type Result =
-    | { success: true, kind: Kind }
-    | { success: false, errors: CheckError[] }
+    | SuccessResult
+    | ErrorResult
 
 export function check(expression: Expression): Result {
     switch (expression.kind) {
@@ -62,12 +66,11 @@ function checkBinExpression(expr: BinExpression): Result {
     let lhs = check(expr.lhs);
     let rhs = check(expr.rhs);
 
-    if (!lhs.success || !rhs.success)
+    if (!lhs.success || !rhs.success) {
         return combineErrors(lhs, rhs);
-    if (lhs.kind === rhs.kind)
+    } else if (lhs.kind === rhs.kind) {
         return { success: true, kind: lhs.kind };
-
-    if (lhs.kind === Kind.number) {
+    } else if (lhs.kind === Kind.number) {
         return { success: true, kind: rhs.kind };
     } else if (rhs.kind === Kind.number) {
         return { success: true, kind: lhs.kind };
@@ -83,6 +86,32 @@ function checkBinExpression(expr: BinExpression): Result {
 }
 
 function checkDiceGroup(group: DiceGroup): Result {
-    console.log(group);
-    return { success: true, kind: Kind.success };
+    const groupChecks = group.elements.map(elem => ({ elem, check: check(elem) }));
+
+    const existingFailures = groupChecks.filter(elem => elem.check.success === false);
+    if (existingFailures.length > 1) {
+        return combineErrors(...existingFailures.map(elem => elem.check));
+    }
+
+    // type assertion to make life easier for us
+    const exprs = groupChecks as { elem: DiceGroup, check: SuccessResult }[];
+
+    const errors: CheckError[] = [];
+    const initType = exprs[0].check.kind;
+
+    for (const expr of exprs) {
+        if (expr.check.kind !== initType) {
+            errors.push({
+                type: 'GROUP_INCOMPATIBLE_KINDS',
+                message: `cannot mix kinds '${initType}' and '${expr.check.kind}'`,
+                loc: expr.elem.loc,
+            });
+        }
+    }
+
+    if (errors.length) {
+        return { success: false, errors };
+    } else {
+        return { success: true, kind: initType };
+    }
 }
