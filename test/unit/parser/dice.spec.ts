@@ -2,8 +2,12 @@ import expect from 'must';
 
 import { parse } from '../../../src/parser';
 import { dice, number, binExpression, DICE_MAX, diceGroup } from '../../../src/types';
+import { acceptLoc, ignoreLoc } from '../../ignore-loc.util';
 
 describe('parser/dice', () => {
+
+    beforeEach(() => { ignoreLoc(expect); });
+    afterEach(() => { acceptLoc(expect); });
 
     describe('basic dice', () => {
 
@@ -343,7 +347,7 @@ describe('parser/dice', () => {
 
         it('should not accept any additional modifiers', () => {
             expect(() => parse('{3d1}r3')).to.throw();
-        })
+        });
 
     });
 

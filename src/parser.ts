@@ -188,7 +188,9 @@ const language = createLanguage({
 
     ExprLow: r => seq(r.ExprMed, seq(operatorLow.trim(optWhitespace), r.ExprMed).many())
         .map(([head, tail]) => [head, ...tail])
-        .map(factors => factors.reduce((prev, curr) => !prev ? curr : binExpression({
+        .mark()
+        .map(({value, ...loc}) => value.reduce((prev, curr) => !prev ? curr : binExpression({
+            loc,
             op: curr[0],
             lhs: prev,
             rhs: curr[1],
@@ -196,7 +198,9 @@ const language = createLanguage({
 
     ExprMed: r => seq(r.ExprHigh, seq(operatorMed.trim(optWhitespace), r.ExprHigh).many())
         .map(([head, tail]) => [head, ...tail])
-        .map(factors => factors.reduce((prev, curr) => !prev ? curr : binExpression({
+        .mark()
+        .map(({value, ...loc}) => value.reduce((prev, curr) => !prev ? curr : binExpression({
+            loc,
             op: curr[0],
             lhs: prev,
             rhs: curr[1],
@@ -204,7 +208,9 @@ const language = createLanguage({
 
     ExprHigh: r => seq(r.LiteralOrExpr, seq(operatorHigh.trim(optWhitespace), r.LiteralOrExpr).many())
         .map(([head, tail]) => [head, ...tail])
-        .map(factors => factors.reduce((prev, curr) => !prev ? curr : binExpression({
+        .mark()
+        .map(({value, ...loc}) => value.reduce((prev, curr) => !prev ? curr : binExpression({
+            loc,
             op: curr[0],
             lhs: prev,
             rhs: curr[1],

@@ -1,4 +1,4 @@
-import { BinExpression, DiceGroup, EDice, Expression } from './types';
+import { BinExpression, DiceGroup, EDice, Expression, Location } from './types';
 
 export enum Kind {
     number = 'number',
@@ -76,7 +76,7 @@ function checkBinExpression(expr: BinExpression): Result {
     const error: CheckError = {
         type: 'BINOP_INVALID_KINDS',
         message: `cannot ${humanReadableOp(expr.op)} kinds '${lhs.kind}' and '${rhs.kind}'`,
-        loc: {} as Location,
+        loc: expr.loc,
     };
 
     return { success: false, errors: [error] };

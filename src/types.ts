@@ -1,4 +1,9 @@
-type WithKind<T, Kind extends string> = T & { kind: Kind };
+import { Index } from 'parsimmon';
+
+export type Location = { start: Index, end: Index }
+
+type WithKind<T, Kind extends string> = T & { kind: Kind }
+type WithLoc<T> = T & { loc: Location }
 
 export const DICE_MAX = 'DICE MAX';
 export const DICE_MIN = 'DICE_MIN';
@@ -55,12 +60,14 @@ interface BinExpressionAttrs {
     rhs: Expression,
 }
 
-export type BinExpression = WithKind<BinExpressionAttrs, 'binExpression'>
+export type BinExpression = WithLoc<WithKind<BinExpressionAttrs, 'binExpression'>>
 
-export function binExpression(expr: BinExpressionAttrs): BinExpression {
+export function binExpression(expr: BinExpressionAttrs & { loc?: Location }): BinExpression {
+
     return {
         kind: 'binExpression',
         ...expr,
+        loc: expr.loc || { start: { offset: 0, line: 0, column: 0 }, end: { offset: 0, line: 0, column: 0 } },
     };
 }
 

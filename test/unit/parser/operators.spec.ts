@@ -3,7 +3,12 @@ import expect from 'must';
 import { parse } from '../../../src/parser';
 import { binExpression, number, funcExpression } from '../../../src/types';
 
+import { ignoreLoc, acceptLoc } from '../../ignore-loc.util';
+
 describe('parser/operators', () => {
+
+    beforeEach(() => { ignoreLoc(expect); });
+    afterEach(() => { acceptLoc(expect); });
 
     describe('binary operators', () => {
 

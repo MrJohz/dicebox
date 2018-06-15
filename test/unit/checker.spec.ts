@@ -1,7 +1,14 @@
 import expect from 'must';
 import { check, Kind } from '../../src/checker';
 import { parse } from '../../src/parser';
-import { number } from '../../src/types';
+import { Location, number } from '../../src/types';
+
+function loc(start: number, end: number): Location {
+    return {
+        start: { line: 1, offset: start, column: start + 1 },
+        end: { line: 1, offset: end, column: end + 1 },
+    };
+}
 
 describe('checker', () => {
 
@@ -52,7 +59,7 @@ describe('checker', () => {
                 success: false, errors: [{
                     type: 'BINOP_INVALID_KINDS',
                     message: `cannot add kinds 'success' and 'sum'`,
-                    loc: {},
+                    loc: loc(0, 11),
                 }],
             });
         });
