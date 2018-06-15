@@ -50,7 +50,7 @@ export function number(num: NumberAttrs | number): ENumber {
 }
 
 interface BinExpressionAttrs {
-    op: string,
+    op: '+' | '-' | '*' | '/' | '**' | '%',
     lhs: Expression,
     rhs: Expression,
 }
@@ -85,7 +85,7 @@ export interface DiceGroupModifiers {
     drop?: { number: number, direction: 'h' | 'l' };
 }
 
-interface DiceGroupAttrs extends DiceGroupModifiers{
+interface DiceGroupAttrs extends DiceGroupModifiers {
     elements: Expression[];
 }
 
