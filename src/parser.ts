@@ -84,7 +84,7 @@ const ComparePoint = seq(comparisonOperator.fallback('='), AnyDigits.map(intOf))
     .map(([op, number]) => ({ op, number }));
 
 function diceModifiers(currentModifers: DiceModifiers[]) {
-    const keys = currentModifers.map(mod => Object.keys(mod)[0]);
+    const keys = currentModifers.map(mod => Object.keys(mod)[0]);  // each modifier only has one key
     return alt(...[
         {
             name: 'success', combinator: seq(
@@ -93,7 +93,7 @@ function diceModifiers(currentModifers: DiceModifiers[]) {
                     ComparePoint).fallback(null),
             ).map(([success, failure]) => failure === null
                 ? [...currentModifers, { success }]
-                : [...currentModifers, { success, failure: failure[1] }]),
+                : [...currentModifers, { failure: failure[1] }, { success }]),
         }, {
             name: 'compounding', combinator: seq(
                 string('!!').desc(`compounding modifier '!!'`),

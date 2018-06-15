@@ -217,6 +217,7 @@ describe('parser/dice', () => {
 
         it('should throw if the same modifier is specified twice', () => {
             expect(() => parse('3d1!2!3')).to.throw();
+            expect(() => parse('3d1>3f<2>4')).to.throw();
         });
     });
 
