@@ -1,7 +1,7 @@
 import expect from 'must';
 import { check, Kind } from '../../src/checker';
 import { parse } from '../../src/parser';
-import { Location, number } from '../../src/types';
+import { binExpression, Location, number } from '../../src/types';
 
 function loc(start: number, end: number): Location {
     return {
@@ -57,9 +57,24 @@ describe('checker', () => {
         it('should return failure if applying a success dice to a sum dice', () => {
             expect(check(parse('8d8>3 + 2d6'))).to.eql({
                 success: false, errors: [{
-                    type: 'BINOP_INVALID_KINDS',
+                    type: 'BINOP_INCOMPATIBLE_KINDS',
                     message: `cannot add kinds 'success' and 'sum'`,
                     loc: loc(0, 11),
+                }],
+            });
+        });
+
+        it('should return failure if a nested expression adds two different types', () => {
+            expect(check(binExpression({
+                loc: loc(1, 3),
+                op: '-',
+                lhs: parse('3 + 3d5'),  // sum dice
+                rhs: parse('3d4>7 + 4d6>8'), // success dice
+            }))).to.eql({
+                success: false, errors: [{
+                    type: 'BINOP_INCOMPATIBLE_KINDS',
+                    message: `cannot subtract kinds 'sum' and 'success'`,
+                    loc: loc(1, 3),
                 }],
             });
         });

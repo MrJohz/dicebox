@@ -7,7 +7,7 @@ export enum Kind {
 }
 
 export type CheckError =
-    | { type: 'BINOP_INVALID_KINDS', message: string, loc: Location }
+    | { type: 'BINOP_INCOMPATIBLE_KINDS', message: string, loc: Location }
 
 export type Result =
     | { success: true, kind: Kind }
@@ -74,7 +74,7 @@ function checkBinExpression(expr: BinExpression): Result {
     }
 
     const error: CheckError = {
-        type: 'BINOP_INVALID_KINDS',
+        type: 'BINOP_INCOMPATIBLE_KINDS',
         message: `cannot ${humanReadableOp(expr.op)} kinds '${lhs.kind}' and '${rhs.kind}'`,
         loc: expr.loc,
     };
