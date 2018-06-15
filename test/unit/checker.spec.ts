@@ -54,6 +54,40 @@ describe('checker', () => {
             expect(check(parse('3d6>2 * 8'))).to.eql({ success: true, kind: Kind.success });
         });
 
+        it('should return failure if one child is a failure', () => {
+            const failureChild = parse('d1>1 + d1');
+            const failCheck = check(failureChild);
+            if (failCheck.success) throw new Error('failing child should not succeed');
+
+            expect(check(binExpression({
+                op: '+',
+                lhs: failureChild,
+                rhs: parse('3'),
+            }))).to.eql({
+                success: false,
+                errors: failCheck.errors,
+            });
+        });
+
+        it('should return failure if both children are failures', () => {
+            const failureChild1 = parse('d1>1 + d1');
+            const failCheck1 = check(failureChild1);
+            if (failCheck1.success) throw new Error('failing child should not succeed');
+
+            const failureChild2 = parse('d11 + d1>1');
+            const failCheck2 = check(failureChild2);
+            if (failCheck2.success) throw new Error('failing child should not succeed');
+
+            expect(check(binExpression({
+                op: '+',
+                lhs: failureChild1,
+                rhs: failureChild2,
+            }))).to.eql({
+                success: false,
+                errors: [...failCheck1.errors, ...failCheck2.errors],
+            });
+        });
+
         it('should return failure if applying a success dice to a sum dice', () => {
             expect(check(parse('8d8>3 + 2d6'))).to.eql({
                 success: false, errors: [{
@@ -142,9 +176,9 @@ describe('checker', () => {
                         message: `cannot mix kinds 'sum' and 'number'`,
                         loc: loc(19, 20),
                     },
-                ]
-            })
-        })
+                ],
+            });
+        });
 
     });
 

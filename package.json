@@ -10,7 +10,8 @@
     "build:cjs": "tsc -p ./tsconfig/tsconfig.cjs.json",
     "build:dts": "tsc -p ./tsconfig/tsconfig.dts.json",
     "build": "npm run build:esm && npm run build:cjs && npm run build:dts",
-    "test": "cross-env TS_NODE_PROJECT=test/tsconfig.json mocha"
+    "test": "cross-env TS_NODE_PROJECT=test/tsconfig.json mocha",
+    "test:coverage": "cross-env TS_NODE_PROJECT=test/tsconfig.json nyc mocha"
   },
   "keywords": [
     "dice",
@@ -25,6 +26,7 @@
     "cross-env": "^5.2.0",
     "mocha": "^5.2.0",
     "must": "^0.13.4",
+    "nyc": "^12.0.2",
     "ts-node": "^6.1.0",
     "typescript": "^2.9.1"
   },
