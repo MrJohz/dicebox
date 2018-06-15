@@ -290,4 +290,61 @@ describe('parser/dice', () => {
 
     });
 
+    describe('dice group modifiers', () => {
+
+        it('should add success modifiers to the dice group object', () => {
+            expect(parse('{ 3d1 }>4')).to.eql(diceGroup({
+                elements: [dice({ noDice: 3, diceSides: [1] })],
+                success: { op: '>', number: 4 },
+            }));
+        });
+
+        it('should add success and failure modifiers to the dice group object', () => {
+            expect(parse('{ 3d1 }>4f<1')).to.eql(diceGroup({
+                elements: [dice({ noDice: 3, diceSides: [1] })],
+                success: { op: '>', number: 4 },
+                failure: { op: '<', number: 1 },
+            }));
+        });
+
+        it('should not parse a failure condition by itself', () => {
+            expect(() => parse('{ 4d1 }f<4')).to.throw();
+        });
+
+        it('should add keep modifiers to the dice group object', () => {
+            expect(parse('{3d1}k2')).to.eql(diceGroup({
+                elements: [dice({ noDice: 3, diceSides: [1] })],
+                keep: { direction: 'h', number: 2 },
+            }));
+            expect(parse('{3d1}kh2')).to.eql(diceGroup({
+                elements: [dice({ noDice: 3, diceSides: [1] })],
+                keep: { direction: 'h', number: 2 },
+            }));
+            expect(parse('{3d1}kl2')).to.eql(diceGroup({
+                elements: [dice({ noDice: 3, diceSides: [1] })],
+                keep: { direction: 'l', number: 2 },
+            }));
+        });
+
+        it('should add drop modifiers to the dice group object', () => {
+            expect(parse('{3d1}d2')).to.eql(diceGroup({
+                elements: [dice({ noDice: 3, diceSides: [1] })],
+                drop: { direction: 'l', number: 2 },
+            }));
+            expect(parse('{3d1}dh2')).to.eql(diceGroup({
+                elements: [dice({ noDice: 3, diceSides: [1] })],
+                drop: { direction: 'h', number: 2 },
+            }));
+            expect(parse('{3d1}dl2')).to.eql(diceGroup({
+                elements: [dice({ noDice: 3, diceSides: [1] })],
+                drop: { direction: 'l', number: 2 },
+            }));
+        });
+
+        it('should not accept any additional modifiers', () => {
+            expect(() => parse('{3d1}r3')).to.throw();
+        })
+
+    });
+
 });

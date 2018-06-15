@@ -78,7 +78,14 @@ export function funcExpression(expr: FuncExpressionAttrs): FuncExpression {
     };
 }
 
-interface DiceGroupAttrs {
+export interface DiceGroupModifiers {
+    success?: { op: ModifierOperators, number: number | typeof DICE_MAX };
+    failure?: { op: ModifierOperators, number: number | typeof DICE_MAX };
+    keep?: { number: number, direction: 'h' | 'l' };
+    drop?: { number: number, direction: 'h' | 'l' };
+}
+
+interface DiceGroupAttrs extends DiceGroupModifiers{
     elements: Expression[];
 }
 
