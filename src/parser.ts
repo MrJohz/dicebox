@@ -1,5 +1,5 @@
 import { alt, createLanguage, of, oneOf, optWhitespace, Parser, regexp, seq, string } from 'parsimmon';
-import { assign } from '../tsconfig/polyfills';
+import { assign } from './polyfills';
 
 import {
     binExpression, dice, DICE_MAX, DICE_MIN, diceGroup, DiceGroupModifiers, DiceModifiers, EDice, funcExpression,
