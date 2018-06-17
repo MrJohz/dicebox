@@ -2,7 +2,14 @@ import Must from 'must';
 
 let originalEqual: any;
 
-export function ignoreLoc(M: typeof Must): typeof Must {
+export function ignoreLoc(M: typeof Must, cb?: () => void): typeof Must {
+    if (cb) {
+        ignoreLoc(M);
+        cb();
+        acceptLoc(M);
+        return M;
+    }
+
     if (originalEqual) throw new Error('ignoreLoc already applied');
     originalEqual = M.prototype.eql;
     M.prototype.eql = function (expected: any) {
@@ -16,6 +23,7 @@ export function ignoreLoc(M: typeof Must): typeof Must {
 }
 
 export function acceptLoc(M: typeof Must): typeof Must {
+    if (!originalEqual) throw new Error('ignoreLoc not currently active');
     M.prototype.eql = originalEqual;
     originalEqual = null;
     return M;

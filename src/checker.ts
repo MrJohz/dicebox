@@ -56,7 +56,7 @@ function humanReadableOp(operator: BinExpression['op']): string {
         case '/':
             return 'divide';
         case '**':
-            return 'raise';
+            return 'raise to power';
     }
 }
 

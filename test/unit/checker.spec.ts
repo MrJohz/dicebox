@@ -2,6 +2,7 @@ import expect from 'must';
 import { check, Kind } from '../../src/checker';
 import { parse } from '../../src/parser';
 import { binExpression, Location, number } from '../../src/types';
+import { ignoreLoc } from '../ignore-loc.util';
 
 function loc(start: number, end: number): Location {
     return {
@@ -112,6 +113,96 @@ describe('checker', () => {
                 }],
             });
         });
+
+        it('should raise correct errors for modulo', () => {
+            const ourLoc = loc(1, 1);
+
+            expect(check(binExpression({
+                loc: ourLoc, op: '%',
+                lhs: parse('1d1>1'), rhs: parse('1d1'),
+            }))).to.eql({
+                success: false, errors: [{
+                    loc: ourLoc,
+                    type: 'BINOP_INCOMPATIBLE_KINDS',
+                    message: `cannot modulo kinds 'success' and 'sum'`,
+                }],
+            });
+        });
+
+        it('should raise correct errors for addition', () => {
+            const ourLoc = loc(1, 1);
+
+            expect(check(binExpression({
+                loc: ourLoc, op: '+',
+                lhs: parse('1d1>1'), rhs: parse('1d1'),
+            }))).to.eql({
+                success: false, errors: [{
+                    loc: ourLoc,
+                    type: 'BINOP_INCOMPATIBLE_KINDS',
+                    message: `cannot add kinds 'success' and 'sum'`,
+                }],
+            });
+        });
+
+        it('should raise correct errors for subtraction', () => {
+            const ourLoc = loc(1, 1);
+
+            expect(check(binExpression({
+                loc: ourLoc, op: '-',
+                lhs: parse('1d1>1'), rhs: parse('1d1'),
+            }))).to.eql({
+                success: false, errors: [{
+                    loc: ourLoc,
+                    type: 'BINOP_INCOMPATIBLE_KINDS',
+                    message: `cannot subtract kinds 'success' and 'sum'`,
+                }],
+            });
+        });
+
+        it('should raise correct errors for multiplication', () => {
+            const ourLoc = loc(1, 1);
+
+            expect(check(binExpression({
+                loc: ourLoc, op: '*',
+                lhs: parse('1d1>1'), rhs: parse('1d1'),
+            }))).to.eql({
+                success: false, errors: [{
+                    loc: ourLoc,
+                    type: 'BINOP_INCOMPATIBLE_KINDS',
+                    message: `cannot multiply kinds 'success' and 'sum'`,
+                }],
+            });
+        });
+
+        it('should raise correct errors for division', () => {
+            const ourLoc = loc(1, 1);
+
+            expect(check(binExpression({
+                loc: ourLoc, op: '/',
+                lhs: parse('1d1>1'), rhs: parse('1d1'),
+            }))).to.eql({
+                success: false, errors: [{
+                    loc: ourLoc,
+                    type: 'BINOP_INCOMPATIBLE_KINDS',
+                    message: `cannot divide kinds 'success' and 'sum'`,
+                }],
+            });
+        });
+
+        it('should raise correct errors for powers', () => {
+            const ourLoc = loc(1, 1);
+
+            expect(check(binExpression({
+                loc: ourLoc, op: '**',
+                lhs: parse('1d1>1'), rhs: parse('1d1'),
+            }))).to.eql({
+                success: false, errors: [{
+                    loc: ourLoc,
+                    type: 'BINOP_INCOMPATIBLE_KINDS',
+                    message: `cannot raise to power kinds 'success' and 'sum'`,
+                }],
+            });
+        });
     });
 
     describe('check dice groups', () => {
@@ -177,6 +268,25 @@ describe('checker', () => {
                         loc: loc(19, 20),
                     },
                 ],
+            });
+        });
+
+    });
+
+    describe('check function expressions', () => {
+
+        it('should return a success if the child expression is a success', () => {
+            expect(check(parse('ciel(3.2)')))
+                .to.eql({ success: true, kind: Kind.number });
+        });
+
+        it('should return a failure if the child expression is a failure', () => {
+            const result = check(parse('ciel(3d2 + 3d2>1)'));
+
+            expect(result.success).to.be.false();
+
+            ignoreLoc(expect, () => {
+                expect(result).to.eql(check(parse('3d2 + 3d2>1')));
             });
         });
 
