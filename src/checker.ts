@@ -1,4 +1,4 @@
-import { BinExpression, DiceGroup, EDice, Expression, Location } from './types';
+import { BinExpression, DiceGroup, EDice, Expression, FuncExpression, Location } from './types';
 
 export enum Kind {
     number = 'number',
@@ -27,6 +27,8 @@ export function check(expression: Expression): Result {
             return checkBinExpression(expression);
         case 'diceGroup':
             return checkDiceGroup(expression);
+        case 'funcExpression':
+            return checkFuncExpression(expression);
     }
 }
 
@@ -114,4 +116,9 @@ function checkDiceGroup(group: DiceGroup): Result {
     } else {
         return { success: true, kind: initType };
     }
+}
+
+function checkFuncExpression(func: FuncExpression): Result {
+    // TODO: could check for valid functions here?
+    return check(func.arg);
 }
