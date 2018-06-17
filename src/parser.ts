@@ -183,9 +183,6 @@ const MultipleDiceGroupModifiers = of([])
 const language = createLanguage({
     Expr: r => r.ExprLow.trim(optWhitespace),
 
-    ExprBracketed: r => seq(openBracket.skip(optWhitespace), r.Expr, optWhitespace.then(closeBracket))
-        .map(([_, expr]) => expr),
-
     ExprLow: r => seq(r.ExprMed, seq(operatorLow.trim(optWhitespace), r.ExprMed).many())
         .map(([head, tail]) => [head, ...tail])
         .mark()
@@ -218,6 +215,9 @@ const language = createLanguage({
 
     LiteralOrExpr: r => alt(r.Function, r.Literal, r.ExprBracketed),
 
+    ExprBracketed: r => seq(openBracket.skip(optWhitespace), r.Expr, optWhitespace.then(closeBracket))
+        .map(([_, expr]) => expr),
+
     Function: r => seq(functionName, r.ExprBracketed)
         .mark()
         .map(({ value: [func, arg], ...loc }) => funcExpression({ func, arg, loc })),
@@ -227,7 +227,7 @@ const language = createLanguage({
     DiceGroup: r => seq(
         openBrace,
         r.Expr,
-        seq(comma.trim(optWhitespace), r.Expr).many(),
+        seq(comma, r.Expr).many(),
         comma.trim(optWhitespace).fallback(','),
         closeBrace,
         r.DiceGroupModifiers,
