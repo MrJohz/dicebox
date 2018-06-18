@@ -1,3 +1,8 @@
+/**
+ * Module-level docstring for parser
+ *
+ */
+
 import { alt, createLanguage, of, oneOf, optWhitespace, Parser, regexp, seq, string } from 'parsimmon';
 import { assign } from './polyfills';
 
@@ -267,6 +272,11 @@ const language = createLanguage({
         .map(({ value, ...loc }) => number({ value, loc })),
 });
 
+/**
+ * Parses a string and returns a parse tree
+ *
+ * @param s This param does magic things
+ */
 export function parse(s: string): EDice {
     return language.Expr.tryParse(s);
 }

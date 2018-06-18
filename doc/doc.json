@@ -1,0 +1,8073 @@
+{
+	"id": 0,
+	"name": "dicebox",
+	"kind": 0,
+	"flags": {},
+	"children": [
+		{
+			"id": 184,
+			"name": "\"checker\"",
+			"kind": 1,
+			"kindString": "External module",
+			"flags": {
+				"isExported": true
+			},
+			"originalName": "/home/jfrere/projects/dicebox/src/checker.ts",
+			"children": [
+				{
+					"id": 185,
+					"name": "Kind",
+					"kind": 4,
+					"kindString": "Enumeration",
+					"flags": {
+						"isExported": true
+					},
+					"children": [
+						{
+							"id": 186,
+							"name": "number",
+							"kind": 16,
+							"kindString": "Enumeration member",
+							"flags": {
+								"isExported": true
+							},
+							"sources": [
+								{
+									"fileName": "checker.ts",
+									"line": 4,
+									"character": 10
+								}
+							],
+							"defaultValue": "\"number\""
+						},
+						{
+							"id": 188,
+							"name": "success",
+							"kind": 16,
+							"kindString": "Enumeration member",
+							"flags": {
+								"isExported": true
+							},
+							"sources": [
+								{
+									"fileName": "checker.ts",
+									"line": 6,
+									"character": 11
+								}
+							],
+							"defaultValue": "\"success\""
+						},
+						{
+							"id": 187,
+							"name": "sum",
+							"kind": 16,
+							"kindString": "Enumeration member",
+							"flags": {
+								"isExported": true
+							},
+							"sources": [
+								{
+									"fileName": "checker.ts",
+									"line": 5,
+									"character": 7
+								}
+							],
+							"defaultValue": "\"sum\""
+						}
+					],
+					"groups": [
+						{
+							"title": "Enumeration members",
+							"kind": 16,
+							"children": [
+								186,
+								188,
+								187
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "checker.ts",
+							"line": 3,
+							"character": 16
+						}
+					]
+				},
+				{
+					"id": 189,
+					"name": "CheckError",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "checker.ts",
+							"line": 9,
+							"character": 22
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "reflection",
+								"declaration": {
+									"id": 190,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"children": [
+										{
+											"id": 193,
+											"name": "loc",
+											"kind": 32,
+											"kindString": "Variable",
+											"flags": {},
+											"sources": [
+												{
+													"fileName": "checker.ts",
+													"line": 10,
+													"character": 62
+												}
+											],
+											"type": {
+												"type": "reference",
+												"name": "Location",
+												"id": 128
+											}
+										},
+										{
+											"id": 192,
+											"name": "message",
+											"kind": 32,
+											"kindString": "Variable",
+											"flags": {},
+											"sources": [
+												{
+													"fileName": "checker.ts",
+													"line": 10,
+													"character": 49
+												}
+											],
+											"type": {
+												"type": "intrinsic",
+												"name": "string"
+											}
+										},
+										{
+											"id": 191,
+											"name": "type",
+											"kind": 32,
+											"kindString": "Variable",
+											"flags": {},
+											"sources": [
+												{
+													"fileName": "checker.ts",
+													"line": 10,
+													"character": 12
+												}
+											],
+											"type": {
+												"type": "stringLiteral",
+												"value": "BINOP_INCOMPATIBLE_KINDS"
+											}
+										}
+									],
+									"groups": [
+										{
+											"title": "Variables",
+											"kind": 32,
+											"children": [
+												193,
+												192,
+												191
+											]
+										}
+									],
+									"sources": [
+										{
+											"fileName": "checker.ts",
+											"line": 10,
+											"character": 5
+										}
+									]
+								}
+							},
+							{
+								"type": "reflection",
+								"declaration": {
+									"id": 194,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"children": [
+										{
+											"id": 197,
+											"name": "loc",
+											"kind": 32,
+											"kindString": "Variable",
+											"flags": {},
+											"sources": [
+												{
+													"fileName": "checker.ts",
+													"line": 11,
+													"character": 62
+												}
+											],
+											"type": {
+												"type": "reference",
+												"name": "Location",
+												"id": 128
+											}
+										},
+										{
+											"id": 196,
+											"name": "message",
+											"kind": 32,
+											"kindString": "Variable",
+											"flags": {},
+											"sources": [
+												{
+													"fileName": "checker.ts",
+													"line": 11,
+													"character": 49
+												}
+											],
+											"type": {
+												"type": "intrinsic",
+												"name": "string"
+											}
+										},
+										{
+											"id": 195,
+											"name": "type",
+											"kind": 32,
+											"kindString": "Variable",
+											"flags": {},
+											"sources": [
+												{
+													"fileName": "checker.ts",
+													"line": 11,
+													"character": 12
+												}
+											],
+											"type": {
+												"type": "stringLiteral",
+												"value": "GROUP_INCOMPATIBLE_KINDS"
+											}
+										}
+									],
+									"groups": [
+										{
+											"title": "Variables",
+											"kind": 32,
+											"children": [
+												197,
+												196,
+												195
+											]
+										}
+									],
+									"sources": [
+										{
+											"fileName": "checker.ts",
+											"line": 11,
+											"character": 5
+										}
+									]
+								}
+							}
+						]
+					}
+				},
+				{
+					"id": 202,
+					"name": "ErrorResult",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "checker.ts",
+							"line": 14,
+							"character": 16
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 203,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {},
+							"children": [
+								{
+									"id": 205,
+									"name": "errors",
+									"kind": 32,
+									"kindString": "Variable",
+									"flags": {},
+									"sources": [
+										{
+											"fileName": "checker.ts",
+											"line": 14,
+											"character": 43
+										}
+									],
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "reference",
+											"name": "CheckError",
+											"id": 189
+										}
+									}
+								},
+								{
+									"id": 204,
+									"name": "success",
+									"kind": 32,
+									"kindString": "Variable",
+									"flags": {},
+									"sources": [
+										{
+											"fileName": "checker.ts",
+											"line": 14,
+											"character": 28
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "false"
+									}
+								}
+							],
+							"groups": [
+								{
+									"title": "Variables",
+									"kind": 32,
+									"children": [
+										205,
+										204
+									]
+								}
+							],
+							"sources": [
+								{
+									"fileName": "checker.ts",
+									"line": 14,
+									"character": 18
+								}
+							]
+						}
+					}
+				},
+				{
+					"id": 206,
+					"name": "Result",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "checker.ts",
+							"line": 16,
+							"character": 18
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "reference",
+								"name": "SuccessResult",
+								"id": 198
+							},
+							{
+								"type": "reference",
+								"name": "ErrorResult",
+								"id": 202
+							}
+						]
+					}
+				},
+				{
+					"id": 198,
+					"name": "SuccessResult",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"sources": [
+						{
+							"fileName": "checker.ts",
+							"line": 13,
+							"character": 18
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 199,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {},
+							"children": [
+								{
+									"id": 201,
+									"name": "kind",
+									"kind": 32,
+									"kindString": "Variable",
+									"flags": {},
+									"sources": [
+										{
+											"fileName": "checker.ts",
+											"line": 13,
+											"character": 42
+										}
+									],
+									"type": {
+										"type": "reference",
+										"name": "Kind",
+										"id": 185
+									}
+								},
+								{
+									"id": 200,
+									"name": "success",
+									"kind": 32,
+									"kindString": "Variable",
+									"flags": {},
+									"sources": [
+										{
+											"fileName": "checker.ts",
+											"line": 13,
+											"character": 30
+										}
+									],
+									"type": {
+										"type": "intrinsic",
+										"name": "true"
+									}
+								}
+							],
+							"groups": [
+								{
+									"title": "Variables",
+									"kind": 32,
+									"children": [
+										201,
+										200
+									]
+								}
+							],
+							"sources": [
+								{
+									"fileName": "checker.ts",
+									"line": 13,
+									"character": 20
+								}
+							]
+						}
+					}
+				},
+				{
+					"id": 207,
+					"name": "check",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 208,
+							"name": "check",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"id": 209,
+									"name": "expression",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"name": "Expression",
+										"id": 183
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Result",
+								"id": 206
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "checker.ts",
+							"line": 20,
+							"character": 21
+						}
+					]
+				},
+				{
+					"id": 219,
+					"name": "checkBinExpression",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"signatures": [
+						{
+							"id": 220,
+							"name": "checkBinExpression",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"id": 221,
+									"name": "expr",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"name": "BinExpression",
+										"id": 159
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Result",
+								"id": 206
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "checker.ts",
+							"line": 67,
+							"character": 27
+						}
+					]
+				},
+				{
+					"id": 216,
+					"name": "checkDice",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"signatures": [
+						{
+							"id": 217,
+							"name": "checkDice",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"id": 218,
+									"name": "dice",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"name": "EDice",
+										"id": 143
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Result",
+								"id": 206
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "checker.ts",
+							"line": 63,
+							"character": 18
+						}
+					]
+				},
+				{
+					"id": 222,
+					"name": "checkDiceGroup",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"signatures": [
+						{
+							"id": 223,
+							"name": "checkDiceGroup",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"id": 224,
+									"name": "group",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"name": "DiceGroup",
+										"id": 175
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Result",
+								"id": 206
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "checker.ts",
+							"line": 90,
+							"character": 23
+						}
+					]
+				},
+				{
+					"id": 225,
+					"name": "checkFuncExpression",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"signatures": [
+						{
+							"id": 226,
+							"name": "checkFuncExpression",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"id": 227,
+									"name": "func",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"name": "FuncExpression",
+										"id": 167
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Result",
+								"id": 206
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "checker.ts",
+							"line": 121,
+							"character": 28
+						}
+					]
+				},
+				{
+					"id": 210,
+					"name": "combineErrors",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"signatures": [
+						{
+							"id": 211,
+							"name": "combineErrors",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"id": 212,
+									"name": "maybeErrors",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isRest": true
+									},
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "reference",
+											"name": "Result",
+											"id": 206
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Result",
+								"id": 206
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "checker.ts",
+							"line": 35,
+							"character": 22
+						}
+					]
+				},
+				{
+					"id": 213,
+					"name": "humanReadableOp",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"signatures": [
+						{
+							"id": 214,
+							"name": "humanReadableOp",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"id": 215,
+									"name": "operator",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "union",
+										"types": [
+											{
+												"type": "stringLiteral",
+												"value": "+"
+											},
+											{
+												"type": "stringLiteral",
+												"value": "-"
+											},
+											{
+												"type": "stringLiteral",
+												"value": "*"
+											},
+											{
+												"type": "stringLiteral",
+												"value": "/"
+											},
+											{
+												"type": "stringLiteral",
+												"value": "**"
+											},
+											{
+												"type": "stringLiteral",
+												"value": "%"
+											}
+										]
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "checker.ts",
+							"line": 46,
+							"character": 24
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Enumerations",
+					"kind": 4,
+					"children": [
+						185
+					]
+				},
+				{
+					"title": "Type aliases",
+					"kind": 4194304,
+					"children": [
+						189,
+						202,
+						206,
+						198
+					]
+				},
+				{
+					"title": "Functions",
+					"kind": 64,
+					"children": [
+						207,
+						219,
+						216,
+						222,
+						225,
+						210,
+						213
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "checker.ts",
+					"line": 1,
+					"character": 0
+				}
+			]
+		},
+		{
+			"id": 235,
+			"name": "\"evaluator\"",
+			"kind": 1,
+			"kindString": "External module",
+			"flags": {
+				"isExported": true
+			},
+			"originalName": "/home/jfrere/projects/dicebox/src/evaluator.ts",
+			"children": [
+				{
+					"id": 266,
+					"name": "Evaluator",
+					"kind": 128,
+					"kindString": "Class",
+					"flags": {
+						"isExported": true
+					},
+					"children": [
+						{
+							"id": 267,
+							"name": "evaluate",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isExported": true
+							},
+							"signatures": [
+								{
+									"id": 268,
+									"name": "evaluate",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 269,
+											"name": "expression",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"name": "Expression",
+												"id": 183
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"name": "Result",
+										"id": 257
+									}
+								}
+							],
+							"sources": [
+								{
+									"fileName": "evaluator.ts",
+									"line": 41,
+									"character": 12
+								}
+							]
+						},
+						{
+							"id": 273,
+							"name": "evaluateBinExpression",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isExported": true
+							},
+							"signatures": [
+								{
+									"id": 274,
+									"name": "evaluateBinExpression",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 275,
+											"name": "expr",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"name": "BinExpression",
+												"id": 159
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"name": "Result",
+										"id": 257
+									}
+								}
+							],
+							"sources": [
+								{
+									"fileName": "evaluator.ts",
+									"line": 63,
+									"character": 25
+								}
+							]
+						},
+						{
+							"id": 276,
+							"name": "evaluateDiceGroup",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isExported": true
+							},
+							"signatures": [
+								{
+									"id": 277,
+									"name": "evaluateDiceGroup",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 278,
+											"name": "expr",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"name": "DiceGroup",
+												"id": 175
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"name": "Result",
+										"id": 257
+									}
+								}
+							],
+							"sources": [
+								{
+									"fileName": "evaluator.ts",
+									"line": 76,
+									"character": 21
+								}
+							]
+						},
+						{
+							"id": 270,
+							"name": "evaluateNumber",
+							"kind": 2048,
+							"kindString": "Method",
+							"flags": {
+								"isExported": true
+							},
+							"signatures": [
+								{
+									"id": 271,
+									"name": "evaluateNumber",
+									"kind": 4096,
+									"kindString": "Call signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 272,
+											"name": "num",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"name": "ENumber",
+												"id": 151
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"name": "Result",
+										"id": 257
+									}
+								}
+							],
+							"sources": [
+								{
+									"fileName": "evaluator.ts",
+									"line": 56,
+									"character": 18
+								}
+							]
+						}
+					],
+					"groups": [
+						{
+							"title": "Methods",
+							"kind": 2048,
+							"children": [
+								267,
+								273,
+								276,
+								270
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "evaluator.ts",
+							"line": 40,
+							"character": 22
+						}
+					]
+				},
+				{
+					"id": 257,
+					"name": "Result",
+					"kind": 128,
+					"kindString": "Class",
+					"flags": {
+						"isExported": true
+					},
+					"children": [
+						{
+							"id": 258,
+							"name": "constructor",
+							"kind": 512,
+							"kindString": "Constructor",
+							"flags": {
+								"isExported": true
+							},
+							"signatures": [
+								{
+									"id": 262,
+									"name": "new Result",
+									"kind": 16384,
+									"kindString": "Constructor signature",
+									"flags": {},
+									"parameters": [
+										{
+											"id": 263,
+											"name": "value",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 264,
+											"name": "kind",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"name": "Kind",
+												"id": 185
+											}
+										},
+										{
+											"id": 265,
+											"name": "tree",
+											"kind": 32768,
+											"kindString": "Parameter",
+											"flags": {},
+											"type": {
+												"type": "reference",
+												"name": "ExpressionResult",
+												"id": 279
+											}
+										}
+									],
+									"type": {
+										"type": "reference",
+										"name": "Result",
+										"id": 257
+									}
+								}
+							],
+							"sources": [
+								{
+									"fileName": "evaluator.ts",
+									"line": 36,
+									"character": 21
+								}
+							]
+						},
+						{
+							"id": 260,
+							"name": "kind",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isConstructorProperty": true,
+								"isExported": true,
+								"isPublic": true
+							},
+							"sources": [
+								{
+									"fileName": "evaluator.ts",
+									"line": 37,
+									"character": 49
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Kind",
+								"id": 185
+							}
+						},
+						{
+							"id": 261,
+							"name": "tree",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isConstructorProperty": true,
+								"isExported": true,
+								"isPublic": true
+							},
+							"sources": [
+								{
+									"fileName": "evaluator.ts",
+									"line": 37,
+									"character": 68
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "ExpressionResult",
+								"id": 279
+							}
+						},
+						{
+							"id": 259,
+							"name": "value",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isConstructorProperty": true,
+								"isExported": true,
+								"isPublic": true
+							},
+							"sources": [
+								{
+									"fileName": "evaluator.ts",
+									"line": 37,
+									"character": 28
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Constructors",
+							"kind": 512,
+							"children": [
+								258
+							]
+						},
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								260,
+								261,
+								259
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "evaluator.ts",
+							"line": 36,
+							"character": 19
+						}
+					]
+				},
+				{
+					"id": 240,
+					"name": "BinExpressionResult",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {
+						"isExported": true
+					},
+					"children": [
+						{
+							"id": 244,
+							"name": "lhs",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true
+							},
+							"sources": [
+								{
+									"fileName": "evaluator.ts",
+									"line": 18,
+									"character": 7
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "ExpressionResult",
+								"id": 279
+							}
+						},
+						{
+							"id": 242,
+							"name": "loc",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true
+							},
+							"sources": [
+								{
+									"fileName": "evaluator.ts",
+									"line": 16,
+									"character": 7
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Location",
+								"id": 128
+							}
+						},
+						{
+							"id": 241,
+							"name": "nodeKind",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true
+							},
+							"sources": [
+								{
+									"fileName": "evaluator.ts",
+									"line": 15,
+									"character": 12
+								}
+							],
+							"type": {
+								"type": "stringLiteral",
+								"value": "binExpression"
+							}
+						},
+						{
+							"id": 246,
+							"name": "op",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true
+							},
+							"sources": [
+								{
+									"fileName": "evaluator.ts",
+									"line": 20,
+									"character": 6
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "BinaryOperator",
+								"id": 142
+							}
+						},
+						{
+							"id": 245,
+							"name": "rhs",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true
+							},
+							"sources": [
+								{
+									"fileName": "evaluator.ts",
+									"line": 19,
+									"character": 7
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "ExpressionResult",
+								"id": 279
+							}
+						},
+						{
+							"id": 243,
+							"name": "value",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true
+							},
+							"sources": [
+								{
+									"fileName": "evaluator.ts",
+									"line": 17,
+									"character": 9
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								244,
+								242,
+								241,
+								246,
+								245,
+								243
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "evaluator.ts",
+							"line": 14,
+							"character": 36
+						}
+					]
+				},
+				{
+					"id": 247,
+					"name": "DiceGroupResult",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {
+						"isExported": true
+					},
+					"children": [
+						{
+							"id": 251,
+							"name": "elements",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true
+							},
+							"sources": [
+								{
+									"fileName": "evaluator.ts",
+									"line": 27,
+									"character": 12
+								}
+							],
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "reflection",
+									"declaration": {
+										"id": 252,
+										"name": "__type",
+										"kind": 65536,
+										"kindString": "Type literal",
+										"flags": {},
+										"children": [
+											{
+												"id": 254,
+												"name": "dropped",
+												"kind": 32,
+												"kindString": "Variable",
+												"flags": {},
+												"sources": [
+													{
+														"fileName": "evaluator.ts",
+														"line": 27,
+														"character": 47
+													}
+												],
+												"type": {
+													"type": "intrinsic",
+													"name": "boolean"
+												}
+											},
+											{
+												"id": 253,
+												"name": "expr",
+												"kind": 32,
+												"kindString": "Variable",
+												"flags": {},
+												"sources": [
+													{
+														"fileName": "evaluator.ts",
+														"line": 27,
+														"character": 20
+													}
+												],
+												"type": {
+													"type": "reference",
+													"name": "ExpressionResult",
+													"id": 279
+												}
+											},
+											{
+												"id": 255,
+												"name": "success",
+												"kind": 32,
+												"kindString": "Variable",
+												"flags": {},
+												"sources": [
+													{
+														"fileName": "evaluator.ts",
+														"line": 27,
+														"character": 65
+													}
+												],
+												"type": {
+													"type": "intrinsic",
+													"name": "number"
+												}
+											}
+										],
+										"groups": [
+											{
+												"title": "Variables",
+												"kind": 32,
+												"children": [
+													254,
+													253,
+													255
+												]
+											}
+										],
+										"sources": [
+											{
+												"fileName": "evaluator.ts",
+												"line": 27,
+												"character": 13
+											}
+										]
+									}
+								}
+							}
+						},
+						{
+							"id": 249,
+							"name": "loc",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true
+							},
+							"sources": [
+								{
+									"fileName": "evaluator.ts",
+									"line": 25,
+									"character": 7
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Location",
+								"id": 128
+							}
+						},
+						{
+							"id": 256,
+							"name": "modifiers",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true
+							},
+							"sources": [
+								{
+									"fileName": "evaluator.ts",
+									"line": 28,
+									"character": 13
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "DiceGroupModifiers",
+								"id": 93
+							}
+						},
+						{
+							"id": 248,
+							"name": "nodeKind",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true
+							},
+							"sources": [
+								{
+									"fileName": "evaluator.ts",
+									"line": 24,
+									"character": 12
+								}
+							],
+							"type": {
+								"type": "stringLiteral",
+								"value": "diceGroup"
+							}
+						},
+						{
+							"id": 250,
+							"name": "value",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true
+							},
+							"sources": [
+								{
+									"fileName": "evaluator.ts",
+									"line": 26,
+									"character": 9
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								251,
+								249,
+								256,
+								248,
+								250
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "evaluator.ts",
+							"line": 23,
+							"character": 32
+						}
+					]
+				},
+				{
+					"id": 236,
+					"name": "ENumberResult",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {
+						"isExported": true
+					},
+					"children": [
+						{
+							"id": 238,
+							"name": "loc",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true
+							},
+							"sources": [
+								{
+									"fileName": "evaluator.ts",
+									"line": 10,
+									"character": 7
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Location",
+								"id": 128
+							}
+						},
+						{
+							"id": 237,
+							"name": "nodeKind",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true
+							},
+							"sources": [
+								{
+									"fileName": "evaluator.ts",
+									"line": 9,
+									"character": 12
+								}
+							],
+							"type": {
+								"type": "stringLiteral",
+								"value": "number"
+							}
+						},
+						{
+							"id": 239,
+							"name": "value",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true
+							},
+							"sources": [
+								{
+									"fileName": "evaluator.ts",
+									"line": 11,
+									"character": 9
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								238,
+								237,
+								239
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "evaluator.ts",
+							"line": 8,
+							"character": 30
+						}
+					]
+				},
+				{
+					"id": 279,
+					"name": "ExpressionResult",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "evaluator.ts",
+							"line": 31,
+							"character": 28
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "reference",
+								"name": "ENumberResult",
+								"id": 236
+							},
+							{
+								"type": "reference",
+								"name": "BinExpressionResult",
+								"id": 240
+							},
+							{
+								"type": "reference",
+								"name": "DiceGroupResult",
+								"id": 247
+							}
+						]
+					}
+				},
+				{
+					"id": 293,
+					"name": "binaryEval",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"signatures": [
+						{
+							"id": 294,
+							"name": "binaryEval",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"id": 295,
+									"name": "op",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"name": "BinaryOperator",
+										"id": 142
+									}
+								},
+								{
+									"id": 296,
+									"name": "lhs",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								},
+								{
+									"id": 297,
+									"name": "rhs",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "evaluator.ts",
+							"line": 185,
+							"character": 19
+						}
+					]
+				},
+				{
+					"id": 280,
+					"name": "drop",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"signatures": [
+						{
+							"id": 281,
+							"name": "drop",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"id": 282,
+									"name": "rolls",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "reference",
+											"name": "Result",
+											"id": 257
+										}
+									}
+								},
+								{
+									"id": 283,
+									"name": "direction",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "union",
+										"types": [
+											{
+												"type": "stringLiteral",
+												"value": "l"
+											},
+											{
+												"type": "stringLiteral",
+												"value": "h"
+											}
+										]
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "evaluator.ts",
+							"line": 140,
+							"character": 13
+						}
+					]
+				},
+				{
+					"id": 284,
+					"name": "keep",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"signatures": [
+						{
+							"id": 285,
+							"name": "keep",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"id": 286,
+									"name": "rolls",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "reference",
+											"name": "Result",
+											"id": 257
+										}
+									}
+								},
+								{
+									"id": 287,
+									"name": "direction",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "union",
+										"types": [
+											{
+												"type": "stringLiteral",
+												"value": "l"
+											},
+											{
+												"type": "stringLiteral",
+												"value": "h"
+											}
+										]
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "evaluator.ts",
+							"line": 157,
+							"character": 13
+						}
+					]
+				},
+				{
+					"id": 288,
+					"name": "matchTarget",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"signatures": [
+						{
+							"id": 289,
+							"name": "matchTarget",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"id": 290,
+									"name": "op",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "reference",
+										"name": "ModifierOperator",
+										"id": 141
+									}
+								},
+								{
+									"id": 291,
+									"name": "target",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								},
+								{
+									"id": 292,
+									"name": "value",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "number"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "boolean"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "evaluator.ts",
+							"line": 174,
+							"character": 20
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Classes",
+					"kind": 128,
+					"children": [
+						266,
+						257
+					]
+				},
+				{
+					"title": "Interfaces",
+					"kind": 256,
+					"children": [
+						240,
+						247,
+						236
+					]
+				},
+				{
+					"title": "Type aliases",
+					"kind": 4194304,
+					"children": [
+						279
+					]
+				},
+				{
+					"title": "Functions",
+					"kind": 64,
+					"children": [
+						293,
+						280,
+						284,
+						288
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "evaluator.ts",
+					"line": 1,
+					"character": 0
+				}
+			]
+		},
+		{
+			"id": 298,
+			"name": "\"index\"",
+			"kind": 1,
+			"kindString": "External module",
+			"flags": {
+				"isExported": true
+			},
+			"originalName": "/home/jfrere/projects/dicebox/src/index.ts",
+			"children": [
+				{
+					"id": 299,
+					"name": "THREE",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isExported": true,
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "index.ts",
+							"line": 1,
+							"character": 18
+						}
+					],
+					"type": {
+						"type": "unknown",
+						"name": "3"
+					},
+					"defaultValue": "3"
+				},
+				{
+					"id": 300,
+					"name": "spread",
+					"kind": 2097152,
+					"kindString": "Object literal",
+					"flags": {
+						"isExported": true,
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "index.ts",
+							"line": 3,
+							"character": 19
+						}
+					],
+					"type": {
+						"type": "intrinsic",
+						"name": "object"
+					}
+				}
+			],
+			"groups": [
+				{
+					"title": "Variables",
+					"kind": 32,
+					"children": [
+						299
+					]
+				},
+				{
+					"title": "Object literals",
+					"kind": 2097152,
+					"children": [
+						300
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "index.ts",
+					"line": 1,
+					"character": 0
+				}
+			]
+		},
+		{
+			"id": 330,
+			"name": "\"parser\"",
+			"kind": 1,
+			"kindString": "External module",
+			"flags": {
+				"isExported": true
+			},
+			"originalName": "/home/jfrere/projects/dicebox/src/parser.ts",
+			"children": [
+				{
+					"id": 341,
+					"name": "AnyDigits",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "parser.ts",
+							"line": 37,
+							"character": 15
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Parser",
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							}
+						]
+					},
+					"defaultValue": " alt(string('0'), DigitsNotZero).desc('integer')"
+				},
+				{
+					"id": 354,
+					"name": "AnyFloat",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "parser.ts",
+							"line": 62,
+							"character": 14
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Parser",
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							}
+						]
+					},
+					"defaultValue": " seq(\n    AnyDigits.fallback('0'),\n    string('.'),\n    AnyDigits,\n    seq(\n        oneOf('eE').desc('e/E'),\n        AnyDigits,\n    ).desc('exponent').map(all => all.join('')).fallback(''),\n).map(all => all.join('')).desc('float')"
+				},
+				{
+					"id": 355,
+					"name": "AnyInt",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "parser.ts",
+							"line": 72,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Parser",
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							}
+						]
+					},
+					"defaultValue": " seq(\n    AnyDigits,\n    seq(\n        oneOf('eE').desc('e/E'),\n        AnyDigits,\n    ).desc('exponent').map(all => all.join('')).fallback(''),\n).map(all => all.join('')).desc('integer w/ exponent')"
+				},
+				{
+					"id": 356,
+					"name": "AnyNum",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "parser.ts",
+							"line": 80,
+							"character": 12
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Parser",
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							}
+						]
+					},
+					"defaultValue": " alt(AnyFloat, AnyInt).desc('number')"
+				},
+				{
+					"id": 357,
+					"name": "ComparePoint",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "parser.ts",
+							"line": 82,
+							"character": 18
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Parser",
+						"typeArguments": [
+							{
+								"type": "reflection",
+								"declaration": {
+									"id": 358,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"children": [
+										{
+											"id": 360,
+											"name": "number",
+											"kind": 32,
+											"kindString": "Variable",
+											"flags": {},
+											"sources": [
+												{
+													"fileName": "parser.ts",
+													"line": 83,
+													"character": 40
+												}
+											],
+											"type": {
+												"type": "intrinsic",
+												"name": "number"
+											}
+										},
+										{
+											"id": 359,
+											"name": "op",
+											"kind": 32,
+											"kindString": "Variable",
+											"flags": {},
+											"sources": [
+												{
+													"fileName": "parser.ts",
+													"line": 83,
+													"character": 32
+												}
+											],
+											"type": {
+												"type": "intrinsic",
+												"name": "string"
+											}
+										}
+									],
+									"groups": [
+										{
+											"title": "Variables",
+											"kind": 32,
+											"children": [
+												360,
+												359
+											]
+										}
+									]
+								}
+							}
+						]
+					},
+					"defaultValue": " seq(comparisonOperator.fallback('='), AnyDigits.map(intOf))\n    .map(([op, number]) => ({ op, number }))"
+				},
+				{
+					"id": 343,
+					"name": "DiceSpec",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "parser.ts",
+							"line": 39,
+							"character": 14
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Parser",
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							}
+						]
+					},
+					"defaultValue": " string('d').desc(`dice specifier 'd'`)"
+				},
+				{
+					"id": 340,
+					"name": "DigitsNotZero",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "parser.ts",
+							"line": 36,
+							"character": 19
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Parser",
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							}
+						]
+					},
+					"defaultValue": " regexp(/[1-9]+/).desc('non-zero integer')"
+				},
+				{
+					"id": 342,
+					"name": "FateDice",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "parser.ts",
+							"line": 38,
+							"character": 14
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Parser",
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							}
+						]
+					},
+					"defaultValue": " string('F').desc(`fate dice 'F'`)"
+				},
+				{
+					"id": 375,
+					"name": "MultipleDiceGroupModifiers",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "parser.ts",
+							"line": 185,
+							"character": 32
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Parser",
+						"typeArguments": [
+							{
+								"type": "array",
+								"elementType": {
+									"type": "reference",
+									"name": "DiceModifiers",
+									"id": 44
+								}
+							}
+						]
+					},
+					"defaultValue": " of([])\n    .chain(chainFunc(diceGroupModifiers))"
+				},
+				{
+					"id": 374,
+					"name": "MultipleDiceModifiers",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "parser.ts",
+							"line": 182,
+							"character": 27
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Parser",
+						"typeArguments": [
+							{
+								"type": "array",
+								"elementType": {
+									"type": "reference",
+									"name": "DiceModifiers",
+									"id": 44
+								}
+							}
+						]
+					},
+					"defaultValue": " of([])\n    .chain(chainFunc(diceModifiers))"
+				},
+				{
+					"id": 351,
+					"name": "closeBrace",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "parser.ts",
+							"line": 51,
+							"character": 16
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Parser",
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							}
+						]
+					},
+					"defaultValue": " string('}').desc('close brace')"
+				},
+				{
+					"id": 349,
+					"name": "closeBracket",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "parser.ts",
+							"line": 48,
+							"character": 18
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Parser",
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							}
+						]
+					},
+					"defaultValue": " string(')').desc('close paren')"
+				},
+				{
+					"id": 352,
+					"name": "comma",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "parser.ts",
+							"line": 53,
+							"character": 11
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Parser",
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							}
+						]
+					},
+					"defaultValue": " string(',').desc('comma')"
+				},
+				{
+					"id": 347,
+					"name": "comparisonOperator",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "parser.ts",
+							"line": 45,
+							"character": 24
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Parser",
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							}
+						]
+					},
+					"defaultValue": " oneOf('<>=').desc('< or > or =')"
+				},
+				{
+					"id": 353,
+					"name": "functionName",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "parser.ts",
+							"line": 55,
+							"character": 18
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Parser",
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							}
+						]
+					},
+					"defaultValue": " alt(\n    string('floor'),\n    string('round'),\n    string('ciel'),\n    string('abs'),\n)"
+				},
+				{
+					"id": 376,
+					"name": "language",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "parser.ts",
+							"line": 188,
+							"character": 14
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Language"
+					},
+					"defaultValue": " createLanguage({\n    Expr: r => r.ExprLow.trim(optWhitespace),\n\n    ExprLow: r => seq(r.ExprMed, seq(operatorLow.trim(optWhitespace), r.ExprMed).many())\n        .map(([head, tail]) => [head, ...tail])\n        .mark()\n        .map(({ value, ...loc }) => value.reduce((prev, curr) => binExpression({\n                loc,\n                op: curr[0],\n                lhs: prev,\n                rhs: curr[1],\n            }))),\n\n    ExprMed: r => seq(r.ExprHigh, seq(operatorMed.trim(optWhitespace), r.ExprHigh).many())\n        .map(([head, tail]) => [head, ...tail])\n        .mark()\n        .map(({ value, ...loc }) => value.reduce((prev, curr) => binExpression({\n            loc,\n            op: curr[0],\n            lhs: prev,\n            rhs: curr[1],\n        }))),\n\n    ExprHigh: r => seq(r.LiteralOrExpr, seq(operatorHigh.trim(optWhitespace), r.LiteralOrExpr).many())\n        .map(([head, tail]) => [head, ...tail])\n        .mark()\n        .map(({ value, ...loc }) => value.reduce((prev, curr) => binExpression({\n            loc,\n            op: curr[0],\n            lhs: prev,\n            rhs: curr[1],\n        }))),\n\n    LiteralOrExpr: r => alt(r.Function, r.Literal, r.ExprBracketed),\n\n    ExprBracketed: r => seq(openBracket.skip(optWhitespace), r.Expr, optWhitespace.then(closeBracket))\n        .map(([_, expr]) => expr),\n\n    Function: r => seq(functionName, r.ExprBracketed)\n        .mark()\n        .map(({ value: [func, arg], ...loc }) => funcExpression({ func, arg, loc })),\n\n    Literal: r => alt(r.Dice, r.Number, r.DiceGroup),\n\n    DiceGroup: r => seq(\n        openBrace,\n        r.Expr,\n        seq(comma, r.Expr).many(),\n        comma.trim(optWhitespace).fallback(','),\n        closeBrace,\n        r.DiceGroupModifiers,\n    )\n        .mark()\n        .map(({ value: [_1, expr, exprs, _2, _3, mods], ...loc }) =>\n            diceGroup({ elements: [expr, ...exprs.map(([_, expr]) => expr)], ...mods, loc })),\n\n    DiceGroupModifiers: () => MultipleDiceGroupModifiers\n        .map(modifiers => assign({}, ...modifiers)),\n\n    Dice: r => seq(\n        alt(\n            r.ExprBracketed,\n            AnyDigits.map(intOf),\n            of(1),\n        ),\n        DiceSpec,\n        alt(\n            r.ExprBracketed,\n            DigitsNotZero.map(diceSidesOf),\n            FateDice.map(diceSidesOf),\n        ),\n        r.DiceModifiers,\n    )\n        .mark()\n        .map(({ value: [noDice, _, diceSides, modifiers], ...loc }) => dice({ noDice, diceSides, ...modifiers, loc })),\n\n    DiceModifiers: () => MultipleDiceModifiers\n        .map(modifiers => {\n            let reroll = modifiers.filter(mod => 'reroll' in mod).map(mod => mod.reroll);\n            return assign({}, ...modifiers.filter(mod => !('reroll' in mod)), reroll.length ? { reroll } : null);\n        }),\n\n    Number: () => AnyNum.map(floatOf)\n        .mark()\n        .map(({ value, ...loc }) => number({ value, loc })),\n})"
+				},
+				{
+					"id": 350,
+					"name": "openBrace",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "parser.ts",
+							"line": 50,
+							"character": 15
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Parser",
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							}
+						]
+					},
+					"defaultValue": " string('{').desc('open brace')"
+				},
+				{
+					"id": 348,
+					"name": "openBracket",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "parser.ts",
+							"line": 47,
+							"character": 17
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Parser",
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							}
+						]
+					},
+					"defaultValue": " string('(').desc('open paren')"
+				},
+				{
+					"id": 346,
+					"name": "operatorHigh",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "parser.ts",
+							"line": 43,
+							"character": 18
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Parser",
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							}
+						]
+					},
+					"defaultValue": " string('**').desc('**')"
+				},
+				{
+					"id": 344,
+					"name": "operatorLow",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "parser.ts",
+							"line": 41,
+							"character": 17
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Parser",
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							}
+						]
+					},
+					"defaultValue": " oneOf('+-%').desc('+ or - or %')"
+				},
+				{
+					"id": 345,
+					"name": "operatorMed",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "parser.ts",
+							"line": 42,
+							"character": 17
+						}
+					],
+					"type": {
+						"type": "reference",
+						"name": "Parser",
+						"typeArguments": [
+							{
+								"type": "intrinsic",
+								"name": "string"
+							}
+						]
+					},
+					"defaultValue": " oneOf('*/').desc('* or /')"
+				},
+				{
+					"id": 367,
+					"name": "chainFunc",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"signatures": [
+						{
+							"id": 368,
+							"name": "chainFunc",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"typeParameter": [
+								{
+									"id": 369,
+									"name": "T",
+									"kind": 131072,
+									"kindString": "Type parameter",
+									"flags": {}
+								}
+							],
+							"parameters": [
+								{
+									"id": 370,
+									"name": "modParser",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "reflection",
+										"declaration": {
+											"id": 371,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"signatures": [
+												{
+													"id": 372,
+													"name": "__call",
+													"kind": 4096,
+													"kindString": "Call signature",
+													"flags": {},
+													"parameters": [
+														{
+															"id": 373,
+															"name": "arg",
+															"kind": 32768,
+															"kindString": "Parameter",
+															"flags": {},
+															"type": {
+																"type": "array",
+																"elementType": {
+																	"type": "typeParameter",
+																	"name": "T"
+																}
+															}
+														}
+													],
+													"type": {
+														"type": "reference",
+														"name": "Parser",
+														"typeArguments": [
+															{
+																"type": "array",
+																"elementType": {
+																	"type": "typeParameter",
+																	"name": "T"
+																}
+															}
+														]
+													}
+												}
+											],
+											"sources": [
+												{
+													"fileName": "parser.ts",
+													"line": 174,
+													"character": 32
+												}
+											]
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "chain"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "parser.ts",
+							"line": 174,
+							"character": 18
+						}
+					]
+				},
+				{
+					"id": 364,
+					"name": "diceGroupModifiers",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"signatures": [
+						{
+							"id": 365,
+							"name": "diceGroupModifiers",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"id": 366,
+									"name": "currentModifiers",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "reference",
+											"name": "DiceGroupModifiers",
+											"id": 93
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Parser",
+								"typeArguments": [
+									{
+										"type": "array",
+										"elementType": {
+											"type": "reference",
+											"name": "DiceGroupModifiers",
+											"id": 93
+										}
+									}
+								]
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "parser.ts",
+							"line": 145,
+							"character": 27
+						}
+					]
+				},
+				{
+					"id": 361,
+					"name": "diceModifiers",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"signatures": [
+						{
+							"id": 362,
+							"name": "diceModifiers",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"id": 363,
+									"name": "currentModifiers",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "reference",
+											"name": "DiceModifiers",
+											"id": 44
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Parser",
+								"typeArguments": [
+									{
+										"type": "array",
+										"elementType": {
+											"type": "reference",
+											"name": "DiceModifiers",
+											"id": 44
+										}
+									}
+								]
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "parser.ts",
+							"line": 85,
+							"character": 22
+						}
+					]
+				},
+				{
+					"id": 331,
+					"name": "diceSidesOf",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"signatures": [
+						{
+							"id": 332,
+							"name": "diceSidesOf",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"id": 333,
+									"name": "n",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								}
+							],
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "intrinsic",
+									"name": "number"
+								}
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "parser.ts",
+							"line": 14,
+							"character": 20
+						}
+					]
+				},
+				{
+					"id": 337,
+					"name": "floatOf",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"signatures": [
+						{
+							"id": 338,
+							"name": "floatOf",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"id": 339,
+									"name": "n",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "parser.ts",
+							"line": 32,
+							"character": 16
+						}
+					]
+				},
+				{
+					"id": 334,
+					"name": "intOf",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"signatures": [
+						{
+							"id": 335,
+							"name": "intOf",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"id": 336,
+									"name": "n",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "parser.ts",
+							"line": 28,
+							"character": 14
+						}
+					]
+				},
+				{
+					"id": 377,
+					"name": "parse",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 378,
+							"name": "parse",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"comment": {
+								"shortText": "Parses a string and returns a parse tree"
+							},
+							"parameters": [
+								{
+									"id": 379,
+									"name": "s",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"comment": {
+										"text": "This param does magic things\n"
+									},
+									"type": {
+										"type": "intrinsic",
+										"name": "string"
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "EDice",
+								"id": 143
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "parser.ts",
+							"line": 280,
+							"character": 21
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Variables",
+					"kind": 32,
+					"children": [
+						341,
+						354,
+						355,
+						356,
+						357,
+						343,
+						340,
+						342,
+						375,
+						374,
+						351,
+						349,
+						352,
+						347,
+						353,
+						376,
+						350,
+						348,
+						346,
+						344,
+						345
+					]
+				},
+				{
+					"title": "Functions",
+					"kind": 64,
+					"children": [
+						367,
+						364,
+						361,
+						331,
+						337,
+						334,
+						377
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "parser.ts",
+					"line": 1,
+					"character": 0
+				}
+			]
+		},
+		{
+			"id": 301,
+			"name": "\"polyfills\"",
+			"kind": 1,
+			"kindString": "External module",
+			"flags": {
+				"isExported": true
+			},
+			"originalName": "/home/jfrere/projects/dicebox/src/polyfills.ts",
+			"children": [
+				{
+					"id": 302,
+					"name": "assign",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 303,
+							"name": "assign",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"typeParameter": [
+								{
+									"id": 304,
+									"name": "T",
+									"kind": 131072,
+									"kindString": "Type parameter",
+									"flags": {}
+								}
+							],
+							"parameters": [
+								{
+									"id": 305,
+									"name": "target",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "typeParameter",
+										"name": "T"
+									}
+								}
+							],
+							"type": {
+								"type": "typeParameter",
+								"name": "T"
+							}
+						},
+						{
+							"id": 306,
+							"name": "assign",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"typeParameter": [
+								{
+									"id": 307,
+									"name": "T",
+									"kind": 131072,
+									"kindString": "Type parameter",
+									"flags": {}
+								},
+								{
+									"id": 308,
+									"name": "U",
+									"kind": 131072,
+									"kindString": "Type parameter",
+									"flags": {}
+								}
+							],
+							"parameters": [
+								{
+									"id": 309,
+									"name": "target",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "typeParameter",
+										"name": "T"
+									}
+								},
+								{
+									"id": 310,
+									"name": "source",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "typeParameter",
+										"name": "U"
+									}
+								}
+							],
+							"type": {
+								"type": "intersection",
+								"types": [
+									{
+										"type": "typeParameter",
+										"name": "T"
+									},
+									{
+										"type": "typeParameter",
+										"name": "U"
+									}
+								]
+							}
+						},
+						{
+							"id": 311,
+							"name": "assign",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"typeParameter": [
+								{
+									"id": 312,
+									"name": "T",
+									"kind": 131072,
+									"kindString": "Type parameter",
+									"flags": {}
+								},
+								{
+									"id": 313,
+									"name": "U",
+									"kind": 131072,
+									"kindString": "Type parameter",
+									"flags": {}
+								},
+								{
+									"id": 314,
+									"name": "V",
+									"kind": 131072,
+									"kindString": "Type parameter",
+									"flags": {}
+								}
+							],
+							"parameters": [
+								{
+									"id": 315,
+									"name": "target",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "typeParameter",
+										"name": "T"
+									}
+								},
+								{
+									"id": 316,
+									"name": "source1",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "typeParameter",
+										"name": "U"
+									}
+								},
+								{
+									"id": 317,
+									"name": "source2",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "typeParameter",
+										"name": "V"
+									}
+								}
+							],
+							"type": {
+								"type": "intersection",
+								"types": [
+									{
+										"type": "typeParameter",
+										"name": "T"
+									},
+									{
+										"type": "typeParameter",
+										"name": "U"
+									},
+									{
+										"type": "typeParameter",
+										"name": "V"
+									}
+								]
+							}
+						},
+						{
+							"id": 318,
+							"name": "assign",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"typeParameter": [
+								{
+									"id": 319,
+									"name": "T",
+									"kind": 131072,
+									"kindString": "Type parameter",
+									"flags": {}
+								},
+								{
+									"id": 320,
+									"name": "U",
+									"kind": 131072,
+									"kindString": "Type parameter",
+									"flags": {}
+								},
+								{
+									"id": 321,
+									"name": "V",
+									"kind": 131072,
+									"kindString": "Type parameter",
+									"flags": {}
+								},
+								{
+									"id": 322,
+									"name": "W",
+									"kind": 131072,
+									"kindString": "Type parameter",
+									"flags": {}
+								}
+							],
+							"parameters": [
+								{
+									"id": 323,
+									"name": "target",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "typeParameter",
+										"name": "T"
+									}
+								},
+								{
+									"id": 324,
+									"name": "source1",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "typeParameter",
+										"name": "U"
+									}
+								},
+								{
+									"id": 325,
+									"name": "source2",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "typeParameter",
+										"name": "V"
+									}
+								},
+								{
+									"id": 326,
+									"name": "source3",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "typeParameter",
+										"name": "W"
+									}
+								}
+							],
+							"type": {
+								"type": "intersection",
+								"types": [
+									{
+										"type": "typeParameter",
+										"name": "T"
+									},
+									{
+										"type": "typeParameter",
+										"name": "U"
+									},
+									{
+										"type": "typeParameter",
+										"name": "V"
+									},
+									{
+										"type": "typeParameter",
+										"name": "W"
+									}
+								]
+							}
+						},
+						{
+							"id": 327,
+							"name": "assign",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"id": 328,
+									"name": "target",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "intrinsic",
+										"name": "any"
+									}
+								},
+								{
+									"id": 329,
+									"name": "varargs",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {
+										"isRest": true
+									},
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "intrinsic",
+											"name": "any"
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "any"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "polyfills.ts",
+							"line": 7,
+							"character": 22
+						},
+						{
+							"fileName": "polyfills.ts",
+							"line": 8,
+							"character": 22
+						},
+						{
+							"fileName": "polyfills.ts",
+							"line": 9,
+							"character": 22
+						},
+						{
+							"fileName": "polyfills.ts",
+							"line": 10,
+							"character": 22
+						},
+						{
+							"fileName": "polyfills.ts",
+							"line": 11,
+							"character": 22
+						},
+						{
+							"fileName": "polyfills.ts",
+							"line": 12,
+							"character": 22
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Functions",
+					"kind": 64,
+					"children": [
+						302
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "polyfills.ts",
+					"line": 1,
+					"character": 0
+				}
+			]
+		},
+		{
+			"id": 1,
+			"name": "\"types\"",
+			"kind": 1,
+			"kindString": "External module",
+			"flags": {
+				"isExported": true
+			},
+			"originalName": "/home/jfrere/projects/dicebox/src/types.ts",
+			"children": [
+				{
+					"id": 86,
+					"name": "BinExpressionAttrs",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"children": [
+						{
+							"id": 88,
+							"name": "lhs",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 69,
+									"character": 7
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Expression",
+								"id": 183
+							}
+						},
+						{
+							"id": 87,
+							"name": "op",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 68,
+									"character": 6
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "BinaryOperator",
+								"id": 142
+							}
+						},
+						{
+							"id": 89,
+							"name": "rhs",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 70,
+									"character": 7
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Expression",
+								"id": 183
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								88,
+								87,
+								89
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "types.ts",
+							"line": 67,
+							"character": 28
+						}
+					]
+				},
+				{
+					"id": 2,
+					"name": "DiceAttrs",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"children": [
+						{
+							"id": 17,
+							"name": "compounding",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 30,
+									"character": 15
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 18,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"children": [
+												{
+													"id": 20,
+													"name": "number",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 30,
+															"character": 48
+														}
+													],
+													"type": {
+														"type": "union",
+														"types": [
+															{
+																"type": "intrinsic",
+																"name": "number"
+															},
+															{
+																"type": "stringLiteral",
+																"value": "DICE MAX"
+															}
+														]
+													}
+												},
+												{
+													"id": 19,
+													"name": "op",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 30,
+															"character": 22
+														}
+													],
+													"type": {
+														"type": "reference",
+														"name": "ModifierOperator",
+														"id": 141
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														20,
+														19
+													]
+												}
+											]
+										}
+									}
+								]
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "DiceModifiers.compounding",
+								"id": 57
+							}
+						},
+						{
+							"id": 3,
+							"name": "diceSides",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 22,
+									"character": 13
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "array",
+										"elementType": {
+											"type": "intrinsic",
+											"name": "number"
+										}
+									},
+									{
+										"type": "reference",
+										"name": "Expression",
+										"id": 183
+									}
+								]
+							}
+						},
+						{
+							"id": 29,
+							"name": "drop",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 33,
+									"character": 8
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 30,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"children": [
+												{
+													"id": 32,
+													"name": "direction",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 33,
+															"character": 38
+														}
+													],
+													"type": {
+														"type": "union",
+														"types": [
+															{
+																"type": "stringLiteral",
+																"value": "h"
+															},
+															{
+																"type": "stringLiteral",
+																"value": "l"
+															}
+														]
+													}
+												},
+												{
+													"id": 31,
+													"name": "number",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 33,
+															"character": 19
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														32,
+														31
+													]
+												}
+											]
+										}
+									}
+								]
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "DiceModifiers.drop",
+								"id": 69
+							}
+						},
+						{
+							"id": 13,
+							"name": "exploding",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 29,
+									"character": 13
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 14,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"children": [
+												{
+													"id": 16,
+													"name": "number",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 29,
+															"character": 46
+														}
+													],
+													"type": {
+														"type": "union",
+														"types": [
+															{
+																"type": "intrinsic",
+																"name": "number"
+															},
+															{
+																"type": "stringLiteral",
+																"value": "DICE MAX"
+															}
+														]
+													}
+												},
+												{
+													"id": 15,
+													"name": "op",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 29,
+															"character": 20
+														}
+													],
+													"type": {
+														"type": "reference",
+														"name": "ModifierOperator",
+														"id": 141
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														16,
+														15
+													]
+												}
+											]
+										}
+									}
+								]
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "DiceModifiers.exploding",
+								"id": 53
+							}
+						},
+						{
+							"id": 9,
+							"name": "failure",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 28,
+									"character": 11
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 10,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"children": [
+												{
+													"id": 12,
+													"name": "number",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 28,
+															"character": 44
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													}
+												},
+												{
+													"id": 11,
+													"name": "op",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 28,
+															"character": 18
+														}
+													],
+													"type": {
+														"type": "reference",
+														"name": "ModifierOperator",
+														"id": 141
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														12,
+														11
+													]
+												}
+											]
+										}
+									}
+								]
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "DiceModifiers.failure",
+								"id": 49
+							}
+						},
+						{
+							"id": 25,
+							"name": "keep",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 32,
+									"character": 8
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 26,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"children": [
+												{
+													"id": 28,
+													"name": "direction",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 32,
+															"character": 38
+														}
+													],
+													"type": {
+														"type": "union",
+														"types": [
+															{
+																"type": "stringLiteral",
+																"value": "h"
+															},
+															{
+																"type": "stringLiteral",
+																"value": "l"
+															}
+														]
+													}
+												},
+												{
+													"id": 27,
+													"name": "number",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 32,
+															"character": 19
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														28,
+														27
+													]
+												}
+											]
+										}
+									}
+								]
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "DiceModifiers.keep",
+								"id": 65
+							}
+						},
+						{
+							"id": 4,
+							"name": "noDice",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 23,
+									"character": 10
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "number"
+									},
+									{
+										"type": "reference",
+										"name": "Expression",
+										"id": 183
+									}
+								]
+							}
+						},
+						{
+							"id": 21,
+							"name": "penetrating",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 31,
+									"character": 15
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 22,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"children": [
+												{
+													"id": 24,
+													"name": "number",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 31,
+															"character": 48
+														}
+													],
+													"type": {
+														"type": "union",
+														"types": [
+															{
+																"type": "intrinsic",
+																"name": "number"
+															},
+															{
+																"type": "stringLiteral",
+																"value": "DICE MAX"
+															}
+														]
+													}
+												},
+												{
+													"id": 23,
+													"name": "op",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 31,
+															"character": 22
+														}
+													],
+													"type": {
+														"type": "reference",
+														"name": "ModifierOperator",
+														"id": 141
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														24,
+														23
+													]
+												}
+											]
+										}
+									}
+								]
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "DiceModifiers.penetrating",
+								"id": 61
+							}
+						},
+						{
+							"id": 37,
+							"name": "reroll",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 35,
+									"character": 10
+								}
+							],
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "reflection",
+									"declaration": {
+										"id": 38,
+										"name": "__type",
+										"kind": 65536,
+										"kindString": "Type literal",
+										"flags": {},
+										"children": [
+											{
+												"id": 40,
+												"name": "number",
+												"kind": 32,
+												"kindString": "Variable",
+												"flags": {},
+												"sources": [
+													{
+														"fileName": "types.ts",
+														"line": 35,
+														"character": 44
+													}
+												],
+												"type": {
+													"type": "union",
+													"types": [
+														{
+															"type": "intrinsic",
+															"name": "number"
+														},
+														{
+															"type": "stringLiteral",
+															"value": "DICE MAX"
+														}
+													]
+												}
+											},
+											{
+												"id": 39,
+												"name": "op",
+												"kind": 32,
+												"kindString": "Variable",
+												"flags": {},
+												"sources": [
+													{
+														"fileName": "types.ts",
+														"line": 35,
+														"character": 18
+													}
+												],
+												"type": {
+													"type": "reference",
+													"name": "ModifierOperator",
+													"id": 141
+												}
+											}
+										],
+										"groups": [
+											{
+												"title": "Variables",
+												"kind": 32,
+												"children": [
+													40,
+													39
+												]
+											}
+										],
+										"sources": [
+											{
+												"fileName": "types.ts",
+												"line": 35,
+												"character": 12
+											}
+										]
+									}
+								}
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "DiceModifiers.reroll",
+								"id": 77
+							}
+						},
+						{
+							"id": 33,
+							"name": "rerollOnce",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 34,
+									"character": 14
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 34,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"children": [
+												{
+													"id": 36,
+													"name": "number",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 34,
+															"character": 47
+														}
+													],
+													"type": {
+														"type": "union",
+														"types": [
+															{
+																"type": "intrinsic",
+																"name": "number"
+															},
+															{
+																"type": "stringLiteral",
+																"value": "DICE MAX"
+															}
+														]
+													}
+												},
+												{
+													"id": 35,
+													"name": "op",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 34,
+															"character": 21
+														}
+													],
+													"type": {
+														"type": "reference",
+														"name": "ModifierOperator",
+														"id": 141
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														36,
+														35
+													]
+												}
+											]
+										}
+									}
+								]
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "DiceModifiers.rerollOnce",
+								"id": 73
+							}
+						},
+						{
+							"id": 41,
+							"name": "sort",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 36,
+									"character": 8
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 42,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"children": [
+												{
+													"id": 43,
+													"name": "direction",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 36,
+															"character": 23
+														}
+													],
+													"type": {
+														"type": "union",
+														"types": [
+															{
+																"type": "stringLiteral",
+																"value": "a"
+															},
+															{
+																"type": "stringLiteral",
+																"value": "d"
+															}
+														]
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														43
+													]
+												}
+											]
+										}
+									}
+								]
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "DiceModifiers.sort",
+								"id": 81
+							}
+						},
+						{
+							"id": 5,
+							"name": "success",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 27,
+									"character": 11
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 6,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"children": [
+												{
+													"id": 8,
+													"name": "number",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 27,
+															"character": 44
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													}
+												},
+												{
+													"id": 7,
+													"name": "op",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 27,
+															"character": 18
+														}
+													],
+													"type": {
+														"type": "reference",
+														"name": "ModifierOperator",
+														"id": 141
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														8,
+														7
+													]
+												}
+											]
+										}
+									}
+								]
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "DiceModifiers.success",
+								"id": 45
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								17,
+								3,
+								29,
+								13,
+								9,
+								25,
+								4,
+								21,
+								37,
+								33,
+								41,
+								5
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "types.ts",
+							"line": 21,
+							"character": 19
+						}
+					],
+					"extendedTypes": [
+						{
+							"type": "reference",
+							"name": "DiceModifiers",
+							"id": 44
+						}
+					]
+				},
+				{
+					"id": 110,
+					"name": "DiceGroupAttrs",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"children": [
+						{
+							"id": 124,
+							"name": "drop",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 103,
+									"character": 8
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 125,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"children": [
+												{
+													"id": 127,
+													"name": "direction",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 103,
+															"character": 38
+														}
+													],
+													"type": {
+														"type": "union",
+														"types": [
+															{
+																"type": "stringLiteral",
+																"value": "h"
+															},
+															{
+																"type": "stringLiteral",
+																"value": "l"
+															}
+														]
+													}
+												},
+												{
+													"id": 126,
+													"name": "number",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 103,
+															"character": 19
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														127,
+														126
+													]
+												}
+											]
+										}
+									}
+								]
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "DiceGroupModifiers.drop",
+								"id": 106
+							}
+						},
+						{
+							"id": 111,
+							"name": "elements",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 107,
+									"character": 12
+								}
+							],
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "reference",
+									"name": "Expression",
+									"id": 183
+								}
+							}
+						},
+						{
+							"id": 116,
+							"name": "failure",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 101,
+									"character": 11
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 117,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"children": [
+												{
+													"id": 119,
+													"name": "number",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 101,
+															"character": 44
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													}
+												},
+												{
+													"id": 118,
+													"name": "op",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 101,
+															"character": 18
+														}
+													],
+													"type": {
+														"type": "reference",
+														"name": "ModifierOperator",
+														"id": 141
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														119,
+														118
+													]
+												}
+											]
+										}
+									}
+								]
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "DiceGroupModifiers.failure",
+								"id": 98
+							}
+						},
+						{
+							"id": 120,
+							"name": "keep",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 102,
+									"character": 8
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 121,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"children": [
+												{
+													"id": 123,
+													"name": "direction",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 102,
+															"character": 38
+														}
+													],
+													"type": {
+														"type": "union",
+														"types": [
+															{
+																"type": "stringLiteral",
+																"value": "h"
+															},
+															{
+																"type": "stringLiteral",
+																"value": "l"
+															}
+														]
+													}
+												},
+												{
+													"id": 122,
+													"name": "number",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 102,
+															"character": 19
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														123,
+														122
+													]
+												}
+											]
+										}
+									}
+								]
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "DiceGroupModifiers.keep",
+								"id": 102
+							}
+						},
+						{
+							"id": 112,
+							"name": "success",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 100,
+									"character": 11
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 113,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"children": [
+												{
+													"id": 115,
+													"name": "number",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 100,
+															"character": 44
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													}
+												},
+												{
+													"id": 114,
+													"name": "op",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 100,
+															"character": 18
+														}
+													],
+													"type": {
+														"type": "reference",
+														"name": "ModifierOperator",
+														"id": 141
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														115,
+														114
+													]
+												}
+											]
+										}
+									}
+								]
+							},
+							"inheritedFrom": {
+								"type": "reference",
+								"name": "DiceGroupModifiers.success",
+								"id": 94
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								124,
+								111,
+								116,
+								120,
+								112
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "types.ts",
+							"line": 106,
+							"character": 24
+						}
+					],
+					"extendedTypes": [
+						{
+							"type": "reference",
+							"name": "DiceGroupModifiers",
+							"id": 93
+						}
+					]
+				},
+				{
+					"id": 93,
+					"name": "DiceGroupModifiers",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {
+						"isExported": true
+					},
+					"children": [
+						{
+							"id": 106,
+							"name": "drop",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true,
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 103,
+									"character": 8
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 107,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"children": [
+												{
+													"id": 109,
+													"name": "direction",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 103,
+															"character": 38
+														}
+													],
+													"type": {
+														"type": "union",
+														"types": [
+															{
+																"type": "stringLiteral",
+																"value": "h"
+															},
+															{
+																"type": "stringLiteral",
+																"value": "l"
+															}
+														]
+													}
+												},
+												{
+													"id": 108,
+													"name": "number",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 103,
+															"character": 19
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														109,
+														108
+													]
+												}
+											]
+										}
+									}
+								]
+							}
+						},
+						{
+							"id": 98,
+							"name": "failure",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true,
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 101,
+									"character": 11
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 99,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"children": [
+												{
+													"id": 101,
+													"name": "number",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 101,
+															"character": 44
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													}
+												},
+												{
+													"id": 100,
+													"name": "op",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 101,
+															"character": 18
+														}
+													],
+													"type": {
+														"type": "reference",
+														"name": "ModifierOperator",
+														"id": 141
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														101,
+														100
+													]
+												}
+											]
+										}
+									}
+								]
+							}
+						},
+						{
+							"id": 102,
+							"name": "keep",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true,
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 102,
+									"character": 8
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 103,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"children": [
+												{
+													"id": 105,
+													"name": "direction",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 102,
+															"character": 38
+														}
+													],
+													"type": {
+														"type": "union",
+														"types": [
+															{
+																"type": "stringLiteral",
+																"value": "h"
+															},
+															{
+																"type": "stringLiteral",
+																"value": "l"
+															}
+														]
+													}
+												},
+												{
+													"id": 104,
+													"name": "number",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 102,
+															"character": 19
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														105,
+														104
+													]
+												}
+											]
+										}
+									}
+								]
+							}
+						},
+						{
+							"id": 94,
+							"name": "success",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true,
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 100,
+									"character": 11
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 95,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"children": [
+												{
+													"id": 97,
+													"name": "number",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 100,
+															"character": 44
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													}
+												},
+												{
+													"id": 96,
+													"name": "op",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 100,
+															"character": 18
+														}
+													],
+													"type": {
+														"type": "reference",
+														"name": "ModifierOperator",
+														"id": 141
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														97,
+														96
+													]
+												}
+											]
+										}
+									}
+								]
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								106,
+								98,
+								102,
+								94
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "types.ts",
+							"line": 99,
+							"character": 35
+						}
+					],
+					"extendedBy": [
+						{
+							"type": "reference",
+							"name": "DiceGroupAttrs",
+							"id": 110
+						}
+					]
+				},
+				{
+					"id": 44,
+					"name": "DiceModifiers",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {
+						"isExported": true
+					},
+					"children": [
+						{
+							"id": 57,
+							"name": "compounding",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true,
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 30,
+									"character": 15
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 58,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"children": [
+												{
+													"id": 60,
+													"name": "number",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 30,
+															"character": 48
+														}
+													],
+													"type": {
+														"type": "union",
+														"types": [
+															{
+																"type": "intrinsic",
+																"name": "number"
+															},
+															{
+																"type": "stringLiteral",
+																"value": "DICE MAX"
+															}
+														]
+													}
+												},
+												{
+													"id": 59,
+													"name": "op",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 30,
+															"character": 22
+														}
+													],
+													"type": {
+														"type": "reference",
+														"name": "ModifierOperator",
+														"id": 141
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														60,
+														59
+													]
+												}
+											]
+										}
+									}
+								]
+							}
+						},
+						{
+							"id": 69,
+							"name": "drop",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true,
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 33,
+									"character": 8
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 70,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"children": [
+												{
+													"id": 72,
+													"name": "direction",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 33,
+															"character": 38
+														}
+													],
+													"type": {
+														"type": "union",
+														"types": [
+															{
+																"type": "stringLiteral",
+																"value": "h"
+															},
+															{
+																"type": "stringLiteral",
+																"value": "l"
+															}
+														]
+													}
+												},
+												{
+													"id": 71,
+													"name": "number",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 33,
+															"character": 19
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														72,
+														71
+													]
+												}
+											]
+										}
+									}
+								]
+							}
+						},
+						{
+							"id": 53,
+							"name": "exploding",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true,
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 29,
+									"character": 13
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 54,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"children": [
+												{
+													"id": 56,
+													"name": "number",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 29,
+															"character": 46
+														}
+													],
+													"type": {
+														"type": "union",
+														"types": [
+															{
+																"type": "intrinsic",
+																"name": "number"
+															},
+															{
+																"type": "stringLiteral",
+																"value": "DICE MAX"
+															}
+														]
+													}
+												},
+												{
+													"id": 55,
+													"name": "op",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 29,
+															"character": 20
+														}
+													],
+													"type": {
+														"type": "reference",
+														"name": "ModifierOperator",
+														"id": 141
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														56,
+														55
+													]
+												}
+											]
+										}
+									}
+								]
+							}
+						},
+						{
+							"id": 49,
+							"name": "failure",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true,
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 28,
+									"character": 11
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 50,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"children": [
+												{
+													"id": 52,
+													"name": "number",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 28,
+															"character": 44
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													}
+												},
+												{
+													"id": 51,
+													"name": "op",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 28,
+															"character": 18
+														}
+													],
+													"type": {
+														"type": "reference",
+														"name": "ModifierOperator",
+														"id": 141
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														52,
+														51
+													]
+												}
+											]
+										}
+									}
+								]
+							}
+						},
+						{
+							"id": 65,
+							"name": "keep",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true,
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 32,
+									"character": 8
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 66,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"children": [
+												{
+													"id": 68,
+													"name": "direction",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 32,
+															"character": 38
+														}
+													],
+													"type": {
+														"type": "union",
+														"types": [
+															{
+																"type": "stringLiteral",
+																"value": "h"
+															},
+															{
+																"type": "stringLiteral",
+																"value": "l"
+															}
+														]
+													}
+												},
+												{
+													"id": 67,
+													"name": "number",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 32,
+															"character": 19
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														68,
+														67
+													]
+												}
+											]
+										}
+									}
+								]
+							}
+						},
+						{
+							"id": 61,
+							"name": "penetrating",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true,
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 31,
+									"character": 15
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 62,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"children": [
+												{
+													"id": 64,
+													"name": "number",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 31,
+															"character": 48
+														}
+													],
+													"type": {
+														"type": "union",
+														"types": [
+															{
+																"type": "intrinsic",
+																"name": "number"
+															},
+															{
+																"type": "stringLiteral",
+																"value": "DICE MAX"
+															}
+														]
+													}
+												},
+												{
+													"id": 63,
+													"name": "op",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 31,
+															"character": 22
+														}
+													],
+													"type": {
+														"type": "reference",
+														"name": "ModifierOperator",
+														"id": 141
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														64,
+														63
+													]
+												}
+											]
+										}
+									}
+								]
+							}
+						},
+						{
+							"id": 77,
+							"name": "reroll",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true,
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 35,
+									"character": 10
+								}
+							],
+							"type": {
+								"type": "array",
+								"elementType": {
+									"type": "reflection",
+									"declaration": {
+										"id": 78,
+										"name": "__type",
+										"kind": 65536,
+										"kindString": "Type literal",
+										"flags": {},
+										"children": [
+											{
+												"id": 80,
+												"name": "number",
+												"kind": 32,
+												"kindString": "Variable",
+												"flags": {},
+												"sources": [
+													{
+														"fileName": "types.ts",
+														"line": 35,
+														"character": 44
+													}
+												],
+												"type": {
+													"type": "union",
+													"types": [
+														{
+															"type": "intrinsic",
+															"name": "number"
+														},
+														{
+															"type": "stringLiteral",
+															"value": "DICE MAX"
+														}
+													]
+												}
+											},
+											{
+												"id": 79,
+												"name": "op",
+												"kind": 32,
+												"kindString": "Variable",
+												"flags": {},
+												"sources": [
+													{
+														"fileName": "types.ts",
+														"line": 35,
+														"character": 18
+													}
+												],
+												"type": {
+													"type": "reference",
+													"name": "ModifierOperator",
+													"id": 141
+												}
+											}
+										],
+										"groups": [
+											{
+												"title": "Variables",
+												"kind": 32,
+												"children": [
+													80,
+													79
+												]
+											}
+										],
+										"sources": [
+											{
+												"fileName": "types.ts",
+												"line": 35,
+												"character": 12
+											}
+										]
+									}
+								}
+							}
+						},
+						{
+							"id": 73,
+							"name": "rerollOnce",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true,
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 34,
+									"character": 14
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 74,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"children": [
+												{
+													"id": 76,
+													"name": "number",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 34,
+															"character": 47
+														}
+													],
+													"type": {
+														"type": "union",
+														"types": [
+															{
+																"type": "intrinsic",
+																"name": "number"
+															},
+															{
+																"type": "stringLiteral",
+																"value": "DICE MAX"
+															}
+														]
+													}
+												},
+												{
+													"id": 75,
+													"name": "op",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 34,
+															"character": 21
+														}
+													],
+													"type": {
+														"type": "reference",
+														"name": "ModifierOperator",
+														"id": 141
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														76,
+														75
+													]
+												}
+											]
+										}
+									}
+								]
+							}
+						},
+						{
+							"id": 81,
+							"name": "sort",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true,
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 36,
+									"character": 8
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 82,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"children": [
+												{
+													"id": 83,
+													"name": "direction",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 36,
+															"character": 23
+														}
+													],
+													"type": {
+														"type": "union",
+														"types": [
+															{
+																"type": "stringLiteral",
+																"value": "a"
+															},
+															{
+																"type": "stringLiteral",
+																"value": "d"
+															}
+														]
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														83
+													]
+												}
+											]
+										}
+									}
+								]
+							}
+						},
+						{
+							"id": 45,
+							"name": "success",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {
+								"isExported": true,
+								"isOptional": true
+							},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 27,
+									"character": 11
+								}
+							],
+							"type": {
+								"type": "union",
+								"types": [
+									{
+										"type": "intrinsic",
+										"name": "undefined"
+									},
+									{
+										"type": "reflection",
+										"declaration": {
+											"id": 46,
+											"name": "__type",
+											"kind": 65536,
+											"kindString": "Type literal",
+											"flags": {},
+											"children": [
+												{
+													"id": 48,
+													"name": "number",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 27,
+															"character": 44
+														}
+													],
+													"type": {
+														"type": "intrinsic",
+														"name": "number"
+													}
+												},
+												{
+													"id": 47,
+													"name": "op",
+													"kind": 32,
+													"kindString": "Variable",
+													"flags": {},
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 27,
+															"character": 18
+														}
+													],
+													"type": {
+														"type": "reference",
+														"name": "ModifierOperator",
+														"id": 141
+													}
+												}
+											],
+											"groups": [
+												{
+													"title": "Variables",
+													"kind": 32,
+													"children": [
+														48,
+														47
+													]
+												}
+											]
+										}
+									}
+								]
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								57,
+								69,
+								53,
+								49,
+								65,
+								61,
+								77,
+								73,
+								81,
+								45
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "types.ts",
+							"line": 26,
+							"character": 30
+						}
+					],
+					"extendedBy": [
+						{
+							"type": "reference",
+							"name": "DiceAttrs",
+							"id": 2
+						}
+					]
+				},
+				{
+					"id": 90,
+					"name": "FuncExpressionAttrs",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"children": [
+						{
+							"id": 92,
+							"name": "arg",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 86,
+									"character": 7
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Expression",
+								"id": 183
+							}
+						},
+						{
+							"id": 91,
+							"name": "func",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 85,
+									"character": 8
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								92,
+								91
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "types.ts",
+							"line": 84,
+							"character": 29
+						}
+					]
+				},
+				{
+					"id": 84,
+					"name": "NumberAttrs",
+					"kind": 256,
+					"kindString": "Interface",
+					"flags": {},
+					"children": [
+						{
+							"id": 85,
+							"name": "value",
+							"kind": 1024,
+							"kindString": "Property",
+							"flags": {},
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 50,
+									"character": 9
+								}
+							],
+							"type": {
+								"type": "intrinsic",
+								"name": "number"
+							}
+						}
+					],
+					"groups": [
+						{
+							"title": "Properties",
+							"kind": 1024,
+							"children": [
+								85
+							]
+						}
+					],
+					"sources": [
+						{
+							"fileName": "types.ts",
+							"line": 49,
+							"character": 21
+						}
+					]
+				},
+				{
+					"id": 159,
+					"name": "BinExpression",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "types.ts",
+							"line": 73,
+							"character": 25
+						}
+					],
+					"type": {
+						"type": "intersection",
+						"types": [
+							{
+								"type": "reference",
+								"name": "WithKind",
+								"id": 134,
+								"typeArguments": [
+									{
+										"type": "reference",
+										"name": "BinExpressionAttrs",
+										"id": 86
+									},
+									{
+										"type": "stringLiteral",
+										"value": "binExpression"
+									}
+								]
+							},
+							{
+								"type": "reflection",
+								"declaration": {
+									"id": 160,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"children": [
+										{
+											"id": 161,
+											"name": "loc",
+											"kind": 32,
+											"kindString": "Variable",
+											"flags": {},
+											"sources": [
+												{
+													"fileName": "types.ts",
+													"line": 73,
+													"character": 81
+												}
+											],
+											"type": {
+												"type": "reference",
+												"name": "Location",
+												"id": 128
+											}
+										}
+									],
+									"groups": [
+										{
+											"title": "Variables",
+											"kind": 32,
+											"children": [
+												161
+											]
+										}
+									],
+									"sources": [
+										{
+											"fileName": "types.ts",
+											"line": 73,
+											"character": 75
+										}
+									]
+								}
+							}
+						]
+					}
+				},
+				{
+					"id": 142,
+					"name": "BinaryOperator",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "types.ts",
+							"line": 19,
+							"character": 26
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "stringLiteral",
+								"value": "+"
+							},
+							{
+								"type": "stringLiteral",
+								"value": "-"
+							},
+							{
+								"type": "stringLiteral",
+								"value": "*"
+							},
+							{
+								"type": "stringLiteral",
+								"value": "/"
+							},
+							{
+								"type": "stringLiteral",
+								"value": "**"
+							},
+							{
+								"type": "stringLiteral",
+								"value": "%"
+							}
+						]
+					}
+				},
+				{
+					"id": 175,
+					"name": "DiceGroup",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "types.ts",
+							"line": 110,
+							"character": 21
+						}
+					],
+					"type": {
+						"type": "intersection",
+						"types": [
+							{
+								"type": "reference",
+								"name": "WithKind",
+								"id": 134,
+								"typeArguments": [
+									{
+										"type": "reference",
+										"name": "DiceGroupAttrs",
+										"id": 110
+									},
+									{
+										"type": "stringLiteral",
+										"value": "diceGroup"
+									}
+								]
+							},
+							{
+								"type": "reflection",
+								"declaration": {
+									"id": 176,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"children": [
+										{
+											"id": 177,
+											"name": "loc",
+											"kind": 32,
+											"kindString": "Variable",
+											"flags": {},
+											"sources": [
+												{
+													"fileName": "types.ts",
+													"line": 110,
+													"character": 69
+												}
+											],
+											"type": {
+												"type": "reference",
+												"name": "Location",
+												"id": 128
+											}
+										}
+									],
+									"groups": [
+										{
+											"title": "Variables",
+											"kind": 32,
+											"children": [
+												177
+											]
+										}
+									],
+									"sources": [
+										{
+											"fileName": "types.ts",
+											"line": 110,
+											"character": 63
+										}
+									]
+								}
+							}
+						]
+					}
+				},
+				{
+					"id": 143,
+					"name": "EDice",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "types.ts",
+							"line": 39,
+							"character": 17
+						}
+					],
+					"type": {
+						"type": "intersection",
+						"types": [
+							{
+								"type": "reference",
+								"name": "WithKind",
+								"id": 134,
+								"typeArguments": [
+									{
+										"type": "reference",
+										"name": "DiceAttrs",
+										"id": 2
+									},
+									{
+										"type": "stringLiteral",
+										"value": "dice"
+									}
+								]
+							},
+							{
+								"type": "reflection",
+								"declaration": {
+									"id": 144,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"children": [
+										{
+											"id": 145,
+											"name": "loc",
+											"kind": 32,
+											"kindString": "Variable",
+											"flags": {},
+											"sources": [
+												{
+													"fileName": "types.ts",
+													"line": 39,
+													"character": 55
+												}
+											],
+											"type": {
+												"type": "reference",
+												"name": "Location",
+												"id": 128
+											}
+										}
+									],
+									"groups": [
+										{
+											"title": "Variables",
+											"kind": 32,
+											"children": [
+												145
+											]
+										}
+									],
+									"sources": [
+										{
+											"fileName": "types.ts",
+											"line": 39,
+											"character": 49
+										}
+									]
+								}
+							}
+						]
+					}
+				},
+				{
+					"id": 151,
+					"name": "ENumber",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "types.ts",
+							"line": 53,
+							"character": 19
+						}
+					],
+					"type": {
+						"type": "intersection",
+						"types": [
+							{
+								"type": "reference",
+								"name": "WithKind",
+								"id": 134,
+								"typeArguments": [
+									{
+										"type": "reference",
+										"name": "NumberAttrs",
+										"id": 84
+									},
+									{
+										"type": "stringLiteral",
+										"value": "number"
+									}
+								]
+							},
+							{
+								"type": "reflection",
+								"declaration": {
+									"id": 152,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"children": [
+										{
+											"id": 153,
+											"name": "loc",
+											"kind": 32,
+											"kindString": "Variable",
+											"flags": {},
+											"sources": [
+												{
+													"fileName": "types.ts",
+													"line": 53,
+													"character": 61
+												}
+											],
+											"type": {
+												"type": "reference",
+												"name": "Location",
+												"id": 128
+											}
+										}
+									],
+									"groups": [
+										{
+											"title": "Variables",
+											"kind": 32,
+											"children": [
+												153
+											]
+										}
+									],
+									"sources": [
+										{
+											"fileName": "types.ts",
+											"line": 53,
+											"character": 55
+										}
+									]
+								}
+							}
+						]
+					}
+				},
+				{
+					"id": 183,
+					"name": "Expression",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "types.ts",
+							"line": 120,
+							"character": 22
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "reference",
+								"name": "EDice",
+								"id": 143
+							},
+							{
+								"type": "reference",
+								"name": "ENumber",
+								"id": 151
+							},
+							{
+								"type": "reference",
+								"name": "BinExpression",
+								"id": 159
+							},
+							{
+								"type": "reference",
+								"name": "DiceGroup",
+								"id": 175
+							},
+							{
+								"type": "reference",
+								"name": "FuncExpression",
+								"id": 167
+							}
+						]
+					}
+				},
+				{
+					"id": 167,
+					"name": "FuncExpression",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "types.ts",
+							"line": 89,
+							"character": 26
+						}
+					],
+					"type": {
+						"type": "intersection",
+						"types": [
+							{
+								"type": "reference",
+								"name": "WithKind",
+								"id": 134,
+								"typeArguments": [
+									{
+										"type": "reference",
+										"name": "FuncExpressionAttrs",
+										"id": 90
+									},
+									{
+										"type": "stringLiteral",
+										"value": "funcExpression"
+									}
+								]
+							},
+							{
+								"type": "reflection",
+								"declaration": {
+									"id": 168,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"children": [
+										{
+											"id": 169,
+											"name": "loc",
+											"kind": 32,
+											"kindString": "Variable",
+											"flags": {},
+											"sources": [
+												{
+													"fileName": "types.ts",
+													"line": 89,
+													"character": 84
+												}
+											],
+											"type": {
+												"type": "reference",
+												"name": "Location",
+												"id": 128
+											}
+										}
+									],
+									"groups": [
+										{
+											"title": "Variables",
+											"kind": 32,
+											"children": [
+												169
+											]
+										}
+									],
+									"sources": [
+										{
+											"fileName": "types.ts",
+											"line": 89,
+											"character": 78
+										}
+									]
+								}
+							}
+						]
+					}
+				},
+				{
+					"id": 128,
+					"name": "Location",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "types.ts",
+							"line": 3,
+							"character": 20
+						}
+					],
+					"type": {
+						"type": "reflection",
+						"declaration": {
+							"id": 129,
+							"name": "__type",
+							"kind": 65536,
+							"kindString": "Type literal",
+							"flags": {},
+							"children": [
+								{
+									"id": 131,
+									"name": "end",
+									"kind": 32,
+									"kindString": "Variable",
+									"flags": {},
+									"sources": [
+										{
+											"fileName": "types.ts",
+											"line": 3,
+											"character": 42
+										}
+									],
+									"type": {
+										"type": "reference",
+										"name": "Index"
+									}
+								},
+								{
+									"id": 130,
+									"name": "start",
+									"kind": 32,
+									"kindString": "Variable",
+									"flags": {},
+									"sources": [
+										{
+											"fileName": "types.ts",
+											"line": 3,
+											"character": 30
+										}
+									],
+									"type": {
+										"type": "reference",
+										"name": "Index"
+									}
+								}
+							],
+							"groups": [
+								{
+									"title": "Variables",
+									"kind": 32,
+									"children": [
+										131,
+										130
+									]
+								}
+							],
+							"sources": [
+								{
+									"fileName": "types.ts",
+									"line": 3,
+									"character": 22
+								}
+							]
+						}
+					}
+				},
+				{
+					"id": 141,
+					"name": "ModifierOperator",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {
+						"isExported": true
+					},
+					"sources": [
+						{
+							"fileName": "types.ts",
+							"line": 17,
+							"character": 28
+						}
+					],
+					"type": {
+						"type": "union",
+						"types": [
+							{
+								"type": "stringLiteral",
+								"value": "="
+							},
+							{
+								"type": "stringLiteral",
+								"value": "<"
+							},
+							{
+								"type": "stringLiteral",
+								"value": ">"
+							}
+						]
+					}
+				},
+				{
+					"id": 134,
+					"name": "WithKind",
+					"kind": 4194304,
+					"kindString": "Type alias",
+					"flags": {},
+					"typeParameter": [
+						{
+							"id": 135,
+							"name": "T",
+							"kind": 131072,
+							"kindString": "Type parameter",
+							"flags": {}
+						},
+						{
+							"id": 136,
+							"name": "Kind",
+							"kind": 131072,
+							"kindString": "Type parameter",
+							"flags": {},
+							"type": {
+								"type": "intrinsic",
+								"name": "string"
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "types.ts",
+							"line": 12,
+							"character": 13
+						}
+					],
+					"type": {
+						"type": "intersection",
+						"types": [
+							{
+								"type": "typeParameter",
+								"name": "T"
+							},
+							{
+								"type": "reflection",
+								"declaration": {
+									"id": 137,
+									"name": "__type",
+									"kind": 65536,
+									"kindString": "Type literal",
+									"flags": {},
+									"children": [
+										{
+											"id": 138,
+											"name": "kind",
+											"kind": 32,
+											"kindString": "Variable",
+											"flags": {},
+											"sources": [
+												{
+													"fileName": "types.ts",
+													"line": 12,
+													"character": 50
+												}
+											],
+											"type": {
+												"type": "typeParameter",
+												"name": "Kind",
+												"constraint": {
+													"type": "intrinsic",
+													"name": "string"
+												}
+											}
+										}
+									],
+									"groups": [
+										{
+											"title": "Variables",
+											"kind": 32,
+											"children": [
+												138
+											]
+										}
+									],
+									"sources": [
+										{
+											"fileName": "types.ts",
+											"line": 12,
+											"character": 43
+										}
+									]
+								}
+							}
+						]
+					}
+				},
+				{
+					"id": 139,
+					"name": "DICE_MAX",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isExported": true,
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "types.ts",
+							"line": 14,
+							"character": 21
+						}
+					],
+					"type": {
+						"type": "stringLiteral",
+						"value": "DICE MAX"
+					},
+					"defaultValue": "\"DICE MAX\""
+				},
+				{
+					"id": 140,
+					"name": "DICE_MIN",
+					"kind": 32,
+					"kindString": "Variable",
+					"flags": {
+						"isExported": true,
+						"isConst": true
+					},
+					"sources": [
+						{
+							"fileName": "types.ts",
+							"line": 15,
+							"character": 21
+						}
+					],
+					"type": {
+						"type": "stringLiteral",
+						"value": "DICE_MIN"
+					},
+					"defaultValue": "\"DICE_MIN\""
+				},
+				{
+					"id": 162,
+					"name": "binExpression",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 163,
+							"name": "binExpression",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"id": 164,
+									"name": "expr",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "intersection",
+										"types": [
+											{
+												"type": "reference",
+												"name": "BinExpressionAttrs",
+												"id": 86
+											},
+											{
+												"type": "reflection",
+												"declaration": {
+													"id": 165,
+													"name": "__type",
+													"kind": 65536,
+													"kindString": "Type literal",
+													"flags": {},
+													"children": [
+														{
+															"id": 166,
+															"name": "loc",
+															"kind": 32,
+															"kindString": "Variable",
+															"flags": {
+																"isOptional": true
+															},
+															"sources": [
+																{
+																	"fileName": "types.ts",
+																	"line": 75,
+																	"character": 62
+																}
+															],
+															"type": {
+																"type": "reference",
+																"name": "Location",
+																"id": 128
+															}
+														}
+													],
+													"groups": [
+														{
+															"title": "Variables",
+															"kind": 32,
+															"children": [
+																166
+															]
+														}
+													],
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 75,
+															"character": 56
+														}
+													]
+												}
+											}
+										]
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "BinExpression",
+								"id": 159
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "types.ts",
+							"line": 75,
+							"character": 29
+						}
+					]
+				},
+				{
+					"id": 132,
+					"name": "defaultLocation",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {},
+					"signatures": [
+						{
+							"id": 133,
+							"name": "defaultLocation",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"type": {
+								"type": "reference",
+								"name": "Location",
+								"id": 128
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "types.ts",
+							"line": 5,
+							"character": 24
+						}
+					]
+				},
+				{
+					"id": 146,
+					"name": "dice",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 147,
+							"name": "dice",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"id": 148,
+									"name": "dice",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "intersection",
+										"types": [
+											{
+												"type": "reference",
+												"name": "DiceAttrs",
+												"id": 2
+											},
+											{
+												"type": "reflection",
+												"declaration": {
+													"id": 149,
+													"name": "__type",
+													"kind": 65536,
+													"kindString": "Type literal",
+													"flags": {},
+													"children": [
+														{
+															"id": 150,
+															"name": "loc",
+															"kind": 32,
+															"kindString": "Variable",
+															"flags": {
+																"isOptional": true
+															},
+															"sources": [
+																{
+																	"fileName": "types.ts",
+																	"line": 41,
+																	"character": 44
+																}
+															],
+															"type": {
+																"type": "reference",
+																"name": "Location",
+																"id": 128
+															}
+														}
+													],
+													"groups": [
+														{
+															"title": "Variables",
+															"kind": 32,
+															"children": [
+																150
+															]
+														}
+													],
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 41,
+															"character": 38
+														}
+													]
+												}
+											}
+										]
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "EDice",
+								"id": 143
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "types.ts",
+							"line": 41,
+							"character": 20
+						}
+					]
+				},
+				{
+					"id": 178,
+					"name": "diceGroup",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 179,
+							"name": "diceGroup",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"id": 180,
+									"name": "expr",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "intersection",
+										"types": [
+											{
+												"type": "reference",
+												"name": "DiceGroupAttrs",
+												"id": 110
+											},
+											{
+												"type": "reflection",
+												"declaration": {
+													"id": 181,
+													"name": "__type",
+													"kind": 65536,
+													"kindString": "Type literal",
+													"flags": {},
+													"children": [
+														{
+															"id": 182,
+															"name": "loc",
+															"kind": 32,
+															"kindString": "Variable",
+															"flags": {
+																"isOptional": true
+															},
+															"sources": [
+																{
+																	"fileName": "types.ts",
+																	"line": 112,
+																	"character": 54
+																}
+															],
+															"type": {
+																"type": "reference",
+																"name": "Location",
+																"id": 128
+															}
+														}
+													],
+													"groups": [
+														{
+															"title": "Variables",
+															"kind": 32,
+															"children": [
+																182
+															]
+														}
+													],
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 112,
+															"character": 48
+														}
+													]
+												}
+											}
+										]
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "DiceGroup",
+								"id": 175
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "types.ts",
+							"line": 112,
+							"character": 25
+						}
+					]
+				},
+				{
+					"id": 170,
+					"name": "funcExpression",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 171,
+							"name": "funcExpression",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"id": 172,
+									"name": "expr",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "intersection",
+										"types": [
+											{
+												"type": "reference",
+												"name": "FuncExpressionAttrs",
+												"id": 90
+											},
+											{
+												"type": "reflection",
+												"declaration": {
+													"id": 173,
+													"name": "__type",
+													"kind": 65536,
+													"kindString": "Type literal",
+													"flags": {},
+													"children": [
+														{
+															"id": 174,
+															"name": "loc",
+															"kind": 32,
+															"kindString": "Variable",
+															"flags": {
+																"isOptional": true
+															},
+															"sources": [
+																{
+																	"fileName": "types.ts",
+																	"line": 91,
+																	"character": 64
+																}
+															],
+															"type": {
+																"type": "reference",
+																"name": "Location",
+																"id": 128
+															}
+														}
+													],
+													"groups": [
+														{
+															"title": "Variables",
+															"kind": 32,
+															"children": [
+																174
+															]
+														}
+													],
+													"sources": [
+														{
+															"fileName": "types.ts",
+															"line": 91,
+															"character": 58
+														}
+													]
+												}
+											}
+										]
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "FuncExpression",
+								"id": 167
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "types.ts",
+							"line": 91,
+							"character": 30
+						}
+					]
+				},
+				{
+					"id": 154,
+					"name": "number",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 155,
+							"name": "number",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"parameters": [
+								{
+									"id": 156,
+									"name": "num",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "union",
+										"types": [
+											{
+												"type": "intersection",
+												"types": [
+													{
+														"type": "reference",
+														"name": "NumberAttrs",
+														"id": 84
+													},
+													{
+														"type": "reflection",
+														"declaration": {
+															"id": 157,
+															"name": "__type",
+															"kind": 65536,
+															"kindString": "Type literal",
+															"flags": {},
+															"children": [
+																{
+																	"id": 158,
+																	"name": "loc",
+																	"kind": 32,
+																	"kindString": "Variable",
+																	"flags": {
+																		"isOptional": true
+																	},
+																	"sources": [
+																		{
+																			"fileName": "types.ts",
+																			"line": 55,
+																			"character": 47
+																		}
+																	],
+																	"type": {
+																		"type": "reference",
+																		"name": "Location",
+																		"id": 128
+																	}
+																}
+															],
+															"groups": [
+																{
+																	"title": "Variables",
+																	"kind": 32,
+																	"children": [
+																		158
+																	]
+																}
+															],
+															"sources": [
+																{
+																	"fileName": "types.ts",
+																	"line": 55,
+																	"character": 41
+																}
+															]
+														}
+													}
+												]
+											},
+											{
+												"type": "intrinsic",
+												"name": "number"
+											}
+										]
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "ENumber",
+								"id": 151
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "types.ts",
+							"line": 55,
+							"character": 22
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Interfaces",
+					"kind": 256,
+					"children": [
+						86,
+						2,
+						110,
+						93,
+						44,
+						90,
+						84
+					]
+				},
+				{
+					"title": "Type aliases",
+					"kind": 4194304,
+					"children": [
+						159,
+						142,
+						175,
+						143,
+						151,
+						183,
+						167,
+						128,
+						141,
+						134
+					]
+				},
+				{
+					"title": "Variables",
+					"kind": 32,
+					"children": [
+						139,
+						140
+					]
+				},
+				{
+					"title": "Functions",
+					"kind": 64,
+					"children": [
+						162,
+						132,
+						146,
+						178,
+						170,
+						154
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "types.ts",
+					"line": 1,
+					"character": 0
+				}
+			]
+		},
+		{
+			"id": 228,
+			"name": "\"utils\"",
+			"kind": 1,
+			"kindString": "External module",
+			"flags": {
+				"isExported": true
+			},
+			"originalName": "/home/jfrere/projects/dicebox/src/utils.ts",
+			"children": [
+				{
+					"id": 229,
+					"name": "keySelect",
+					"kind": 64,
+					"kindString": "Function",
+					"flags": {
+						"isExported": true
+					},
+					"signatures": [
+						{
+							"id": 230,
+							"name": "keySelect",
+							"kind": 4096,
+							"kindString": "Call signature",
+							"flags": {},
+							"typeParameter": [
+								{
+									"id": 231,
+									"name": "T",
+									"kind": 131072,
+									"kindString": "Type parameter",
+									"flags": {}
+								},
+								{
+									"id": 232,
+									"name": "K",
+									"kind": 131072,
+									"kindString": "Type parameter",
+									"flags": {},
+									"type": {
+										"type": "typeOperator",
+										"operator": "keyof",
+										"target": {
+											"type": "typeParameter",
+											"name": "T"
+										}
+									}
+								}
+							],
+							"parameters": [
+								{
+									"id": 233,
+									"name": "orig",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "typeParameter",
+										"name": "T"
+									}
+								},
+								{
+									"id": 234,
+									"name": "keys",
+									"kind": 32768,
+									"kindString": "Parameter",
+									"flags": {},
+									"type": {
+										"type": "array",
+										"elementType": {
+											"type": "typeParameter",
+											"name": "K",
+											"constraint": {
+												"type": "typeOperator",
+												"operator": "keyof",
+												"target": {
+													"type": "typeParameter",
+													"name": "T"
+												}
+											}
+										}
+									}
+								}
+							],
+							"type": {
+								"type": "reference",
+								"name": "Pick",
+								"typeArguments": [
+									{
+										"type": "typeParameter",
+										"name": "T"
+									},
+									{
+										"type": "typeParameter",
+										"name": "K",
+										"constraint": {
+											"type": "typeOperator",
+											"operator": "keyof",
+											"target": {
+												"type": "typeParameter",
+												"name": "T"
+											}
+										}
+									}
+								]
+							}
+						}
+					],
+					"sources": [
+						{
+							"fileName": "utils.ts",
+							"line": 1,
+							"character": 25
+						}
+					]
+				}
+			],
+			"groups": [
+				{
+					"title": "Functions",
+					"kind": 64,
+					"children": [
+						229
+					]
+				}
+			],
+			"sources": [
+				{
+					"fileName": "utils.ts",
+					"line": 1,
+					"character": 0
+				}
+			]
+		}
+	],
+	"groups": [
+		{
+			"title": "External modules",
+			"kind": 1,
+			"children": [
+				184,
+				235,
+				298,
+				330,
+				301,
+				1,
+				228
+			]
+		}
+	]
+}

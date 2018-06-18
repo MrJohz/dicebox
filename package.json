@@ -35,6 +35,7 @@
     "@types/parsimmon": "^1.6.2",
     "moo": "^0.4.3",
     "parsimmon": "^1.8.0",
+    "showdown": "^1.8.6",
     "tslib": "^1.9.2"
   }
 }
