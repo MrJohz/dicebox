@@ -31,10 +31,8 @@
     "typescript": "^2.9.1"
   },
   "dependencies": {
-    "@types/moo": "^0.4.0",
     "@types/parsimmon": "^1.6.2",
-    "moo": "^0.4.3",
-    "parsimmon": "^1.8.0",
+    "parsimmon": "^1.10.0",
     "tslib": "^1.9.2"
   }
 }

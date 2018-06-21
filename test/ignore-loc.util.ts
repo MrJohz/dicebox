@@ -1,4 +1,5 @@
 import Must from 'must';
+import { Location } from '../src/types';
 
 let originalEqual: any;
 
@@ -44,4 +45,11 @@ function _ignoreLoc(item: any): any {
     }
 
     return item;
+}
+
+export function loc(start: number, end: number): Location {
+    return {
+        start: { line: 1, offset: start, column: start + 1 },
+        end: { line: 1, offset: end, column: end + 1 },
+    };
 }

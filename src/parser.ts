@@ -33,11 +33,11 @@ const AnyDigits = alt(string('0'), DigitsNotZero).desc('integer');
 const FateDice = string('F').desc(`fate dice 'F'`);
 const DiceSpec = string('d').desc(`dice specifier 'd'`);
 
-const operatorLow = oneOf('+-%').desc('+ or - or %');
-const operatorMed = oneOf('*/').desc('* or /');
+const operatorLow = oneOf('+-%').desc(['+', '-', '%'] as any);
+const operatorMed = oneOf('*/').desc(['*', '/'] as any);  // type assertions needed until @types are updated
 const operatorHigh = string('**').desc('**');
 
-const comparisonOperator = oneOf('<>=').desc('< or > or =');
+const comparisonOperator = oneOf('<>=').desc(['<', '>', '='] as any);
 
 const openBracket = string('(').desc('open paren');
 const closeBracket = string(')').desc('close paren');
@@ -187,11 +187,11 @@ const language = createLanguage({
         .map(([head, tail]) => [head, ...tail])
         .mark()
         .map(({ value, ...loc }) => value.reduce((prev, curr) => binExpression({
-                loc,
-                op: curr[0],
-                lhs: prev,
-                rhs: curr[1],
-            }))),
+            loc,
+            op: curr[0],
+            lhs: prev,
+            rhs: curr[1],
+        }))),
 
     ExprMed: r => seq(r.ExprHigh, seq(operatorMed.trim(optWhitespace), r.ExprHigh).many())
         .map(([head, tail]) => [head, ...tail])
