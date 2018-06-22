@@ -66,7 +66,16 @@ export class Evaluator {
 
         const value = binaryEval(expr.op, lhs.value, rhs.value);
 
-        return new Result(value, Kind.success, {
+        let returnKind = Kind.sum;  // default - shouldn't be needed if `checker` is run beforehand
+        if (lhs.kind === rhs.kind) {
+            returnKind = lhs.kind;
+        } else if (lhs.kind === Kind.number) {
+            returnKind = rhs.kind;
+        } else if (rhs.kind === Kind.number) {
+            returnKind = lhs.kind;
+        }
+
+        return new Result(value, returnKind, {
             nodeKind: 'binExpression', loc: expr.loc,
             value,
             lhs: lhs.tree, rhs: rhs.tree, op: expr.op,
