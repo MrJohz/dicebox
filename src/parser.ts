@@ -267,6 +267,11 @@ const language = createLanguage({
         .map(({ value, ...loc }) => number({ value, loc })),
 });
 
+/**
+ * Parses everything and does magic and stuff oh yeah
+ * @param {string} s
+ * @returns {EDice}
+ */
 export function parse(s: string): EDice {
     return language.Expr.tryParse(s);
 }

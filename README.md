@@ -25,3 +25,17 @@ console.log(roller.roll(parsedDice))
 ## What is this?
 
 Dicebox is a toolbox for parsing and rolling dice written in 'dice notation' (e.g. `3d6`, `d8`, `2d100`).  It uses Roll20 syntax, and can parse all sorts of dice syntaxes, including Fate dice (`4dF`), exploding dice (`3d6!`), successes and failures (`12d10>4`), and more.  It can also evaluate arithmetic expressions, including simple modifiers, multiplication and division, exponents, `floor`/`ciel`/`round`, etc.
+
+## Documentation
+
+Documentation is a faff.  Documentation should be rebuilt automatically, so if you're not explicitly worried about the documentation, it shouldn't be an issue for you.  However, if you want to modify the documentation and view the changes you're making, you will need to have Python installed, and grab `sphinx-js` using
+
+    $ pip install sphinx-js  # not npm!
+
+You made need to use `sudo pip install ...` on some systems.  Alternatively, you can do this properly and create a python virtualenv - it's your dev environment!
+
+When you've got that sorted, you should just be able to run 
+
+    $ npm doc
+
+and the documentation will be generated in `doc/build`.

@@ -38,6 +38,11 @@ export interface DiceModifiers {
 
 export type EDice = WithKind<DiceAttrs, 'dice'> & { loc: Location }
 
+/**
+ * Create a dice AST node
+ * @param {DiceAttrs & {loc?: Location}} dice
+ * @returns {EDice}
+ */
 export function dice(dice: DiceAttrs & { loc?: Location }): EDice {
     return {
         kind: 'dice',

@@ -10,6 +10,7 @@
     "build:cjs": "tsc -p ./tsconfig/tsconfig.cjs.json",
     "build:dts": "tsc -p ./tsconfig/tsconfig.dts.json",
     "build": "npm run build:esm && npm run build:cjs && npm run build:dts",
+    "doc": "npm run build:esm && sphinx-build doc/ doc/_build/",
     "test": "cross-env TS_NODE_PROJECT=test/tsconfig.json mocha",
     "test:coverage": "cross-env TS_NODE_PROJECT=test/tsconfig.json nyc mocha"
   },
@@ -24,6 +25,7 @@
   "devDependencies": {
     "@types/mocha": "^5.2.1",
     "cross-env": "^5.2.0",
+    "jsdoc": "^3.5.5",
     "mocha": "^5.2.0",
     "must": "^0.13.4",
     "nyc": "^12.0.2",

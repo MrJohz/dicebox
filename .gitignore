@@ -3,6 +3,8 @@ dist/
 node_modules/
 lib-*
 
-coverage
+coverage/
 .nyc_output
 *.log
+
+doc/_build/
