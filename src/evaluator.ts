@@ -1,9 +1,17 @@
 import { Kind } from './checker';
 import {
-    BinaryOperator, BinExpression, DiceGroup, DiceGroupModifiers, ENumber, Expression, Location, ModifierOperator,
+    BinaryOperator, BinExpression, DiceGroup, DiceGroupModifiers, ENumber, Expression, FuncExpression, Location,
+    ModifierOperator,
     number,
 } from './types';
 import { keySelect } from './utils';
+
+const FUNCTION_IMPLS: { [key: string]: (a: number) => number } = {
+    floor: Math.floor,
+    ceil: Math.ceil,
+    round: Math.round,
+    abs: Math.abs,
+};
 
 export interface ENumberResult {
     nodeKind: 'number';
@@ -28,10 +36,19 @@ export interface DiceGroupResult {
     modifiers: DiceGroupModifiers;
 }
 
+export interface FuncExpressionResult {
+    nodeKind: 'funcExpression';
+    loc: Location;
+    value: number;
+    funcName: string;
+    arg: ExpressionResult;
+}
+
 export type ExpressionResult =
     | ENumberResult
     | BinExpressionResult
     | DiceGroupResult
+    | FuncExpressionResult
 
 export class Result {
     constructor(public value: number, public kind: Kind, public tree: ExpressionResult) {}
@@ -46,10 +63,30 @@ export class Evaluator {
                 return this.evaluateBinExpression(expression);
             case 'diceGroup':
                 return this.evaluateDiceGroup(expression);
+            case 'funcExpression':
+                return this.evaluateFuncExpression(expression);
             // case 'dice':
             //     return this.evaluateDice(expression);
             default:
                 throw new Error('?');
+        }
+    }
+
+    evaluateFuncExpression(expr: FuncExpression): Result {
+        const arg = this.evaluate(expr.arg);
+
+        /* istanbul ignore else */
+        if (expr.func in FUNCTION_IMPLS) {
+            const value = FUNCTION_IMPLS[expr.func](arg.value);
+            return new Result(value, arg.kind, {
+                nodeKind: 'funcExpression',
+                loc: expr.loc,
+                value,
+                arg: arg.tree,
+                funcName: expr.func,
+            });
+        } else {
+            throw new Error(`Invalid function name ${expr.func}`);
         }
     }
 

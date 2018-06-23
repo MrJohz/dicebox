@@ -31,6 +31,14 @@ describe('parser/numbers', () => {
             expect(parse('14.4e4')).to.eql(number({ value: 14.4e4 }));
         });
 
+        it('should handle negative integers', () => {
+            expect(parse('-4')).to.eql(number({ value: -4 }));
+        });
+
+        it('should handle negative fractions', () => {
+            expect(parse('-3.5')).to.eql(number({ value: -3.5 }));
+        });
+
     });
 
 });

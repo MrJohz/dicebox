@@ -187,7 +187,7 @@ describe('parser/operators', () => {
         });
 
         it('should allow whitespace between brackets', () => {
-            expect(parse('ciel(   4.8   )')).to.eql(funcExpression({ func: 'ciel', arg: number(4.8) }));
+            expect(parse('ceil(   4.8   )')).to.eql(funcExpression({ func: 'ceil', arg: number(4.8) }));
         });
 
         it('should not allow space between function name and brackets', () => {

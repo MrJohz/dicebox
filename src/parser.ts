@@ -50,11 +50,12 @@ const comma = string(',').desc('comma');
 const functionName = alt(
     string('floor'),
     string('round'),
-    string('ciel'),
+    string('ceil'),
     string('abs'),
 );
 
 const AnyFloat = seq(
+    string('-').fallback(''),
     AnyDigits.fallback('0'),
     string('.'),
     AnyDigits,
@@ -65,6 +66,7 @@ const AnyFloat = seq(
 ).map(all => all.join('')).desc('float');
 
 const AnyInt = seq(
+    string('-').fallback(''),
     AnyDigits,
     seq(
         oneOf('eE').desc('e/E'),
@@ -248,7 +250,7 @@ const language = createLanguage({
         DiceSpec,
         alt(
             r.ExprBracketed,
-            DigitsNotZero.map(diceSidesOf),
+            AnyDigits.map(diceSidesOf),
             FateDice.map(diceSidesOf),
         ),
         r.DiceModifiers,

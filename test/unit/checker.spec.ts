@@ -276,12 +276,12 @@ describe('checker', () => {
     describe('check function expressions', () => {
 
         it('should return a success if the child expression is a success', () => {
-            expect(check(parse('ciel(3.2)')))
+            expect(check(parse('ceil(3.2)')))
                 .to.eql({ success: true, kind: Kind.number });
         });
 
         it('should return a failure if the child expression is a failure', () => {
-            const result = check(parse('ciel(3d2 + 3d2>1)'));
+            const result = check(parse('ceil(3d2 + 3d2>1)'));
 
             expect(result.success).to.be.false();
 

@@ -27,6 +27,14 @@ describe('parser/dice', () => {
             expect(parse('3dF')).to.eql(dice({ noDice: 3, diceSides: [-1, 0, 1] }));
         });
 
+        it(`should accept zero-sided dice`, () => {
+            expect(parse('3d0')).to.eql(dice({ noDice: 3, diceSides: [] }));
+        });
+
+        it(`should throw when passed a negative number of dice`, () => {
+            expect(() => parse('-3dF')).to.throw();
+        });
+
     });
 
     describe('computed dice', () => {
