@@ -8,3 +8,25 @@ export function keySelect<T, K extends keyof T>(orig: T, keys: K[]): Pick<T, K> 
 
     return result;
 }
+
+export function diceSidesOf(n: string | number) {
+    if (n === 'F') {
+        return [-1, 0, 1];
+    }
+
+    const arr = [];
+    const all = typeof n === 'number' ? n : parseInt(n, 10);
+    for (let i = 1; i <= all; i++) {
+        arr.push(i);
+    }
+
+    return arr;
+}
+
+export function intOf(n: string): number {
+    return parseInt(n, 10);
+}
+
+export function floatOf(n: string): number {
+    return parseFloat(n);
+}

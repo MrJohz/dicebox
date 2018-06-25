@@ -5,28 +5,7 @@ import {
     binExpression, dice, DICE_MAX, DICE_MIN, diceGroup, DiceGroupModifiers, DiceModifiers, EDice, funcExpression,
     number,
 } from './types';
-
-function diceSidesOf(n: string) {
-    if (n === 'F') {
-        return [-1, 0, 1];
-    }
-
-    const arr = [];
-    const all = parseInt(n, 10);
-    for (let i = 1; i <= all; i++) {
-        arr.push(i);
-    }
-
-    return arr;
-}
-
-function intOf(n: string): number {
-    return parseInt(n, 10);
-}
-
-function floatOf(n: string): number {
-    return parseFloat(n);
-}
+import { diceSidesOf, floatOf, intOf } from './utils';
 
 const DigitsNotZero = regexp(/[1-9]+/).desc('non-zero integer');
 const AnyDigits = alt(string('0'), DigitsNotZero).desc('integer');

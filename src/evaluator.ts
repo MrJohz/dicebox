@@ -1,8 +1,7 @@
 import { Kind } from './checker';
 import {
-    BinaryOperator, BinExpression, DiceGroup, DiceGroupModifiers, ENumber, Expression, FuncExpression, Location,
+    BinaryOperator, BinExpression, DiceGroup, DiceGroupModifiers, EDice, ENumber, Expression, FuncExpression, Location,
     ModifierOperator,
-    number,
 } from './types';
 import { keySelect } from './utils';
 
@@ -13,10 +12,29 @@ const FUNCTION_IMPLS: { [key: string]: (a: number) => number } = {
     abs: Math.abs,
 };
 
+export enum RollSuccess {
+    success = 1,
+    ignored = 0,
+    failure = -1,
+}
+
 export interface ENumberResult {
     nodeKind: 'number';
     loc: Location;
     value: number;
+}
+
+interface DiceRollResult {
+    value: number;
+    dropped: boolean;
+    success: RollSuccess;
+}
+
+export interface DiceExpressionResult {
+    nodeKind: 'dice';
+    loc: Location;
+    value: number;
+    rolls: Array<DiceRollResult | DiceRollResult[]>
 }
 
 export interface BinExpressionResult {
@@ -32,7 +50,7 @@ export interface DiceGroupResult {
     nodeKind: 'diceGroup';
     loc: Location;
     value: number;
-    elements: { expr: ExpressionResult, dropped: boolean, success: number }[];
+    elements: { expr: ExpressionResult, dropped: boolean, success: RollSuccess }[];
     modifiers: DiceGroupModifiers;
 }
 
@@ -49,6 +67,7 @@ export type ExpressionResult =
     | BinExpressionResult
     | DiceGroupResult
     | FuncExpressionResult
+    | DiceExpressionResult
 
 export class Result {
     constructor(public value: number, public kind: Kind, public tree: ExpressionResult) {}
@@ -65,11 +84,13 @@ export class Evaluator {
                 return this.evaluateDiceGroup(expression);
             case 'funcExpression':
                 return this.evaluateFuncExpression(expression);
-            // case 'dice':
-            //     return this.evaluateDice(expression);
-            default:
-                throw new Error('?');
+            case 'dice':
+                return this.evaluateDice(expression);
         }
+    }
+
+    evaluateDice(expr: EDice): Result {
+        return {} as Result;
     }
 
     evaluateFuncExpression(expr: FuncExpression): Result {
@@ -121,7 +142,11 @@ export class Evaluator {
 
     evaluateDiceGroup(expr: DiceGroup): Result {
         let returnSuccesses = false;
-        let elements = expr.elements.map(elem => ({ expr: this.evaluate(elem), dropped: false, success: 0 }));
+        let elements = expr.elements.map(elem => ({
+            expr: this.evaluate(elem),
+            dropped: false,
+            success: RollSuccess.ignored,
+        }));
 
         if (expr.drop) {
             for (let i = 0; i < expr.drop.number; i++) {
@@ -156,11 +181,11 @@ export class Evaluator {
                     : false;
 
                 if (success) {
-                    result.success = 1;
+                    result.success = RollSuccess.success;
                 } else if (failure) {
-                    result.success = -1;
+                    result.success = RollSuccess.failure;
                 } else {
-                    result.success = 0;
+                    result.success = RollSuccess.ignored;
                 }
             }
         }
