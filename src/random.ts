@@ -31,7 +31,7 @@ export class SeededRandom extends EngineRandom {
         super();
         this.engine = Random.engines.mt19937();
 
-        if (!seed) {
+        if (seed == null) {
             this.engine.autoSeed();
         } else if (Array.isArray(seed)) {
             this.engine.seedWithArray(seed);

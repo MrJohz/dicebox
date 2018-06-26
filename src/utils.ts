@@ -9,7 +9,7 @@ export function keySelect<T, K extends keyof T>(orig: T, keys: K[]): Pick<T, K> 
     return result;
 }
 
-export function diceSidesOf(n: string | number) {
+export function diceSidesOf(n: string | number): number[] {
     if (n === 'F') {
         return [-1, 0, 1];
     }

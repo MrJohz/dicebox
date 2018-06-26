@@ -1,9 +1,10 @@
 import { Kind } from './checker';
+import { Randomiser, SimpleRandom } from './random';
 import {
     BinaryOperator, BinExpression, DiceGroup, DiceGroupModifiers, EDice, ENumber, Expression, FuncExpression, Location,
     ModifierOperator,
 } from './types';
-import { keySelect } from './utils';
+import { diceSidesOf, keySelect } from './utils';
 
 const FUNCTION_IMPLS: { [key: string]: (a: number) => number } = {
     floor: Math.floor,
@@ -34,7 +35,9 @@ export interface DiceExpressionResult {
     nodeKind: 'dice';
     loc: Location;
     value: number;
-    rolls: Array<DiceRollResult | DiceRollResult[]>
+    noDice: number | ExpressionResult;
+    diceSides: number[] | ExpressionResult;
+    rolls: Array<DiceRollResult | DiceRollResult[]>;
 }
 
 export interface BinExpressionResult {
@@ -74,6 +77,9 @@ export class Result {
 }
 
 export class Evaluator {
+
+    constructor(private random: Randomiser = new SimpleRandom()) {}
+
     evaluate(expression: Expression): Result {
         switch (expression.kind) {
             case 'number':
@@ -89,11 +95,52 @@ export class Evaluator {
         }
     }
 
-    evaluateDice(expr: EDice): Result {
-        return {} as Result;
+    private evalNoDice(noDice: number | Expression): [number, number | ExpressionResult] {
+        if (typeof noDice === 'number') {
+            return [noDice, noDice];
+        } else {
+            const e = this.evaluate(noDice);
+            return [e.value, e.tree];
+        }
     }
 
-    evaluateFuncExpression(expr: FuncExpression): Result {
+    private evalDiceSides(diceSides: number[] | Expression): [number[], number[] | ExpressionResult] {
+        if (Array.isArray(diceSides)) {
+            return [diceSides, diceSides];
+        } else {
+            const e = this.evaluate(diceSides);
+            return [diceSidesOf(e.value), e.tree];
+        }
+    }
+
+    private evaluateDice(expr: EDice): Result {
+        const [noDice, noDiceTree] = this.evalNoDice(expr.noDice);
+        const [diceSides, diceSidesTree] = this.evalDiceSides(expr.diceSides);
+
+        const rolls: Array<DiceRollResult | DiceRollResult[]> = [];
+
+        for (let i = 0; i < noDice; i++) {
+            rolls.push({
+                value: diceSides[this.random.between(0, diceSides.length)],
+                dropped: false,
+                success: RollSuccess.ignored,
+            });
+        }
+
+        const sum = rolls.reduce((total, dice) => total + (Array.isArray(dice)
+            ? dice.reduce((total, dice) => total + dice.value, 0)
+            : dice.value), 0);
+
+        return new Result(sum, Kind.sum, {
+            nodeKind: 'dice', loc: expr.loc,
+            noDice: noDiceTree,
+            diceSides: diceSidesTree,
+            value: sum,
+            rolls,
+        });
+    }
+
+    private evaluateFuncExpression(expr: FuncExpression): Result {
         const arg = this.evaluate(expr.arg);
 
         /* istanbul ignore else */
@@ -111,14 +158,14 @@ export class Evaluator {
         }
     }
 
-    evaluateNumber(num: ENumber): Result {
+    private evaluateNumber(num: ENumber): Result {
         return new Result(num.value, Kind.number, {
             nodeKind: 'number', loc: num.loc,
             value: num.value,
         });
     }
 
-    evaluateBinExpression(expr: BinExpression): Result {
+    private evaluateBinExpression(expr: BinExpression): Result {
         const lhs = this.evaluate(expr.lhs);
         const rhs = this.evaluate(expr.rhs);
 
@@ -140,7 +187,7 @@ export class Evaluator {
         });
     }
 
-    evaluateDiceGroup(expr: DiceGroup): Result {
+    private evaluateDiceGroup(expr: DiceGroup): Result {
         let returnSuccesses = false;
         let elements = expr.elements.map(elem => ({
             expr: this.evaluate(elem),

@@ -52,6 +52,11 @@ describe('random', () => {
             expect(results).not.to.contain(2);
         });
 
+        it('should set the seed to 0 if 0 is passed', () => {
+            const random = new SeededRandom(0);
+            expect(random.between(0, 100000000)).to.equal(57136044);
+        })
+
     });
 
     describe('FetchRandom', () => {
