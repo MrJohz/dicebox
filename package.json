@@ -31,7 +31,7 @@
     "typescript": "^2.9.1"
   },
   "dependencies": {
-    "@types/parsimmon": "^1.6.2",
+    "@types/parsimmon": "^1.10.0",
     "@types/random-js": "^1.0.30",
     "parsimmon": "^1.10.0",
     "random-js": "^1.0.8",

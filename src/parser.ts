@@ -1,8 +1,9 @@
-import { alt, createLanguage, of, oneOf, optWhitespace, Parser, regexp, seq, string } from 'parsimmon';
+import { alt, createLanguage, of, oneOf, optWhitespace, Parser, regexp, seq, seqObj, string } from 'parsimmon';
 import { assign } from './polyfills';
 
 import {
-    binExpression, dice, DICE_MAX, DICE_MIN, diceGroup, DiceGroupModifiers, DiceModifiers, EDice, funcExpression,
+    binExpression, dice, DICE_MAX, DICE_MIN, diceGroup, DiceGroupModifiers, DiceModifiers, EDice, Expression,
+    funcExpression,
     number,
 } from './types';
 import { diceSidesOf, floatOf, intOf } from './utils';
@@ -12,11 +13,11 @@ const AnyDigits = alt(string('0'), DigitsNotZero).desc('integer');
 const FateDice = string('F').desc(`fate dice 'F'`);
 const DiceSpec = string('d').desc(`dice specifier 'd'`);
 
-const operatorLow = oneOf('+-%').desc(['+', '-', '%'] as any);
-const operatorMed = oneOf('*/').desc(['*', '/'] as any);  // type assertions needed until @types are updated
+const operatorLow = oneOf('+-%').desc(['+', '-', '%']);
+const operatorMed = oneOf('*/').desc(['*', '/']);
 const operatorHigh = string('**').desc('**');
 
-const comparisonOperator = oneOf('<>=').desc(['<', '>', '='] as any);
+const comparisonOperator = oneOf('<>=').desc(['<', '>', '=']);
 
 const openBracket = string('(').desc('open paren');
 const closeBracket = string(')').desc('close paren');
@@ -42,7 +43,7 @@ const AnyFloat = seq(
         oneOf('eE').desc('e/E'),
         AnyDigits,
     ).desc('exponent').map(all => all.join('')).fallback(''),
-).map(all => all.join('')).desc('float');
+).tie().desc('float');
 
 const AnyInt = seq(
     string('-').fallback(''),
@@ -51,7 +52,7 @@ const AnyInt = seq(
         oneOf('eE').desc('e/E'),
         AnyDigits,
     ).desc('exponent').map(all => all.join('')).fallback(''),
-).map(all => all.join('')).desc('integer w/ exponent');
+).tie().desc('integer w/ exponent');
 
 const AnyNum = alt(AnyFloat, AnyInt).desc('number');
 
@@ -196,8 +197,13 @@ const language = createLanguage({
 
     LiteralOrExpr: r => alt(r.Function, r.Literal, r.ExprBracketed),
 
-    ExprBracketed: r => seq(openBracket.skip(optWhitespace), r.Expr, optWhitespace.then(closeBracket))
-        .map(([_, expr]) => expr),
+    ExprBracketed: r => seqObj<{ expr: Expression }>(
+        openBracket,
+        optWhitespace,
+        ['expr', r.Expr],
+        optWhitespace,
+        closeBracket,
+    ).map(({ expr }) => expr),
 
     Function: r => seq(functionName, r.ExprBracketed)
         .mark()
@@ -205,17 +211,18 @@ const language = createLanguage({
 
     Literal: r => alt(r.Dice, r.Number, r.DiceGroup),
 
-    DiceGroup: r => seq(
+    DiceGroup: r => seqObj<{ firstExpr: Expression, exprs: Expression[], modifiers: DiceGroupModifiers }>(
         openBrace,
-        r.Expr,
-        seq(comma, r.Expr).many(),
+        ['firstExpr', r.Expr],
+        ['exprs', seq(comma, r.Expr).map(([_, expr]) => expr).many()],
         comma.trim(optWhitespace).fallback(','),
         closeBrace,
-        r.DiceGroupModifiers,
+        ['modifiers', r.DiceGroupModifiers],
     )
         .mark()
-        .map(({ value: [_1, expr, exprs, _2, _3, mods], ...loc }) =>
-            diceGroup({ elements: [expr, ...exprs.map(([_, expr]) => expr)], ...mods, loc })),
+        .map(({ value: { firstExpr, exprs, modifiers }, ...loc }) => diceGroup({
+            elements: [firstExpr, ...exprs], loc, ...modifiers,
+        })),
 
     DiceGroupModifiers: () => MultipleDiceGroupModifiers
         .map(modifiers => assign({}, ...modifiers)),
