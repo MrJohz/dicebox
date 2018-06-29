@@ -48,4 +48,11 @@ There is an obvious difficulty in allowing the reroll once modifier to be applie
 
 In addition to matching the Roll20 syntax, I also want to ensure that my parser isn't over-complicated with weird syntaxes that will make parsing (and error messages) more difficult.  As a result, I believe it makes most sense to treat `roCP` like a normal dice modifier, without any additional conditions over where it is allowed to go.  This means that my parser is slightly more lenient than the Roll20 parser, but also means that I don't need to make a decision about what happens when multiple `roCP` modifiers collide.
 
+### Penetrating Dice
+
+Penetrating dice seem to be a Hackmaster-specific thing that no-one else really uses.  According to [this thread][hm-spec], Hackmaster 4e only penetrates on `d6` rolls, and the roll will only penetrate if the die lands on a 6.  Hackmaster Basic also allows dice to penetrate on rolls of `d100`s and `d20`s, but adds the additional rule that the additional dice rolled must be of a size smaller than the original dice (`d100` -> `d20`, `d20` -> `d6`, `d6`s remain the same).
+
+Roll20 ignores the Hackmaster Basic rule altogether, and always penetrates using a dice of the same size.  In addition, Roll20 allows custom compare points (just as with standard exploding dice, and compounding dice).  The compare points are always compared against the original rolls, not the modified (-1) values.  This is beneficial - it means that `d6!p6` will always penetrate on the highest number rolled, which is usually what is wanted.
+
+[hm-spec]: <https://app.roll20.net/forum/post/2692/penetrating-dice-rolls-not-being-handled-properly>
 [spec]: <https://wiki.roll20.net/Dice_Reference#Roll20_Dice_Specification>
