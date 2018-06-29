@@ -1,10 +1,9 @@
 import { Kind } from './checker';
-import { compounding, exploding } from './modifiers/exploding';
+import { compounding, exploding, penetrating } from './modifiers/exploding';
 import { Randomiser, SimpleRandom } from './random';
 import {
     BinaryOperator, BinExpression, DICE_MAX, DICE_MIN, DiceGroup, DiceGroupModifiers, EDice, ENumber, Expression,
-    FuncExpression,
-    Location, ModifierOperator,
+    FuncExpression, Location,
 } from './types';
 import { diceSidesOf, keySelect, matchTarget } from './utils';
 
@@ -156,6 +155,12 @@ export class Evaluator {
                     number: deMaxify(expr.compounding.number, maxVal, minVal),
                 };
                 roll = compounding(roll, roller, mod);
+            } else if (expr.penetrating) {
+                const mod = {
+                    op: expr.penetrating.op,
+                    number: deMaxify(expr.penetrating.number, maxVal, minVal),
+                };
+                roll = penetrating(roll, roller, mod);
             }
 
             rolls.push(roll);

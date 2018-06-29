@@ -233,6 +233,49 @@ describe('evaluator/dice', () => {
 
         });
 
+        describe('penetrating', () => {
+
+            it('should return the same as exploding, but with -1 modifiers to later rolls', () => {
+                const evl = new Evaluator(new SeededRandom(0));
+
+                expect(evl.evaluate(parse('3d8!p'))).to.eql(new Result(19, Kind.sum, {
+                    nodeKind: 'dice', loc: loc(0, 5),
+                    noDice: 3, diceSides: diceSidesOf(8),
+                    value: 19,
+                    rolls: [
+                        { value: 5, crit: null, dropped: false, success: RollSuccess.ignored },
+                        [
+                            { value: 8, crit: DiceRollCrit.MAX, dropped: false, success: RollSuccess.ignored },
+                            { value: 5, crit: null, dropped: false, success: RollSuccess.ignored },
+                        ],
+                        { value: 1, crit: DiceRollCrit.MIN, dropped: false, success: RollSuccess.ignored },
+                    ],
+                }));
+            });
+
+            it('should roll penetrating dice on arbitrary compare points', () => {
+                const evl = new Evaluator(new SeededRandom(0));
+
+                expect(evl.evaluate(parse('3d8!p>4'))).to.eql(new Result(25, Kind.sum, {
+                    nodeKind: 'dice', loc: loc(0, 7),
+                    noDice: 3, diceSides: diceSidesOf(8),
+                    value: 25,
+                    rolls: [
+                        [
+                            { value: 5, crit: null, dropped: false, success: RollSuccess.ignored },
+                            { value: 7, crit: DiceRollCrit.MAX, dropped: false, success: RollSuccess.ignored },
+                            { value: 5, crit: null, dropped: false, success: RollSuccess.ignored },
+                            { value: 0, crit: DiceRollCrit.MIN, dropped: false, success: RollSuccess.ignored },
+                        ],
+                        { value: 4, crit: null, dropped: false, success: RollSuccess.ignored },
+                        { value: 4, crit: null, dropped: false, success: RollSuccess.ignored },
+                    ],
+                }));
+
+            });
+
+        });
+
     });
 
 });

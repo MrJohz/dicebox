@@ -18,12 +18,7 @@ export function exploding(init: DiceRollResult, random: DiceRoller, modifier: Ex
     return rolls;
 }
 
-interface CompoundingModifier {
-    number: number;
-    op: ModifierOperator;
-}
-
-export function compounding(init: DiceRollResult, random: DiceRoller, modifier: CompoundingModifier): DiceRollResult {
+export function compounding(init: DiceRollResult, random: DiceRoller, modifier: ExplodingModifier): DiceRollResult {
     if (!matchTarget(modifier.op, modifier.number, init.value)) return init;
 
     const roll: DiceRollResult = {
@@ -41,4 +36,12 @@ export function compounding(init: DiceRollResult, random: DiceRoller, modifier: 
     }
 
     return roll;
+}
+
+export function penetrating(init: DiceRollResult, random: DiceRoller, modifier: ExplodingModifier): DiceRollResult | DiceRollResult[] {
+    const rolls = exploding(init, random, modifier);
+    if (!Array.isArray(rolls)) return rolls;
+
+    return rolls.map((roll, idx) =>
+        idx === 0 ? roll : { ...roll, value: roll.value - 1 });
 }
