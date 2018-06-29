@@ -1,10 +1,12 @@
 import { Kind } from './checker';
+import { compounding, exploding } from './modifiers/exploding';
 import { Randomiser, SimpleRandom } from './random';
 import {
-    BinaryOperator, BinExpression, DiceGroup, DiceGroupModifiers, EDice, ENumber, Expression, FuncExpression, Location,
-    ModifierOperator,
+    BinaryOperator, BinExpression, DICE_MAX, DICE_MIN, DiceGroup, DiceGroupModifiers, EDice, ENumber, Expression,
+    FuncExpression,
+    Location, ModifierOperator,
 } from './types';
-import { diceSidesOf, keySelect } from './utils';
+import { diceSidesOf, keySelect, matchTarget } from './utils';
 
 const FUNCTION_IMPLS: { [key: string]: (a: number) => number } = {
     floor: Math.floor,
@@ -25,9 +27,15 @@ export interface ENumberResult {
     value: number;
 }
 
-interface DiceRollResult {
+export enum DiceRollCrit {
+    MAX = 'max',
+    MIN = 'min',
+}
+
+export interface DiceRollResult {
     value: number;
     dropped: boolean;
+    crit: DiceRollCrit | null;
     success: RollSuccess;
 }
 
@@ -76,6 +84,8 @@ export class Result {
     constructor(public value: number, public kind: Kind, public tree: ExpressionResult) {}
 }
 
+export type DiceRoller = () => DiceRollResult;
+
 export class Evaluator {
 
     constructor(private random: Randomiser = new SimpleRandom()) {}
@@ -113,18 +123,42 @@ export class Evaluator {
         }
     }
 
+    private rollDice(diceSides: number[]): DiceRollResult {
+        const value = diceSides[this.random.between(0, diceSides.length)];
+        return {
+            value,
+            crit: crit(value, diceSides[diceSides.length - 1], diceSides[0]),
+            dropped: false,
+            success: RollSuccess.ignored,
+        };
+    }
+
     private evaluateDice(expr: EDice): Result {
         const [noDice, noDiceTree] = this.evalNoDice(expr.noDice);
         const [diceSides, diceSidesTree] = this.evalDiceSides(expr.diceSides);
+        const maxVal = diceSides[diceSides.length - 1];
+        const minVal = diceSides[0];
 
         const rolls: Array<DiceRollResult | DiceRollResult[]> = [];
+        const roller = () => this.rollDice(diceSides);
 
         for (let i = 0; i < noDice; i++) {
-            rolls.push({
-                value: diceSides[this.random.between(0, diceSides.length)],
-                dropped: false,
-                success: RollSuccess.ignored,
-            });
+            let roll: DiceRollResult | DiceRollResult[] = roller();
+            if (expr.exploding) {
+                const mod = {
+                    op: expr.exploding.op,
+                    number: deMaxify(expr.exploding.number, maxVal, minVal),
+                };
+                roll = exploding(roll, roller, mod);
+            } else if (expr.compounding) {
+                const mod = {
+                    op: expr.compounding.op,
+                    number: deMaxify(expr.compounding.number, maxVal, minVal),
+                };
+                roll = compounding(roll, roller, mod);
+            }
+
+            rolls.push(roll);
         }
 
         const sum = rolls.reduce((total, dice) => total + (Array.isArray(dice)
@@ -289,17 +323,6 @@ function keep(rolls: Result[], direction: 'l' | 'h'): number {
     return idx;
 }
 
-function matchTarget(op: ModifierOperator, target: number, value: number): boolean {
-    switch (op) {
-        case '<':
-            return value < target;
-        case '=':
-            return value === target;
-        case '>':
-            return value > target;
-    }
-}
-
 function binaryEval(op: BinaryOperator, lhs: number, rhs: number): number {
     switch (op) {
         case '+':
@@ -314,5 +337,27 @@ function binaryEval(op: BinaryOperator, lhs: number, rhs: number): number {
             return Math.pow(lhs, rhs);
         case '%':
             return lhs % rhs;
+    }
+}
+
+function crit(n: number, max: number, min: number): DiceRollCrit | null {
+    switch (n) {
+        case max:
+            return DiceRollCrit.MAX;
+        case min:
+            return DiceRollCrit.MIN;
+        default:
+            return null;
+    }
+}
+
+function deMaxify(n: number | typeof DICE_MAX | typeof DICE_MIN, max: number, min: number): number {
+    switch (n) {
+        case DICE_MAX:
+            return max;
+        case DICE_MIN:
+            return min;
+        default:
+            return n;
     }
 }

@@ -1,3 +1,5 @@
+import { ModifierOperator } from './types';
+
 export function keySelect<T, K extends keyof T>(orig: T, keys: K[]): Pick<T, K> {
     const result: any = {};
     for (const key of keys) {
@@ -29,4 +31,15 @@ export function intOf(n: string): number {
 
 export function floatOf(n: string): number {
     return parseFloat(n);
+}
+
+export function matchTarget(op: ModifierOperator, target: number, value: number): boolean {
+    switch (op) {
+        case '<':
+            return value < target;
+        case '=':
+            return value === target;
+        case '>':
+            return value > target;
+    }
 }
