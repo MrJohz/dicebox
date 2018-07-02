@@ -1,6 +1,6 @@
 import { Kind } from './checker';
 import { compounding, exploding, penetrating } from './modifiers/exploding';
-import { keep as keepMod } from './modifiers/keep';
+import { keep as keepMod, drop as dropMod } from './modifiers/keep';
 import { Randomiser, SimpleRandom } from './random';
 import {
     BinaryOperator, BinExpression, DICE_MAX, DICE_MIN, DiceGroup, DiceGroupModifiers, EDice, ENumber, Expression,
@@ -143,6 +143,7 @@ export class Evaluator {
         const roller = () => this.rollDice(diceSides);
 
         const keepState: Array<DiceRollResult> = [];
+        const dropState: Array<DiceRollResult> = [];
 
         for (let i = 0; i < noDice; i++) {
             let roll: DiceRollResult | DiceRollResult[] = roller();
@@ -167,7 +168,11 @@ export class Evaluator {
             }
 
             if (expr.keep) {
-                roll = keepMod(roll, roller, expr.keep, keepState);
+                roll = keepMod(roll, expr.keep, keepState);
+            }
+
+            if (expr.drop) {
+                roll = dropMod(roll, expr.drop, dropState);
             }
 
             rolls.push(roll);

@@ -281,14 +281,37 @@ describe('evaluator/dice', () => {
             it('should only keep the best values from a range of dice', () => {
                 const evl = new Evaluator(new SeededRandom(0));
 
-                expect(evl.evaluate(parse('3d8k1'))).to.eql(new Result(14, Kind.sum, {
+                expect(evl.evaluate(parse('5d8k2'))).to.eql(new Result(14, Kind.sum, {
                     nodeKind: 'dice', loc: loc(0, 5),
-                    noDice: 3, diceSides: diceSidesOf(8),
+                    noDice: 5, diceSides: diceSidesOf(8),
                     value: 14,
                     rolls: [
                         { value: 5, crit: null, dropped: true, success: RollSuccess.ignored },
                         { value: 8, crit: DiceRollCrit.MAX, dropped: false, success: RollSuccess.ignored },
                         { value: 6, crit: null, dropped: false, success: RollSuccess.ignored },
+                        { value: 1, crit: DiceRollCrit.MIN, dropped: true, success: RollSuccess.ignored },
+                        { value: 4, crit: null, dropped: true, success: RollSuccess.ignored },
+                    ],
+                }));
+            });
+
+        });
+
+        describe('drop', () => {
+
+            it('should drop the worst values from a range of dice', () => {
+                const evl = new Evaluator(new SeededRandom(0));
+
+                expect(evl.evaluate(parse('5d8d2'))).to.eql(new Result(19, Kind.sum, {
+                    nodeKind: 'dice', loc: loc(0, 5),
+                    noDice: 5, diceSides: diceSidesOf(8),
+                    value: 19,
+                    rolls: [
+                        { value: 5, crit: null, dropped: false, success: RollSuccess.ignored },
+                        { value: 8, crit: DiceRollCrit.MAX, dropped: false, success: RollSuccess.ignored },
+                        { value: 6, crit: null, dropped: false, success: RollSuccess.ignored },
+                        { value: 1, crit: DiceRollCrit.MIN, dropped: true, success: RollSuccess.ignored },
+                        { value: 4, crit: null, dropped: true, success: RollSuccess.ignored },
                     ],
                 }));
             });
