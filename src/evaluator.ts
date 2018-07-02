@@ -1,5 +1,6 @@
 import { Kind } from './checker';
 import { compounding, exploding, penetrating } from './modifiers/exploding';
+import { keep as keepMod } from './modifiers/keep';
 import { Randomiser, SimpleRandom } from './random';
 import {
     BinaryOperator, BinExpression, DICE_MAX, DICE_MIN, DiceGroup, DiceGroupModifiers, EDice, ENumber, Expression,
@@ -141,6 +142,8 @@ export class Evaluator {
         const rolls: Array<DiceRollResult | DiceRollResult[]> = [];
         const roller = () => this.rollDice(diceSides);
 
+        const keepState: Array<DiceRollResult> = [];
+
         for (let i = 0; i < noDice; i++) {
             let roll: DiceRollResult | DiceRollResult[] = roller();
             if (expr.exploding) {
@@ -163,12 +166,16 @@ export class Evaluator {
                 roll = penetrating(roll, roller, mod);
             }
 
+            if (expr.keep) {
+                roll = keepMod(roll, roller, expr.keep, keepState);
+            }
+
             rolls.push(roll);
         }
 
         const sum = rolls.reduce((total, dice) => total + (Array.isArray(dice)
-            ? dice.reduce((total, dice) => total + dice.value, 0)
-            : dice.value), 0);
+            ? dice.reduce((total, dice) => total + diceValue(dice), 0)
+            : diceValue(dice)), 0);
 
         return new Result(sum, Kind.sum, {
             nodeKind: 'dice', loc: expr.loc,
@@ -292,6 +299,10 @@ export class Evaluator {
             });
         }
     }
+}
+
+function diceValue(dice: DiceRollResult): number {
+    return dice.dropped ? 0 : dice.value;
 }
 
 function drop(rolls: Result[], direction: 'l' | 'h'): number {
