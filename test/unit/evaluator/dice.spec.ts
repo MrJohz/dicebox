@@ -392,6 +392,81 @@ describe('evaluator/dice', () => {
 
         });
 
+        describe('success/failure', () => {
+
+            it('should return success count w/ all successes if result is a success', () => {
+                const evl = new Evaluator(new SeededRandom(0));
+
+                expect(evl.evaluate(parse('5d8>5'))).to.eql(new Result(2, Kind.success, {
+                    nodeKind: 'dice', loc: loc(0, 5),
+                    noDice: 5, diceSides: diceSidesOf(8),
+                    value: 2,
+                    rolls: [
+                        { value: 5, crit: null, dropped: false, success: RollSuccess.ignored },
+                        { value: 8, crit: DiceRollCrit.MAX, dropped: false, success: RollSuccess.success },
+                        { value: 6, crit: null, dropped: false, success: RollSuccess.success },
+                        { value: 1, crit: DiceRollCrit.MIN, dropped: false, success: RollSuccess.ignored },
+                        { value: 4, crit: null, dropped: false, success: RollSuccess.ignored },
+                    ],
+                }));
+            });
+
+            it('should return success count w/ successes & failures if passed success and failure mods', () => {
+                const evl = new Evaluator(new SeededRandom(0));
+
+                expect(evl.evaluate(parse('5d8>5f<2'))).to.eql(new Result(1, Kind.success, {
+                    nodeKind: 'dice', loc: loc(0, 8),
+                    noDice: 5, diceSides: diceSidesOf(8),
+                    value: 1,
+                    rolls: [
+                        { value: 5, crit: null, dropped: false, success: RollSuccess.ignored },
+                        { value: 8, crit: DiceRollCrit.MAX, dropped: false, success: RollSuccess.success },
+                        { value: 6, crit: null, dropped: false, success: RollSuccess.success },
+                        { value: 1, crit: DiceRollCrit.MIN, dropped: false, success: RollSuccess.failure },
+                        { value: 4, crit: null, dropped: false, success: RollSuccess.ignored },
+                    ],
+                }));
+            });
+
+            it('should apply successes/failures to exploded dice', () => {
+                const evl = new Evaluator(new SeededRandom(0));
+
+                expect(evl.evaluate(parse('5d8>5f<2!'))).to.eql(new Result(1, Kind.success, {
+                    nodeKind: 'dice', loc: loc(0, 9),
+                    noDice: 5, diceSides: diceSidesOf(8),
+                    value: 1,
+                    rolls: [
+                        { value: 5, crit: null, dropped: false, success: RollSuccess.ignored },
+                        [
+                            { value: 8, crit: DiceRollCrit.MAX, dropped: false, success: RollSuccess.success },
+                            { value: 6, crit: null, dropped: false, success: RollSuccess.success },
+                        ],
+                        { value: 1, crit: DiceRollCrit.MIN, dropped: false, success: RollSuccess.failure },
+                        { value: 4, crit: null, dropped: false, success: RollSuccess.ignored },
+                        { value: 4, crit: null, dropped: false, success: RollSuccess.ignored },
+                    ],
+                }));
+            });
+
+            it('should apply drops/keeps and successes independently', () => {
+                const evl = new Evaluator(new SeededRandom(0));
+
+                expect(evl.evaluate(parse('5d8d2>5'))).to.eql(new Result(2, Kind.success, {
+                    nodeKind: 'dice', loc: loc(0, 7),
+                    noDice: 5, diceSides: diceSidesOf(8),
+                    value: 2,
+                    rolls: [
+                        { value: 5, crit: null, dropped: false, success: RollSuccess.ignored },
+                        { value: 8, crit: DiceRollCrit.MAX, dropped: false, success: RollSuccess.success },
+                        { value: 6, crit: null, dropped: false, success: RollSuccess.success },
+                        { value: 1, crit: DiceRollCrit.MIN, dropped: true, success: RollSuccess.ignored },
+                        { value: 4, crit: null, dropped: true, success: RollSuccess.ignored },
+                    ],
+                }));
+            });
+
+        });
+
     });
 
 });

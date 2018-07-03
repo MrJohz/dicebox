@@ -1,6 +1,7 @@
 import { Kind } from './checker';
 import { compounding, exploding, penetrating } from './modifiers/exploding';
 import { keep as keepMod, drop as dropMod } from './modifiers/keep';
+import { success } from './modifiers/success';
 import { Randomiser, SimpleRandom } from './random';
 import {
     BinaryOperator, BinExpression, DICE_MAX, DICE_MIN, DiceGroup, DiceGroupModifiers, EDice, ENumber, Expression,
@@ -145,6 +146,8 @@ export class Evaluator {
         const keepState: Array<DiceRollResult> = [];
         const dropState: Array<DiceRollResult> = [];
 
+        let successKind = false;
+
         for (let i = 0; i < noDice; i++) {
             let roll: DiceRollResult | DiceRollResult[] = roller();
             if (expr.exploding) {
@@ -175,14 +178,26 @@ export class Evaluator {
                 roll = dropMod(roll, expr.drop, dropState);
             }
 
+            if (expr.success) {
+                successKind = true;
+                roll = success(roll, expr.success, expr.failure);
+            }
+
             rolls.push(roll);
         }
 
-        const sum = rolls.reduce((total, dice) => total + (Array.isArray(dice)
-            ? dice.reduce((total, dice) => total + diceValue(dice), 0)
-            : diceValue(dice)), 0);
+        let sum;
+        if (successKind) {
+            sum = rolls.reduce((total, dice) => total + (Array.isArray(dice)
+                ? dice.reduce((total, dice) => total + successValue(dice), 0)
+                : successValue(dice)), 0);
+        } else {
+            sum = rolls.reduce((total, dice) => total + (Array.isArray(dice)
+                ? dice.reduce((total, dice) => total + diceValue(dice), 0)
+                : diceValue(dice)), 0);
+        }
 
-        return new Result(sum, Kind.sum, {
+        return new Result(sum, successKind ? Kind.success : Kind.sum, {
             nodeKind: 'dice', loc: expr.loc,
             noDice: noDiceTree,
             diceSides: diceSidesTree,
@@ -308,6 +323,10 @@ export class Evaluator {
 
 function diceValue(dice: DiceRollResult): number {
     return dice.dropped ? 0 : dice.value;
+}
+
+function successValue(dice: DiceRollResult): number {
+    return dice.dropped ? 0 : dice.success;
 }
 
 function drop(rolls: Result[], direction: 'l' | 'h'): number {
