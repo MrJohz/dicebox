@@ -21,7 +21,11 @@ function _keepSingle(init: DiceRollResult, modifier: KeepModifier, state: DiceRo
 
     for (let idx = 0; idx < state.length; idx ++) {
         const roll = state[idx];
-        if (init.value > roll.value) {  // N.B. test w/ modifier.direction
+        const test = modifier.direction === 'h'
+            ? init.value > roll.value   // drop highest n
+            : init.value < roll.value;  // drop lowest n
+
+        if (test) {
             state.splice(idx, 0, init);
             dropInit = false;
             break;
@@ -57,7 +61,11 @@ function _dropSingle(init: DiceRollResult, modifier: KeepModifier, state: DiceRo
 
     for (let idx = 0; idx < state.length; idx ++) {
         const roll = state[idx];
-        if (init.value < roll.value) {  // N.B. test w/ modifier.direction
+        const test = modifier.direction === 'h'
+            ? init.value >= roll.value   // drop highest n
+            : init.value <= roll.value;  // drop lowest n
+
+        if (test) {
             init.dropped = true;
             state.splice(idx, 0, init);
             break;

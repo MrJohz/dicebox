@@ -295,6 +295,43 @@ describe('evaluator/dice', () => {
                 }));
             });
 
+            it(`should keep the worst values from a range of dice if 'l' passed`, () => {
+                const evl = new Evaluator(new SeededRandom(0));
+
+                expect(evl.evaluate(parse('5d8kl2'))).to.eql(new Result(5, Kind.sum, {
+                    nodeKind: 'dice', loc: loc(0, 6),
+                    noDice: 5, diceSides: diceSidesOf(8),
+                    value: 5,
+                    rolls: [
+                        { value: 5, crit: null, dropped: true, success: RollSuccess.ignored },
+                        { value: 8, crit: DiceRollCrit.MAX, dropped: true, success: RollSuccess.ignored },
+                        { value: 6, crit: null, dropped: true, success: RollSuccess.ignored },
+                        { value: 1, crit: DiceRollCrit.MIN, dropped: false, success: RollSuccess.ignored },
+                        { value: 4, crit: null, dropped: false, success: RollSuccess.ignored },
+                    ],
+                }));
+            });
+
+            it('should keep the best individual values from exploded dice', () => {
+                const evl = new Evaluator(new SeededRandom(0));
+
+                expect(evl.evaluate(parse('5d8!k3'))).to.eql(new Result(19, Kind.sum, {
+                    nodeKind: 'dice', loc: loc(0, 6),
+                    noDice: 5, diceSides: diceSidesOf(8),
+                    value: 19,
+                    rolls: [
+                        { value: 5, crit: null, dropped: false, success: RollSuccess.ignored },
+                        [
+                            { value: 8, crit: DiceRollCrit.MAX, dropped: false, success: RollSuccess.ignored },
+                            { value: 6, crit: null, dropped: false, success: RollSuccess.ignored },
+                        ],
+                        { value: 1, crit: DiceRollCrit.MIN, dropped: true, success: RollSuccess.ignored },
+                        { value: 4, crit: null, dropped: true, success: RollSuccess.ignored },
+                        { value: 4, crit: null, dropped: true, success: RollSuccess.ignored },
+                    ],
+                }));
+            });
+
         });
 
         describe('drop', () => {
@@ -311,6 +348,43 @@ describe('evaluator/dice', () => {
                         { value: 8, crit: DiceRollCrit.MAX, dropped: false, success: RollSuccess.ignored },
                         { value: 6, crit: null, dropped: false, success: RollSuccess.ignored },
                         { value: 1, crit: DiceRollCrit.MIN, dropped: true, success: RollSuccess.ignored },
+                        { value: 4, crit: null, dropped: true, success: RollSuccess.ignored },
+                    ],
+                }));
+            });
+
+            it(`should drop the best values from a range of dice if 'h' passed`, () => {
+                const evl = new Evaluator(new SeededRandom(0));
+
+                expect(evl.evaluate(parse('5d8dh2'))).to.eql(new Result(10, Kind.sum, {
+                    nodeKind: 'dice', loc: loc(0, 6),
+                    noDice: 5, diceSides: diceSidesOf(8),
+                    value: 10,
+                    rolls: [
+                        { value: 5, crit: null, dropped: false, success: RollSuccess.ignored },
+                        { value: 8, crit: DiceRollCrit.MAX, dropped: true, success: RollSuccess.ignored },
+                        { value: 6, crit: null, dropped: true, success: RollSuccess.ignored },
+                        { value: 1, crit: DiceRollCrit.MIN, dropped: false, success: RollSuccess.ignored },
+                        { value: 4, crit: null, dropped: false, success: RollSuccess.ignored },
+                    ],
+                }));
+            });
+
+            it('should drop the worst individual values from exploded dice', () => {
+                const evl = new Evaluator(new SeededRandom(0));
+
+                expect(evl.evaluate(parse('5d8!d2'))).to.eql(new Result(23, Kind.sum, {
+                    nodeKind: 'dice', loc: loc(0, 6),
+                    noDice: 5, diceSides: diceSidesOf(8),
+                    value: 23,
+                    rolls: [
+                        { value: 5, crit: null, dropped: false, success: RollSuccess.ignored },
+                        [
+                            { value: 8, crit: DiceRollCrit.MAX, dropped: false, success: RollSuccess.ignored },
+                            { value: 6, crit: null, dropped: false, success: RollSuccess.ignored },
+                        ],
+                        { value: 1, crit: DiceRollCrit.MIN, dropped: true, success: RollSuccess.ignored },
+                        { value: 4, crit: null, dropped: false, success: RollSuccess.ignored },
                         { value: 4, crit: null, dropped: true, success: RollSuccess.ignored },
                     ],
                 }));
