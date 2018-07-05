@@ -33,9 +33,15 @@ export enum DiceRollCrit {
     MIN = 'min',
 }
 
+export enum DiceRollStatus {
+    active = 'active',
+    dropped = 'dropped',
+    rerolled = 'rerolled',
+}
+
 export interface DiceRollResult {
     value: number;
-    dropped: boolean;
+    status: DiceRollStatus;
     crit: DiceRollCrit | null;
     success: RollSuccess;
 }
@@ -85,7 +91,7 @@ export class Result {
     constructor(public value: number, public kind: Kind, public tree: ExpressionResult) {}
 }
 
-export type DiceRoller = () => DiceRollResult;
+export type DiceRoller = () => DiceRollResult[];
 
 export class Evaluator {
 
@@ -129,7 +135,7 @@ export class Evaluator {
         return {
             value,
             crit: crit(value, diceSides[diceSides.length - 1], diceSides[0]),
-            dropped: false,
+            status: DiceRollStatus.active,
             success: RollSuccess.ignored,
         };
     }
@@ -141,7 +147,25 @@ export class Evaluator {
         const minVal = diceSides[0];
 
         const rolls: Array<DiceRollResult | DiceRollResult[]> = [];
-        const roller = () => this.rollDice(diceSides);
+
+        const roller = () => {
+            if (!expr.reroll) return [this.rollDice(diceSides)];
+
+            const rolls = [];
+
+            nextroll: while (true) {
+                const roll = this.rollDice(diceSides);
+                rolls.push(roll);
+                for (const test of expr.reroll) {
+                    if (matchTarget(test.op, deMaxify(test.number, maxVal, minVal), roll.value)) {
+                        roll.status = DiceRollStatus.rerolled;
+                        continue nextroll;
+                    }
+                }
+
+                return rolls;
+            }
+        };
 
         const keepState: Array<DiceRollResult> = [];
         const dropState: Array<DiceRollResult> = [];
@@ -149,7 +173,7 @@ export class Evaluator {
         let successKind = false;
 
         for (let i = 0; i < noDice; i++) {
-            let roll: DiceRollResult | DiceRollResult[] = roller();
+            let roll: DiceRollResult[] = roller();
             if (expr.exploding) {
                 const mod = {
                     op: expr.exploding.op,
@@ -183,7 +207,11 @@ export class Evaluator {
                 roll = success(roll, expr.success, expr.failure);
             }
 
-            rolls.push(roll);
+            if (Array.isArray(roll) && roll.length === 1) {
+                rolls.push(roll[0]);
+            } else {
+                rolls.push(roll);
+            }
         }
 
         let sum;
@@ -322,11 +350,11 @@ export class Evaluator {
 }
 
 function diceValue(dice: DiceRollResult): number {
-    return dice.dropped ? 0 : dice.value;
+    return dice.status === DiceRollStatus.active ? dice.value : 0;
 }
 
 function successValue(dice: DiceRollResult): number {
-    return dice.dropped ? 0 : dice.success;
+    return dice.status === DiceRollStatus.active ? dice.success : 0;
 }
 
 function drop(rolls: Result[], direction: 'l' | 'h'): number {

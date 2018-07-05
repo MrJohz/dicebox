@@ -1,17 +1,14 @@
-import { DiceRollResult } from '../evaluator';
+import { DiceRollResult, DiceRollStatus } from '../evaluator';
 
 type KeepModifier = { number: number, direction: 'h' | 'l' }
-type DiceRolls = DiceRollResult | DiceRollResult[]
 
-export function keep(init: DiceRolls, modifier: KeepModifier, state: DiceRollResult[]): DiceRolls {
-    if (Array.isArray(init)) {
-        return init.map(roll => _keepSingle(roll, modifier, state));
-    } else {
-        return _keepSingle(init, modifier, state);
-    }
+export function keep(init: DiceRollResult[], modifier: KeepModifier, state: DiceRollResult[]): DiceRollResult[] {
+    return init.map(roll => _keepSingle(roll, modifier, state));
 }
 
 function _keepSingle(init: DiceRollResult, modifier: KeepModifier, state: DiceRollResult[]): DiceRollResult {
+    if (init.status !== DiceRollStatus.active) return init;
+
     if (state.length === 0) {
         state.push(init);
         return init;
@@ -19,7 +16,7 @@ function _keepSingle(init: DiceRollResult, modifier: KeepModifier, state: DiceRo
 
     let dropInit = true;
 
-    for (let idx = 0; idx < state.length; idx ++) {
+    for (let idx = 0; idx < state.length; idx++) {
         const roll = state[idx];
         const test = modifier.direction === 'h'
             ? init.value > roll.value   // drop highest n
@@ -34,47 +31,45 @@ function _keepSingle(init: DiceRollResult, modifier: KeepModifier, state: DiceRo
 
     const rejects = state.splice(modifier.number);
     for (const reject of rejects) {
-        reject.dropped = true;
+        reject.status = DiceRollStatus.dropped;
     }
 
     if (dropInit) {
-        init.dropped = true;
+        init.status = DiceRollStatus.dropped;
     }
 
     return init;
 }
 
-export function drop(init: DiceRolls, modifier: KeepModifier, state: DiceRollResult[]): DiceRolls {
-    if (Array.isArray(init)) {
-        return init.map(roll => _dropSingle(roll, modifier, state));
-    } else {
-        return _dropSingle(init, modifier, state);
-    }
+export function drop(init: DiceRollResult[], modifier: KeepModifier, state: DiceRollResult[]): DiceRollResult[] {
+    return init.map(roll => _dropSingle(roll, modifier, state));
 }
 
 function _dropSingle(init: DiceRollResult, modifier: KeepModifier, state: DiceRollResult[]): DiceRollResult {
+    if (init.status !== DiceRollStatus.active) return init;
+
     if (state.length === 0) {
         state.push(init);
-        init.dropped = true;
+        init.status = DiceRollStatus.dropped;
         return init;
     }
 
-    for (let idx = 0; idx < state.length; idx ++) {
+    for (let idx = 0; idx < state.length; idx++) {
         const roll = state[idx];
         const test = modifier.direction === 'h'
             ? init.value >= roll.value   // drop highest n
             : init.value <= roll.value;  // drop lowest n
 
         if (test) {
-            init.dropped = true;
+            init.status = DiceRollStatus.dropped;
             state.splice(idx, 0, init);
             break;
         }
     }
 
-    const rejects = state.splice(modifier.number);
-    for (const reject of rejects) {
-        reject.dropped = false;
+    const reclaims = state.splice(modifier.number);
+    for (const reclaim of reclaims) {
+        reclaim.status = DiceRollStatus.active;
     }
 
     return init;

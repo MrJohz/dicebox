@@ -54,5 +54,15 @@ Penetrating dice seem to be a Hackmaster-specific thing that no-one else really 
 
 Roll20 ignores the Hackmaster Basic rule altogether, and always penetrates using a dice of the same size.  In addition, Roll20 allows custom compare points (just as with standard exploding dice, and compounding dice).  The compare points are always compared against the original rolls, not the modified (-1) values.  This is beneficial - it means that `d6!p6` will always penetrate on the highest number rolled, which is usually what is wanted.
 
+### Rerolls revisited (impl)
+
+If you combine the reroll modifier with another modifier that creates additional dice (e.g. exploding dice), the rerolls are handled differently at different points in the execution.
+
+At first, rerolls happen normally.  Take `1d4r!` - this will reroll any 1s, and explode any 4s.  If this lands on a 1, it will display the 1 as a discarded number, and roll the die again.  As long as the die keeps on landing on a 1, it will show the discarded number and reroll.
+
+Alternatively, if the die lands on a 4, it will display the 4 as a kept number, and roll the die again.  As long as the die keeps on landing on a 4, it will show the kept number and reroll.
+
+If the die lands on a 4 and explodes, then lands on a 1, Roll20 will reroll (because we've told it to) but it will *not* display the rerolled value after the exploded 4.  Instead, it seems to add it to the beginning of the roll.  The exact mechanics of this is not clear, because we can't see which rolls were made first.
+
 [hm-spec]: <https://app.roll20.net/forum/post/2692/penetrating-dice-rolls-not-being-handled-properly>
 [spec]: <https://wiki.roll20.net/Dice_Reference#Roll20_Dice_Specification>

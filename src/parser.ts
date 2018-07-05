@@ -100,7 +100,7 @@ function diceModifiers(currentModifiers: DiceModifiers[]): Parser<DiceModifiers[
         }, {
             name: 'rerollOnce', combinator: seq(
                 string('ro').desc(`reroll once modifier 'ro'`),
-                ComparePoint.fallback({ op: '=', number: DICE_MAX }),
+                ComparePoint.fallback({ op: '=', number: DICE_MIN }),
             ).map(([_, rerollOnce]) => ([...currentModifiers, { rerollOnce }])),
         }, {
             name: 'sort', combinator: seq(

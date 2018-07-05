@@ -31,8 +31,8 @@ export interface DiceModifiers {
     penetrating?: { op: ModifierOperator, number: number | typeof DICE_MAX };
     keep?: { number: number, direction: 'h' | 'l' };
     drop?: { number: number, direction: 'h' | 'l' };
-    rerollOnce?: { op: ModifierOperator, number: number | typeof DICE_MAX };
-    reroll?: ({ op: ModifierOperator, number: number | typeof DICE_MAX })[];
+    rerollOnce?: { op: ModifierOperator, number: number | typeof DICE_MIN };
+    reroll?: ({ op: ModifierOperator, number: number | typeof DICE_MIN })[];
     sort?: ({ direction: 'a' | 'd' });
 }
 
