@@ -1,5 +1,7 @@
 # Dicebox - RPG Dice Parsing, Rolling, Analytics
 
+[![Build Status](https://semaphoreci.com/api/v1/mrjohz/dicebox/branches/master/badge.svg)](https://semaphoreci.com/mrjohz/dicebox)
+
 ## WARNING: This is not yet released.  Please do not attempt to use this.  This is a work-in-progress.
 
 ```javascript
