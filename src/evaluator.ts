@@ -28,12 +28,12 @@ export interface ENumberResult {
     value: number;
 }
 
-export enum DiceRollCrit {
+export enum RollCrit {
     MAX = 'max',
     MIN = 'min',
 }
 
-export enum DiceRollStatus {
+export enum RollStatus {
     active = 'active',
     dropped = 'dropped',
     rerolled = 'rerolled',
@@ -41,8 +41,8 @@ export enum DiceRollStatus {
 
 export interface DiceRollResult {
     value: number;
-    status: DiceRollStatus;
-    crit: DiceRollCrit | null;
+    status: RollStatus;
+    crit: RollCrit | null;
     success: RollSuccess;
 }
 
@@ -135,7 +135,7 @@ export class Evaluator {
         return {
             value,
             crit: crit(value, diceSides[diceSides.length - 1], diceSides[0]),
-            status: DiceRollStatus.active,
+            status: RollStatus.active,
             success: RollSuccess.ignored,
         };
     }
@@ -158,7 +158,7 @@ export class Evaluator {
                 rolls.push(roll);
                 for (const test of expr.reroll) {
                     if (matchTarget(test.op, deMaxify(test.number, maxVal, minVal), roll.value)) {
-                        roll.status = DiceRollStatus.rerolled;
+                        roll.status = RollStatus.rerolled;
                         continue nextroll;
                     }
                 }
@@ -350,11 +350,11 @@ export class Evaluator {
 }
 
 function diceValue(dice: DiceRollResult): number {
-    return dice.status === DiceRollStatus.active ? dice.value : 0;
+    return dice.status === RollStatus.active ? dice.value : 0;
 }
 
 function successValue(dice: DiceRollResult): number {
-    return dice.status === DiceRollStatus.active ? dice.success : 0;
+    return dice.status === RollStatus.active ? dice.success : 0;
 }
 
 function drop(rolls: Result[], direction: 'l' | 'h'): number {
@@ -408,12 +408,12 @@ function binaryEval(op: BinaryOperator, lhs: number, rhs: number): number {
     }
 }
 
-function crit(n: number, max: number, min: number): DiceRollCrit | null {
+function crit(n: number, max: number, min: number): RollCrit | null {
     switch (n) {
         case max:
-            return DiceRollCrit.MAX;
+            return RollCrit.MAX;
         case min:
-            return DiceRollCrit.MIN;
+            return RollCrit.MIN;
         default:
             return null;
     }

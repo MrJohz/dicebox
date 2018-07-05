@@ -1,4 +1,4 @@
-import { DiceRollResult, DiceRollStatus } from '../evaluator';
+import { DiceRollResult, RollStatus } from '../evaluator';
 
 type KeepModifier = { number: number, direction: 'h' | 'l' }
 
@@ -7,7 +7,7 @@ export function keep(init: DiceRollResult[], modifier: KeepModifier, state: Dice
 }
 
 function _keepSingle(init: DiceRollResult, modifier: KeepModifier, state: DiceRollResult[]): DiceRollResult {
-    if (init.status !== DiceRollStatus.active) return init;
+    if (init.status !== RollStatus.active) return init;
 
     if (state.length === 0) {
         state.push(init);
@@ -31,11 +31,11 @@ function _keepSingle(init: DiceRollResult, modifier: KeepModifier, state: DiceRo
 
     const rejects = state.splice(modifier.number);
     for (const reject of rejects) {
-        reject.status = DiceRollStatus.dropped;
+        reject.status = RollStatus.dropped;
     }
 
     if (dropInit) {
-        init.status = DiceRollStatus.dropped;
+        init.status = RollStatus.dropped;
     }
 
     return init;
@@ -46,22 +46,22 @@ export function drop(init: DiceRollResult[], modifier: KeepModifier, state: Dice
 }
 
 function _dropSingle(init: DiceRollResult, modifier: KeepModifier, state: DiceRollResult[]): DiceRollResult {
-    if (init.status !== DiceRollStatus.active) return init;
+    if (init.status !== RollStatus.active) return init;
 
     if (state.length === 0) {
         state.push(init);
-        init.status = DiceRollStatus.dropped;
+        init.status = RollStatus.dropped;
         return init;
     }
 
     for (let idx = 0; idx < state.length; idx++) {
         const roll = state[idx];
         const test = modifier.direction === 'h'
-            ? init.value >= roll.value   // drop highest n
-            : init.value <= roll.value;  // drop lowest n
+            ? init.value > roll.value   // drop highest n
+            : init.value < roll.value;  // drop lowest n
 
         if (test) {
-            init.status = DiceRollStatus.dropped;
+            init.status = RollStatus.dropped;
             state.splice(idx, 0, init);
             break;
         }
@@ -69,7 +69,7 @@ function _dropSingle(init: DiceRollResult, modifier: KeepModifier, state: DiceRo
 
     const reclaims = state.splice(modifier.number);
     for (const reclaim of reclaims) {
-        reclaim.status = DiceRollStatus.active;
+        reclaim.status = RollStatus.active;
     }
 
     return init;

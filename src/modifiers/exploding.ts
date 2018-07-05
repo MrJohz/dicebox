@@ -1,4 +1,4 @@
-import { DiceRoller, DiceRollResult, DiceRollStatus, RollSuccess } from '../evaluator';
+import { DiceRoller, DiceRollResult, RollStatus, RollSuccess } from '../evaluator';
 import { ModifierOperator } from '../types';
 import { matchTarget } from '../utils';
 
@@ -36,12 +36,12 @@ export function compounding(init: DiceRollResult[], random: DiceRoller, modifier
 
 function _compounding(init: DiceRollResult, random: DiceRoller, modifier: ExplodingModifier): DiceRollResult {
     if (!matchTarget(modifier.op, modifier.number, init.value)) return init;
-    if (init.status === DiceRollStatus.rerolled) return init;
+    if (init.status === RollStatus.rerolled) return init;
 
     const roll: DiceRollResult = {
         value: init.value,
         crit: null,
-        status: DiceRollStatus.active,
+        status: RollStatus.active,
         success: RollSuccess.ignored,
     };
 

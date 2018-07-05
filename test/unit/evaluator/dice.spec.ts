@@ -1,7 +1,7 @@
 import expect from 'must';
 
 import { Kind } from '../../../src/checker';
-import { DiceRollCrit, DiceRollStatus, Evaluator, Result, RollSuccess } from '../../../src/evaluator';
+import { RollCrit, RollStatus, Evaluator, Result, RollSuccess } from '../../../src/evaluator';
 import { parse } from '../../../src/parser';
 import { SeededRandom } from '../../../src/random';
 import { diceSidesOf } from '../../../src/utils';
@@ -21,7 +21,7 @@ describe('evaluator/dice', () => {
                 loc: loc(0, 2),
                 value: 5,
                 rolls: [
-                    { value: 5, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                    { value: 5, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                 ],
             }));
         });
@@ -35,9 +35,9 @@ describe('evaluator/dice', () => {
                 noDice: 3,
                 value: 19,
                 rolls: [
-                    { value: 5, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                    { value: 8, crit: DiceRollCrit.MAX, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                    { value: 6, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                    { value: 5, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                    { value: 8, crit: RollCrit.MAX, status: RollStatus.active, success: RollSuccess.ignored },
+                    { value: 6, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                 ],
             }));
         });
@@ -51,14 +51,14 @@ describe('evaluator/dice', () => {
                 noDice: 8,
                 value: -1,
                 rolls: [
-                    { value: 1, crit: DiceRollCrit.MAX, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                    { value: -1, crit: DiceRollCrit.MIN, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                    { value: 1, crit: DiceRollCrit.MAX, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                    { value: -1, crit: DiceRollCrit.MIN, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                    { value: 0, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                    { value: -1, crit: DiceRollCrit.MIN, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                    { value: 0, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                    { value: 0, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                    { value: 1, crit: RollCrit.MAX, status: RollStatus.active, success: RollSuccess.ignored },
+                    { value: -1, crit: RollCrit.MIN, status: RollStatus.active, success: RollSuccess.ignored },
+                    { value: 1, crit: RollCrit.MAX, status: RollStatus.active, success: RollSuccess.ignored },
+                    { value: -1, crit: RollCrit.MIN, status: RollStatus.active, success: RollSuccess.ignored },
+                    { value: 0, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                    { value: -1, crit: RollCrit.MIN, status: RollStatus.active, success: RollSuccess.ignored },
+                    { value: 0, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                    { value: 0, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                 ],
             }));
         });
@@ -76,15 +76,15 @@ describe('evaluator/dice', () => {
                     nodeKind: 'dice', loc: loc(1, 3),
                     noDice: 1, diceSides: diceSidesOf(8),
                     value: 5,
-                    rolls: [{ value: 5, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored }],
+                    rolls: [{ value: 5, crit: null, status: RollStatus.active, success: RollSuccess.ignored }],
                 },
                 value: 23,
                 rolls: [
-                    { value: 8, crit: DiceRollCrit.MAX, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                    { value: 6, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                    { value: 1, crit: DiceRollCrit.MIN, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                    { value: 4, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                    { value: 4, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                    { value: 8, crit: RollCrit.MAX, status: RollStatus.active, success: RollSuccess.ignored },
+                    { value: 6, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                    { value: 1, crit: RollCrit.MIN, status: RollStatus.active, success: RollSuccess.ignored },
+                    { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                    { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                 ],
             }));
         });
@@ -99,18 +99,18 @@ describe('evaluator/dice', () => {
                     nodeKind: 'dice', loc: loc(3, 5),
                     noDice: 1, diceSides: diceSidesOf(8),
                     value: 5,
-                    rolls: [{ value: 5, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored }],
+                    rolls: [{ value: 5, crit: null, status: RollStatus.active, success: RollSuccess.ignored }],
                 },
                 value: 29,
                 rolls: [
-                    { value: 5, crit: DiceRollCrit.MAX, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                    { value: 4, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                    { value: 1, crit: DiceRollCrit.MIN, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                    { value: 4, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                    { value: 5, crit: DiceRollCrit.MAX, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                    { value: 3, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                    { value: 4, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                    { value: 3, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                    { value: 5, crit: RollCrit.MAX, status: RollStatus.active, success: RollSuccess.ignored },
+                    { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                    { value: 1, crit: RollCrit.MIN, status: RollStatus.active, success: RollSuccess.ignored },
+                    { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                    { value: 5, crit: RollCrit.MAX, status: RollStatus.active, success: RollSuccess.ignored },
+                    { value: 3, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                    { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                    { value: 3, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                 ],
             }));
         });
@@ -129,12 +129,12 @@ describe('evaluator/dice', () => {
                     noDice: 3, diceSides: diceSidesOf(8),
                     value: 20,
                     rolls: [
-                        { value: 5, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                        { value: 5, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                         [
-                            { value: 8, crit: DiceRollCrit.MAX, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                            { value: 6, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                            { value: 8, crit: RollCrit.MAX, status: RollStatus.active, success: RollSuccess.ignored },
+                            { value: 6, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                         ],
-                        { value: 1, crit: DiceRollCrit.MIN, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                        { value: 1, crit: RollCrit.MIN, status: RollStatus.active, success: RollSuccess.ignored },
                     ],
                 }));
             });
@@ -148,13 +148,13 @@ describe('evaluator/dice', () => {
                     value: 28,
                     rolls: [
                         [
-                            { value: 5, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                            { value: 8, crit: DiceRollCrit.MAX, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                            { value: 6, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                            { value: 1, crit: DiceRollCrit.MIN, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                            { value: 5, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                            { value: 8, crit: RollCrit.MAX, status: RollStatus.active, success: RollSuccess.ignored },
+                            { value: 6, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                            { value: 1, crit: RollCrit.MIN, status: RollStatus.active, success: RollSuccess.ignored },
                         ],
-                        { value: 4, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                        { value: 4, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                        { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                        { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                     ],
                 }));
             });
@@ -171,9 +171,9 @@ describe('evaluator/dice', () => {
                     noDice: 3, diceSides: diceSidesOf(8),
                     value: 20,
                     rolls: [
-                        { value: 5, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                        { value: 14, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                        { value: 1, crit: DiceRollCrit.MIN, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                        { value: 5, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                        { value: 14, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                        { value: 1, crit: RollCrit.MIN, status: RollStatus.active, success: RollSuccess.ignored },
                     ],
                 }));
             });
@@ -186,9 +186,9 @@ describe('evaluator/dice', () => {
                     noDice: 3, diceSides: diceSidesOf(8),
                     value: 28,
                     rolls: [
-                        { value: 20, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                        { value: 4, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                        { value: 4, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                        { value: 20, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                        { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                        { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                     ],
                 }));
             });
@@ -202,13 +202,13 @@ describe('evaluator/dice', () => {
                     value: 28,
                     rolls: [
                         [
-                            { value: 5, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                            { value: 8, crit: DiceRollCrit.MAX, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                            { value: 6, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                            { value: 1, crit: DiceRollCrit.MIN, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                            { value: 5, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                            { value: 8, crit: RollCrit.MAX, status: RollStatus.active, success: RollSuccess.ignored },
+                            { value: 6, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                            { value: 1, crit: RollCrit.MIN, status: RollStatus.active, success: RollSuccess.ignored },
                         ],
-                        { value: 4, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                        { value: 4, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                        { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                        { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                     ],
                 }));
 
@@ -220,13 +220,13 @@ describe('evaluator/dice', () => {
                     value: 28,
                     rolls: [
                         [
-                            { value: 5, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                            { value: 8, crit: DiceRollCrit.MAX, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                            { value: 6, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                            { value: 1, crit: DiceRollCrit.MIN, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                            { value: 5, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                            { value: 8, crit: RollCrit.MAX, status: RollStatus.active, success: RollSuccess.ignored },
+                            { value: 6, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                            { value: 1, crit: RollCrit.MIN, status: RollStatus.active, success: RollSuccess.ignored },
                         ],
-                        { value: 4, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                        { value: 4, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                        { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                        { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                     ],
                 }));
             });
@@ -243,12 +243,12 @@ describe('evaluator/dice', () => {
                     noDice: 3, diceSides: diceSidesOf(8),
                     value: 19,
                     rolls: [
-                        { value: 5, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                        { value: 5, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                         [
-                            { value: 8, crit: DiceRollCrit.MAX, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                            { value: 5, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                            { value: 8, crit: RollCrit.MAX, status: RollStatus.active, success: RollSuccess.ignored },
+                            { value: 5, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                         ],
-                        { value: 1, crit: DiceRollCrit.MIN, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                        { value: 1, crit: RollCrit.MIN, status: RollStatus.active, success: RollSuccess.ignored },
                     ],
                 }));
             });
@@ -262,13 +262,13 @@ describe('evaluator/dice', () => {
                     value: 25,
                     rolls: [
                         [
-                            { value: 5, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                            { value: 7, crit: DiceRollCrit.MAX, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                            { value: 5, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                            { value: 0, crit: DiceRollCrit.MIN, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                            { value: 5, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                            { value: 7, crit: RollCrit.MAX, status: RollStatus.active, success: RollSuccess.ignored },
+                            { value: 5, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                            { value: 0, crit: RollCrit.MIN, status: RollStatus.active, success: RollSuccess.ignored },
                         ],
-                        { value: 4, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                        { value: 4, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                        { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                        { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                     ],
                 }));
 
@@ -286,11 +286,11 @@ describe('evaluator/dice', () => {
                     noDice: 5, diceSides: diceSidesOf(8),
                     value: 14,
                     rolls: [
-                        { value: 5, crit: null, status: DiceRollStatus.dropped, success: RollSuccess.ignored },
-                        { value: 8, crit: DiceRollCrit.MAX, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                        { value: 6, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                        { value: 1, crit: DiceRollCrit.MIN, status: DiceRollStatus.dropped, success: RollSuccess.ignored },
-                        { value: 4, crit: null, status: DiceRollStatus.dropped, success: RollSuccess.ignored },
+                        { value: 5, crit: null, status: RollStatus.dropped, success: RollSuccess.ignored },
+                        { value: 8, crit: RollCrit.MAX, status: RollStatus.active, success: RollSuccess.ignored },
+                        { value: 6, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                        { value: 1, crit: RollCrit.MIN, status: RollStatus.dropped, success: RollSuccess.ignored },
+                        { value: 4, crit: null, status: RollStatus.dropped, success: RollSuccess.ignored },
                     ],
                 }));
             });
@@ -303,11 +303,11 @@ describe('evaluator/dice', () => {
                     noDice: 5, diceSides: diceSidesOf(8),
                     value: 5,
                     rolls: [
-                        { value: 5, crit: null, status: DiceRollStatus.dropped, success: RollSuccess.ignored },
-                        { value: 8, crit: DiceRollCrit.MAX, status: DiceRollStatus.dropped, success: RollSuccess.ignored },
-                        { value: 6, crit: null, status: DiceRollStatus.dropped, success: RollSuccess.ignored },
-                        { value: 1, crit: DiceRollCrit.MIN, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                        { value: 4, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                        { value: 5, crit: null, status: RollStatus.dropped, success: RollSuccess.ignored },
+                        { value: 8, crit: RollCrit.MAX, status: RollStatus.dropped, success: RollSuccess.ignored },
+                        { value: 6, crit: null, status: RollStatus.dropped, success: RollSuccess.ignored },
+                        { value: 1, crit: RollCrit.MIN, status: RollStatus.active, success: RollSuccess.ignored },
+                        { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                     ],
                 }));
             });
@@ -320,14 +320,14 @@ describe('evaluator/dice', () => {
                     noDice: 5, diceSides: diceSidesOf(8),
                     value: 19,
                     rolls: [
-                        { value: 5, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                        { value: 5, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                         [
-                            { value: 8, crit: DiceRollCrit.MAX, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                            { value: 6, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                            { value: 8, crit: RollCrit.MAX, status: RollStatus.active, success: RollSuccess.ignored },
+                            { value: 6, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                         ],
-                        { value: 1, crit: DiceRollCrit.MIN, status: DiceRollStatus.dropped, success: RollSuccess.ignored },
-                        { value: 4, crit: null, status: DiceRollStatus.dropped, success: RollSuccess.ignored },
-                        { value: 4, crit: null, status: DiceRollStatus.dropped, success: RollSuccess.ignored },
+                        { value: 1, crit: RollCrit.MIN, status: RollStatus.dropped, success: RollSuccess.ignored },
+                        { value: 4, crit: null, status: RollStatus.dropped, success: RollSuccess.ignored },
+                        { value: 4, crit: null, status: RollStatus.dropped, success: RollSuccess.ignored },
                     ],
                 }));
             });
@@ -344,11 +344,11 @@ describe('evaluator/dice', () => {
                     noDice: 5, diceSides: diceSidesOf(8),
                     value: 19,
                     rolls: [
-                        { value: 5, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                        { value: 8, crit: DiceRollCrit.MAX, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                        { value: 6, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                        { value: 1, crit: DiceRollCrit.MIN, status: DiceRollStatus.dropped, success: RollSuccess.ignored },
-                        { value: 4, crit: null, status: DiceRollStatus.dropped, success: RollSuccess.ignored },
+                        { value: 5, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                        { value: 8, crit: RollCrit.MAX, status: RollStatus.active, success: RollSuccess.ignored },
+                        { value: 6, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                        { value: 1, crit: RollCrit.MIN, status: RollStatus.dropped, success: RollSuccess.ignored },
+                        { value: 4, crit: null, status: RollStatus.dropped, success: RollSuccess.ignored },
                     ],
                 }));
             });
@@ -361,11 +361,11 @@ describe('evaluator/dice', () => {
                     noDice: 5, diceSides: diceSidesOf(8),
                     value: 10,
                     rolls: [
-                        { value: 5, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                        { value: 8, crit: DiceRollCrit.MAX, status: DiceRollStatus.dropped, success: RollSuccess.ignored },
-                        { value: 6, crit: null, status: DiceRollStatus.dropped, success: RollSuccess.ignored },
-                        { value: 1, crit: DiceRollCrit.MIN, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                        { value: 4, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                        { value: 5, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                        { value: 8, crit: RollCrit.MAX, status: RollStatus.dropped, success: RollSuccess.ignored },
+                        { value: 6, crit: null, status: RollStatus.dropped, success: RollSuccess.ignored },
+                        { value: 1, crit: RollCrit.MIN, status: RollStatus.active, success: RollSuccess.ignored },
+                        { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                     ],
                 }));
             });
@@ -378,14 +378,15 @@ describe('evaluator/dice', () => {
                     noDice: 5, diceSides: diceSidesOf(8),
                     value: 23,
                     rolls: [
-                        { value: 5, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                        { value: 5, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                         [
-                            { value: 8, crit: DiceRollCrit.MAX, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                            { value: 6, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                            { value: 8, crit: RollCrit.MAX, status: RollStatus.active, success: RollSuccess.ignored },
+                            { value: 6, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                         ],
-                        { value: 1, crit: DiceRollCrit.MIN, status: DiceRollStatus.dropped, success: RollSuccess.ignored },
-                        { value: 4, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                        { value: 4, crit: null, status: DiceRollStatus.dropped, success: RollSuccess.ignored },
+                        { value: 1, crit: RollCrit.MIN, status: RollStatus.dropped, success: RollSuccess.ignored },
+                        // NOTE: when two rolls are equal, drop the earliest roll
+                        { value: 4, crit: null, status: RollStatus.dropped, success: RollSuccess.ignored },
+                        { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                     ],
                 }));
             });
@@ -402,11 +403,11 @@ describe('evaluator/dice', () => {
                     noDice: 5, diceSides: diceSidesOf(8),
                     value: 2,
                     rolls: [
-                        { value: 5, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                        { value: 8, crit: DiceRollCrit.MAX, status: DiceRollStatus.active, success: RollSuccess.success },
-                        { value: 6, crit: null, status: DiceRollStatus.active, success: RollSuccess.success },
-                        { value: 1, crit: DiceRollCrit.MIN, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                        { value: 4, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                        { value: 5, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                        { value: 8, crit: RollCrit.MAX, status: RollStatus.active, success: RollSuccess.success },
+                        { value: 6, crit: null, status: RollStatus.active, success: RollSuccess.success },
+                        { value: 1, crit: RollCrit.MIN, status: RollStatus.active, success: RollSuccess.ignored },
+                        { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                     ],
                 }));
             });
@@ -419,11 +420,11 @@ describe('evaluator/dice', () => {
                     noDice: 5, diceSides: diceSidesOf(8),
                     value: 1,
                     rolls: [
-                        { value: 5, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                        { value: 8, crit: DiceRollCrit.MAX, status: DiceRollStatus.active, success: RollSuccess.success },
-                        { value: 6, crit: null, status: DiceRollStatus.active, success: RollSuccess.success },
-                        { value: 1, crit: DiceRollCrit.MIN, status: DiceRollStatus.active, success: RollSuccess.failure },
-                        { value: 4, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                        { value: 5, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                        { value: 8, crit: RollCrit.MAX, status: RollStatus.active, success: RollSuccess.success },
+                        { value: 6, crit: null, status: RollStatus.active, success: RollSuccess.success },
+                        { value: 1, crit: RollCrit.MIN, status: RollStatus.active, success: RollSuccess.failure },
+                        { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                     ],
                 }));
             });
@@ -436,14 +437,14 @@ describe('evaluator/dice', () => {
                     noDice: 5, diceSides: diceSidesOf(8),
                     value: 1,
                     rolls: [
-                        { value: 5, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                        { value: 5, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                         [
-                            { value: 8, crit: DiceRollCrit.MAX, status: DiceRollStatus.active, success: RollSuccess.success },
-                            { value: 6, crit: null, status: DiceRollStatus.active, success: RollSuccess.success },
+                            { value: 8, crit: RollCrit.MAX, status: RollStatus.active, success: RollSuccess.success },
+                            { value: 6, crit: null, status: RollStatus.active, success: RollSuccess.success },
                         ],
-                        { value: 1, crit: DiceRollCrit.MIN, status: DiceRollStatus.active, success: RollSuccess.failure },
-                        { value: 4, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                        { value: 4, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                        { value: 1, crit: RollCrit.MIN, status: RollStatus.active, success: RollSuccess.failure },
+                        { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                        { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                     ],
                 }));
             });
@@ -456,11 +457,11 @@ describe('evaluator/dice', () => {
                     noDice: 5, diceSides: diceSidesOf(8),
                     value: 2,
                     rolls: [
-                        { value: 5, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                        { value: 8, crit: DiceRollCrit.MAX, status: DiceRollStatus.active, success: RollSuccess.success },
-                        { value: 6, crit: null, status: DiceRollStatus.active, success: RollSuccess.success },
-                        { value: 1, crit: DiceRollCrit.MIN, status: DiceRollStatus.dropped, success: RollSuccess.ignored },
-                        { value: 4, crit: null, status: DiceRollStatus.dropped, success: RollSuccess.ignored },
+                        { value: 5, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                        { value: 8, crit: RollCrit.MAX, status: RollStatus.active, success: RollSuccess.success },
+                        { value: 6, crit: null, status: RollStatus.active, success: RollSuccess.success },
+                        { value: 1, crit: RollCrit.MIN, status: RollStatus.dropped, success: RollSuccess.ignored },
+                        { value: 4, crit: null, status: RollStatus.dropped, success: RollSuccess.ignored },
                     ],
                 }));
             });
@@ -477,16 +478,84 @@ describe('evaluator/dice', () => {
                     noDice: 5, diceSides: diceSidesOf(8),
                     value: 27,
                     rolls: [
-                        { value: 5, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
-                        { value: 8, crit: DiceRollCrit.MAX, status: DiceRollStatus.active, success: RollSuccess.ignored},
-                        { value: 6, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                        { value: 5, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                        { value: 8, crit: RollCrit.MAX, status: RollStatus.active, success: RollSuccess.ignored },
+                        { value: 6, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                         [
-                            { value: 1, crit: DiceRollCrit.MIN, status: DiceRollStatus.rerolled, success: RollSuccess.ignored },
-                            { value: 4, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                            { value: 1, crit: RollCrit.MIN, status: RollStatus.rerolled, success: RollSuccess.ignored },
+                            { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                         ],
-                        { value: 4, crit: null, status: DiceRollStatus.active, success: RollSuccess.ignored },
+                        { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                     ],
-                }))
+                }));
+            });
+
+            it('should check all reroll criteria if multiple are given', () => {
+                const evl = new Evaluator(new SeededRandom(0));
+
+                expect(evl.evaluate(parse('5d8r5r8r6'))).to.eql(new Result(15, Kind.sum, {
+                    nodeKind: 'dice', loc: loc(0, 9),
+                    noDice: 5, diceSides: diceSidesOf(8),
+                    value: 15,
+                    rolls: [
+                        [
+                            { value: 5, crit: null, status: RollStatus.rerolled, success: RollSuccess.ignored },
+                            { value: 8, crit: RollCrit.MAX, status: RollStatus.rerolled, success: RollSuccess.ignored },
+                            { value: 6, crit: null, status: RollStatus.rerolled, success: RollSuccess.ignored },
+                            { value: 1, crit: RollCrit.MIN, status: RollStatus.active, success: RollSuccess.ignored },
+                        ],
+                        { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                        { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                        { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                        [
+                            { value: 8, crit: RollCrit.MAX, status: RollStatus.rerolled, success: RollSuccess.ignored },
+                            { value: 2, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                        ],
+                    ],
+                }));
+            });
+
+            it('rerolled dice should be ignored by drop', () => {
+                const evl = new Evaluator(new SeededRandom(0));
+
+                // 5d8, reroll 1s, drop lowest die
+                expect(evl.evaluate(parse('5d8rd1'))).to.eql(new Result(23, Kind.sum, {
+                    nodeKind: 'dice', loc: loc(0, 6),
+                    noDice: 5, diceSides: diceSidesOf(8),
+                    value: 23,
+                    rolls: [
+                        { value: 5, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                        { value: 8, crit: RollCrit.MAX, status: RollStatus.active, success: RollSuccess.ignored },
+                        { value: 6, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                        [
+                            // do not drop the 1, despite it being the lowest
+                            { value: 1, crit: RollCrit.MIN, status: RollStatus.rerolled, success: RollSuccess.ignored },
+                            { value: 4, crit: null, status: RollStatus.dropped, success: RollSuccess.ignored },
+                        ],
+                        { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                    ],
+                }));
+            });
+
+            it('rerolled dice should be ignored by keep', () => {
+                const evl = new Evaluator(new SeededRandom(0));
+
+                // 5d8, reroll 1s, keep lowest die
+                expect(evl.evaluate(parse('5d8rkl1'))).to.eql(new Result(4, Kind.sum, {
+                    nodeKind: 'dice', loc: loc(0, 7),
+                    noDice: 5, diceSides: diceSidesOf(8),
+                    value: 4,
+                    rolls: [
+                        { value: 5, crit: null, status: RollStatus.dropped, success: RollSuccess.ignored },
+                        { value: 8, crit: RollCrit.MAX, status: RollStatus.dropped, success: RollSuccess.ignored },
+                        { value: 6, crit: null, status: RollStatus.dropped, success: RollSuccess.ignored },
+                        [
+                            { value: 1, crit: RollCrit.MIN, status: RollStatus.rerolled, success: RollSuccess.ignored },
+                            { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                        ],
+                        { value: 4, crit: null, status: RollStatus.dropped, success: RollSuccess.ignored },
+                    ],
+                }));
             });
 
         });
