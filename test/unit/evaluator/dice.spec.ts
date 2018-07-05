@@ -159,6 +159,26 @@ describe('evaluator/dice', () => {
                 }));
             });
 
+            it('should ignore rerolled dice', () => {
+                const evl = new Evaluator(new SeededRandom(0));
+
+                expect(evl.evaluate(parse('3d8!>4r>5'))).to.eql(new Result(14, Kind.sum, {
+                    nodeKind: 'dice', loc: loc(0, 9),
+                    noDice: 3, diceSides: diceSidesOf(8),
+                    value: 14,
+                    rolls: [
+                        [
+                            { value: 5, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                            { value: 8, crit: RollCrit.MAX, status: RollStatus.rerolled, success: RollSuccess.ignored },
+                            { value: 6, crit: null, status: RollStatus.rerolled, success: RollSuccess.ignored },
+                            { value: 1, crit: RollCrit.MIN, status: RollStatus.active, success: RollSuccess.ignored },
+                        ],
+                        { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                        { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                    ],
+                }));
+            });
+
         });
 
         describe('compounding', () => {
@@ -193,7 +213,7 @@ describe('evaluator/dice', () => {
                 }));
             });
 
-            it('should not run penetrating if exploding has already run', () => {
+            it('should not run compounding if exploding has already run', () => {
                 let evl = new Evaluator(new SeededRandom(0));
 
                 expect(evl.evaluate(parse('3d8!!>4!>4'))).to.eql(new Result(28, Kind.sum, {
@@ -225,6 +245,21 @@ describe('evaluator/dice', () => {
                             { value: 6, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                             { value: 1, crit: RollCrit.MIN, status: RollStatus.active, success: RollSuccess.ignored },
                         ],
+                        { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                        { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                    ],
+                }));
+            });
+
+            it('should ignore rerolled dice', () => {
+                const evl = new Evaluator(new SeededRandom(0));
+
+                expect(evl.evaluate(parse('3d8!!>4r>5'))).to.eql(new Result(14, Kind.sum, {
+                    nodeKind: 'dice', loc: loc(0, 10),
+                    noDice: 3, diceSides: diceSidesOf(8),
+                    value: 14,
+                    rolls: [
+                        { value: 6, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                         { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                         { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                     ],
@@ -272,6 +307,26 @@ describe('evaluator/dice', () => {
                     ],
                 }));
 
+            });
+
+            it('should ignore rerolled dice', () => {
+                const evl = new Evaluator(new SeededRandom(0));
+
+                expect(evl.evaluate(parse('3d8!p>4r>5'))).to.eql(new Result(13, Kind.sum, {
+                    nodeKind: 'dice', loc: loc(0, 10),
+                    noDice: 3, diceSides: diceSidesOf(8),
+                    value: 13,
+                    rolls: [
+                        [
+                            { value: 5, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                            { value: 7, crit: RollCrit.MAX, status: RollStatus.rerolled, success: RollSuccess.ignored },
+                            { value: 5, crit: null, status: RollStatus.rerolled, success: RollSuccess.ignored },
+                            { value: 0, crit: RollCrit.MIN, status: RollStatus.active, success: RollSuccess.ignored },
+                        ],
+                        { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                        { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                    ],
+                }));
             });
 
         });
@@ -332,6 +387,27 @@ describe('evaluator/dice', () => {
                 }));
             });
 
+            it('should ignore rerolled dice', () => {
+                const evl = new Evaluator(new SeededRandom(0));
+
+                // 5d8, reroll 1s, keep lowest die
+                expect(evl.evaluate(parse('5d8rkl1'))).to.eql(new Result(4, Kind.sum, {
+                    nodeKind: 'dice', loc: loc(0, 7),
+                    noDice: 5, diceSides: diceSidesOf(8),
+                    value: 4,
+                    rolls: [
+                        { value: 5, crit: null, status: RollStatus.dropped, success: RollSuccess.ignored },
+                        { value: 8, crit: RollCrit.MAX, status: RollStatus.dropped, success: RollSuccess.ignored },
+                        { value: 6, crit: null, status: RollStatus.dropped, success: RollSuccess.ignored },
+                        [
+                            { value: 1, crit: RollCrit.MIN, status: RollStatus.rerolled, success: RollSuccess.ignored },
+                            { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                        ],
+                        { value: 4, crit: null, status: RollStatus.dropped, success: RollSuccess.ignored },
+                    ],
+                }));
+            });
+
         });
 
         describe('drop', () => {
@@ -386,6 +462,28 @@ describe('evaluator/dice', () => {
                         { value: 1, crit: RollCrit.MIN, status: RollStatus.dropped, success: RollSuccess.ignored },
                         // NOTE: when two rolls are equal, drop the earliest roll
                         { value: 4, crit: null, status: RollStatus.dropped, success: RollSuccess.ignored },
+                        { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                    ],
+                }));
+            });
+
+            it('should ignore rerolled dice', () => {
+                const evl = new Evaluator(new SeededRandom(0));
+
+                // 5d8, reroll 1s, drop lowest die
+                expect(evl.evaluate(parse('5d8rd1'))).to.eql(new Result(23, Kind.sum, {
+                    nodeKind: 'dice', loc: loc(0, 6),
+                    noDice: 5, diceSides: diceSidesOf(8),
+                    value: 23,
+                    rolls: [
+                        { value: 5, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                        { value: 8, crit: RollCrit.MAX, status: RollStatus.active, success: RollSuccess.ignored },
+                        { value: 6, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
+                        [
+                            // do not drop the 1, despite it being the lowest
+                            { value: 1, crit: RollCrit.MIN, status: RollStatus.rerolled, success: RollSuccess.ignored },
+                            { value: 4, crit: null, status: RollStatus.dropped, success: RollSuccess.ignored },
+                        ],
                         { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                     ],
                 }));
@@ -511,49 +609,6 @@ describe('evaluator/dice', () => {
                             { value: 8, crit: RollCrit.MAX, status: RollStatus.rerolled, success: RollSuccess.ignored },
                             { value: 2, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
                         ],
-                    ],
-                }));
-            });
-
-            it('rerolled dice should be ignored by drop', () => {
-                const evl = new Evaluator(new SeededRandom(0));
-
-                // 5d8, reroll 1s, drop lowest die
-                expect(evl.evaluate(parse('5d8rd1'))).to.eql(new Result(23, Kind.sum, {
-                    nodeKind: 'dice', loc: loc(0, 6),
-                    noDice: 5, diceSides: diceSidesOf(8),
-                    value: 23,
-                    rolls: [
-                        { value: 5, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
-                        { value: 8, crit: RollCrit.MAX, status: RollStatus.active, success: RollSuccess.ignored },
-                        { value: 6, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
-                        [
-                            // do not drop the 1, despite it being the lowest
-                            { value: 1, crit: RollCrit.MIN, status: RollStatus.rerolled, success: RollSuccess.ignored },
-                            { value: 4, crit: null, status: RollStatus.dropped, success: RollSuccess.ignored },
-                        ],
-                        { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
-                    ],
-                }));
-            });
-
-            it('rerolled dice should be ignored by keep', () => {
-                const evl = new Evaluator(new SeededRandom(0));
-
-                // 5d8, reroll 1s, keep lowest die
-                expect(evl.evaluate(parse('5d8rkl1'))).to.eql(new Result(4, Kind.sum, {
-                    nodeKind: 'dice', loc: loc(0, 7),
-                    noDice: 5, diceSides: diceSidesOf(8),
-                    value: 4,
-                    rolls: [
-                        { value: 5, crit: null, status: RollStatus.dropped, success: RollSuccess.ignored },
-                        { value: 8, crit: RollCrit.MAX, status: RollStatus.dropped, success: RollSuccess.ignored },
-                        { value: 6, crit: null, status: RollStatus.dropped, success: RollSuccess.ignored },
-                        [
-                            { value: 1, crit: RollCrit.MIN, status: RollStatus.rerolled, success: RollSuccess.ignored },
-                            { value: 4, crit: null, status: RollStatus.active, success: RollSuccess.ignored },
-                        ],
-                        { value: 4, crit: null, status: RollStatus.dropped, success: RollSuccess.ignored },
                     ],
                 }));
             });

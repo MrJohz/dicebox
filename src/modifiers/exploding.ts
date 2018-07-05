@@ -36,7 +36,6 @@ export function compounding(init: DiceRollResult[], random: DiceRoller, modifier
 
 function _compounding(init: DiceRollResult, random: DiceRoller, modifier: ExplodingModifier): DiceRollResult {
     if (!matchTarget(modifier.op, modifier.number, init.value)) return init;
-    if (init.status === RollStatus.rerolled) return init;
 
     const roll: DiceRollResult = {
         value: init.value,
@@ -48,6 +47,8 @@ function _compounding(init: DiceRollResult, random: DiceRoller, modifier: Explod
     let lastRoll = init.value;
     while (matchTarget(modifier.op, modifier.number, lastRoll)) {
         const nextDice = random();
+        // completely ignore rerolled dice --- given that this is essentially a condensed
+        // version of exploding dice it makes sense to condense the rerolls as well
         const value = nextDice[nextDice.length - 1].value;
         lastRoll = value;
         roll.value += value;
